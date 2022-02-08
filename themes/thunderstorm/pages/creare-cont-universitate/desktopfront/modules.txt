@@ -1,0 +1,3 @@
+header = htmlheader, header-article
+content = ::content
+footer = footer-info, htmlfooter

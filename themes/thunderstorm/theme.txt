@@ -1,0 +1,7 @@
+
+title = Thunderstorm (by Quick Web Frame)
+version = 1.0
+version-major = 1
+version-minor = 0
+type = general
+description = somethin'

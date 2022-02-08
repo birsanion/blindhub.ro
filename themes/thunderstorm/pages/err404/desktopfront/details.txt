@@ -1,0 +1,4 @@
+
+pagevalue_number_of_targets = 0
+renderer = unbuffered-php
+libraries = test

@@ -1,0 +1,10 @@
+/* define fonts for nice browsers */
+
+html, body {
+    font-family: 'Roboto', Helvetica, Geneva, sans-serif;
+    /* sometimes 'Source Code Pro', Helvetica, Arial, sans-serif; */
+}
+
+input, textarea, select {
+    font-family: 'Roboto', Helvetica, Geneva, sans-serif;
+}

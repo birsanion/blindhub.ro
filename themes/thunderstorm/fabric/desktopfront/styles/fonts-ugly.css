@@ -1,0 +1,11 @@
+/* define fonts for ugly browsers */
+
+html, body {
+    font-family: Verdana, Helvetica, Geneva, sans-serif;
+    
+    /* sometimes 'Source Code Pro', Helvetica, Arial, sans-serif; */
+}
+
+input, textarea, select {
+    font-family: Verdana, Helvetica, Geneva, sans-serif;
+}

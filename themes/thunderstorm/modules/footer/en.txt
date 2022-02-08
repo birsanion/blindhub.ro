@@ -1,0 +1,3 @@
+
+page gen = Page generated in
+sec = seconds.

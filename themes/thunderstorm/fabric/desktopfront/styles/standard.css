@@ -1,0 +1,266 @@
+
+@font-face {
+    font-family: "Calibri";
+    src: url(../fonts/calibri.ttf);
+}
+
+@font-face {
+    font-family: "Calibri";
+    src: url(../fonts/calibrib.ttf);
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "Calibri";
+    src: url(../fonts/calibrii.ttf);
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Calibri";
+    src: url(../fonts/calibriz.ttf);
+    font-style: italic;
+    font-weight: bold;
+}
+
+html, body {
+	position: relative;
+}
+
+.clear {
+    clear: both;
+}
+
+.rounded {
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+}
+
+.shadowed {
+    box-shadow: 2px 2px 4px #735049;
+    -webkit-box-shadow: 2px 2px 4px #735049;
+}
+
+.ultra-shadowed {
+    box-shadow: 2px 2px 20px #735049;
+    -webkit-box-shadow: 2px 2px 20px #735049;
+}
+
+.standard-button {
+    margin: 0 10px;
+    padding: 12px 24px;
+    background: #2E2A5E;
+    color: #FFF;
+    border: none;
+    line-height: 22px;
+    vertical-align: middle;
+    text-decoration: none;
+    text-align: center;
+    
+    font-family: "Calibri", Arial, Helvetica, sans-serif;
+}
+
+.standard-button:hover {
+    background: #A8772F;
+}
+
+.standard-button-ok {
+    height: 30px;
+    margin: 5px 10px;
+    padding: 4px 15px;
+    background: #44DD44;
+    color: #302623;
+    border: 2px solid #33AA33;
+    vertical-align: middle;
+    text-decoration: none;
+    
+    font-size: 13px !important
+}
+
+.standard-button-ok:hover {
+    background: #55EE55;
+}
+
+.standard-button-cancel {
+	margin: 0 10px;
+    padding: 12px 4px;
+    background: #DD4444;
+    color: #FFFFFF;
+    border: none;
+    line-height: 22px;
+    vertical-align: middle;
+    text-decoration: none;
+    text-align: center;
+    
+    font-family: "Calibri", Arial, Helvetica, sans-serif;
+	font-size: 20px !important;
+}
+
+.standard-button-cancel:hover {
+    background: #EE5555;
+}
+
+#overlay {
+    /* must be initially hidden */
+    display: none;
+    position: absolute;
+ 
+    /* place overlay on top of other elements */
+    z-index: 1000;
+ 
+    /* styling */
+    background-color: rgb(51,51,51);
+    background-color: rgba(51,51,51,0.5);
+ 
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border: 1px solid #676;
+}
+
+#overlay-layer-2 {
+    /* must be initially hidden */
+    display: none;
+    position: absolute;
+ 
+    /* place overlay on top of other elements */
+    z-index: 1100;
+ 
+    /* styling */
+    background-color: rgb(51,51,51);
+    background-color: rgba(51,51,51,0.5);
+ 
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border: 1px solid #676;
+}
+
+#overlay-layer-3 {
+    /* must be initially hidden */
+    display: none;
+    position: absolute;
+ 
+    /* place overlay on top of other elements */
+    z-index: 1200;
+ 
+    /* styling */
+    background-color: rgb(51,51,51);
+    background-color: rgba(51,51,51,0.5);
+ 
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border: 1px solid #676;
+}
+
+#overlay-layer-4 {
+    /* must be initially hidden */
+    display: none;
+    position: absolute;
+ 
+    /* place overlay on top of other elements */
+    z-index: 1300;
+ 
+    /* styling */
+    background-color: rgb(51,51,51);
+    background-color: rgba(51,51,51,0.5);
+ 
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border: 1px solid #676;
+}
+
+#overlay-layer-5 {
+    /* must be initially hidden */
+    display: none;
+    position: absolute;
+ 
+    /* place overlay on top of other elements */
+    z-index: 1400;
+ 
+    /* styling */
+    background-color: rgb(51,51,51);
+    background-color: rgba(51,51,51,0.5);
+ 
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    border: 1px solid #676;
+}
+
+
+#overlay .overlay-container,
+#overlay-layer-3 .overlay-container,
+#overlay-layer-5 .overlay-container {
+    position: absolute;
+    bottom: 5px;
+    top: 50px;
+    width: 100%;
+    
+    font-size: 14px;
+}
+
+#overlay-layer-2 .overlay-container {
+    position: absolute;
+    bottom: 5px;
+    top: 100px;
+    width: 100%;
+}
+
+.bottom-buttons {
+    height: 50px;
+    background: #F9F9F9;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.leftalign {
+    float: left;
+}
+
+.rightalign {
+    float: right;
+}
+
+
+.invisible {
+	visibility: hidden;
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+.center-text {
+	text-align: center;
+}
+
+.center-page {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.fullwidth {
+	width: 100%;
+}
+
+.almostfullwidth {
+	width: 95%;
+}
+
+a, input, select, textarea {
+	color: #2E295C;
+}
+
+a:hover {
+	color: #A8772F;
+}
