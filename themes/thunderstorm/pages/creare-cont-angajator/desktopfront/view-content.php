@@ -1,90 +1,133 @@
 
-    <div class="center-text">
-        <h1 class="bold space-4040">CREARE CONT ANGAJATOR</h1>
+    <div class="master-container center-page center-text">
+        <h1 class="bold space-4040 center-text">CREARE CONT ANGAJATOR</h1>
         
         <form id="frm_creeazacont" method="post" enctype="multipart/form-data">
-            <div id="section-1" class="section selected">
-                <h1 class="space-2020">Adresa de email:</h1>
-                <br />
-                <input type="text" name="hEditEmail" id="hEditEmail" value="" class="center-text rounded space-0040 w40lst" placeholder="email" />
+            <div id="section-0" class="section selected">
+                <p>Persoanele cu dizabilități reprezintă un capital uman deosebit de important pentru orice
+                    economie. Organizațiile pot valorifica această resursă umană în activitatea specifică aducând
+                    plus de valoare în toate procesele.</p>
+                
+                <p>Dacă dorești să îți diversifici forța de muncă sau dacă ești în căutarea unor persoane
+                    talentate cu dizabilități, aici este locul în care poți începe.</p>
+                
+                <p>BlindHub îți permite să identifici profile de candidați cu dizabilități de vedere pentru
+                    organizația ta, să vizualizezi video-cv-uri, să stabilești interviuri și chiar să
+                    desfășori aceste interviuri prin intermediul aplicației.</p>
+                
+                <p>Aplicația noastră este un mod inovativ și incluziv prin care îți poți transforma afacerea
+                    ta într-un hub de creativitate și excelență.</p>
             </div>
             
-            <div id="section-2" class="section invisible">
-                <h1 class="space-2020">Nume companie:</h1>
+            <div id="section-1" class="section invisible">
+                <h1 class="space-2020 center-text">Nume companie:</h1>
                 <br />
                 <input type="text" name="hEditNumeFirma" id="hEditNumeFirma" value="" class="center-text rounded space-0040 w40lst" placeholder="nume firmă" />
             </div>
             
+            <div id="section-2" class="section invisible">
+                <h1 class="space-2020 center-text">Adresa de email:</h1>
+                <br />
+                <input type="text" name="hEditEmail" id="hEditEmail" value="" class="center-text rounded space-0040 w40lst" placeholder="email" />
+            </div>
+            
             <div id="section-3" class="section invisible">
-                <h1 class="space-2020">Adresa punctului de lucru<br />(oraș și adresa completă)</h1>
-                <br />
-                <input type="text" name="hEditAdresa" id="hEditAdresa" value="" class="center-text rounded space-0040 w80lst" placeholder="adresa" />
-            </div>
-            
-            <div id="section-4" class="section invisible">
-                <h1 class="space-2020">Certificatul de inregistrare fiscala (C.U.I.):</h1>
-                <br />
-                <input type="text" name="hEditCUI" id="hEditCUI" value="" class="center-text rounded space-0040" placeholder="cui" />
-            </div>
-            
-            <div id="section-5" class="section invisible">
-                <h1 class="space-2020">Creează o parolă</h1>
+                <h1 class="space-2020 center-text">Creează o parolă</h1>
                 <br />
                 <span>Parola trebuie să conțină cel puțin 8 caractere, o literă mică, o literă mare, o cifră și un simbol.</span>
                 <br /><br />
                 <input type="password" name="hEditParola" id="hEditParola" value="" class="center-text rounded space-0040 w40lst" placeholder="parolă" />
             </div>
             
-            <div id="section-6" class="section invisible">
-                <h1 class="space-2020">Vă rugăm să precizați dacă sunteți firmă protejată:</h1>
+            <div id="section-4" class="section invisible">
+                <h1 class="space-2020 center-text">Adresa punctului de lucru<br />(oraș și adresa completă)</h1>
                 <br />
-                <div style="width: 20%; text-align: left;" class="center-page">
-                    <label>
-                        <input type="radio" name="hRadioFirmaProtej" id="hRadioFirmaProtej_DA" value="da" />
-                        DA
-                    </label><br /><br />
-                    
-                    <label>
-                        <input type="radio" name="hRadioFirmaProtej" id="hRadioFirmaProtej_NU" value="nu" />
-                        NU
-                    </label><br /><br />
-                </div>
+                <input type="text" name="hEditAdresa" id="hEditAdresa" value="" class="center-text rounded space-0040 w80lst" placeholder="adresa" />
+            </div>
+            
+            <div id="section-5" class="section invisible">
+                <h1 class="space-2020 center-text">Orașe în care faceți recrutare:</h1>
+                <br />
+                <table class="w60lst center-page">
+                    <tr>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_albaiulia" value="albaiulia" />Alba Iulia</label></td>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_alexandria" value="alexandria" />Alexandria</label></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_arad" value="arad" />Arad</label></td>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_baiamare" value="baiamare" />Baia Mare</label></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_bistritanasaud" value="bistritanasaud" />Bistrița Năsăud</label></td>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_braila" value="braila" />Brăila</label></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_bucuresti" value="bucuresti" />București</label></td>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_botosani" value="botosani" />Botoșani</label></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_brasov" value="brasov" />Brașov</label></td>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_bacau" value="bacau" />Bacău</label></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_buzau" value="buzau" />Buzău</label></td>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_calarasi" value="calarasi" />Călărași</label></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_clujnapoca" value="clujnapoca" />Cluj-Napoca</label></td>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_constanta" value="constanta" />Constanța</label></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_craiova" value="craiova" />Craiova</label></td>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_deva" value="deva" />Deva</label></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_iasi" value="iasi" />Iași</label></td>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_focsani" value="focsani" />Focșani</label></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_galati" value="galati" />Galați</label></td>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_giurgiu" value="giurgiu" />Giurgiu</label></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_oradea" value="oradea" />Oradea</label></td>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_ploiesti" value="ploiesti" />Ploiești</label></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_pitesti" value="pitesti" />Pitești</label></td>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_piatraneamt" value="piatraneamt" />Piatra Neamț</label></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_resita" value="resita" />Reșița</label></td>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_ramnicuvalcea" value="ramnicuvalcea" />Râmnicu Vâlcea</label></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_timisoara" value="timisoara" />Timișoara</label></td>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_targumures" value="targumures" />Târgu Mureș</label></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_targujiu" value="targujiu" />Târgu Jiu</label></td>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_slatina" value="slatina" />Slatina</label></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_sibiu" value="sibiu" />Sibiu</label></td>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_satumare" value="satumare" />Satu Mare</label></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_suceava" value="suceava" />Suceava</label></td>
+                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_vaslui" value="vaslui" />Vaslui</label></td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div id="section-6" class="section invisible">
+                <h1 class="space-2020 center-text">Certificatul de inregistrare fiscala (C.U.I.):</h1>
+                <br />
+                <input type="text" name="hEditCUI" id="hEditCUI" value="" class="center-text rounded space-0040" placeholder="cui" />
             </div>
             
             <div id="section-7" class="section invisible">
-                <h1 class="space-2020">Sunteți companie ...</h1>
-                <br />
-                <div style="width: 20%; text-align: left;" class="center-page">
-                    <label>
-                        <input type="radio" name="hRadioFirmaAngajati" id="hRadioFirmaAngajati_sub" value="sub50" />
-                        sub 50 de angajați
-                    </label><br /><br />
-                    
-                    <label>
-                        <input type="radio" name="hRadioFirmaAngajati" id="hRadioFirmaAngajati_peste" value="peste50" />
-                        peste 50 de angajați
-                    </label><br /><br />
-                </div>
-            </div>
-            
-            <div id="section-8" class="section invisible">
-                <h1 class="space-2020">Perioada contractuală:</h1>
-                <br />
-                <div style="width: 20%; text-align: left;" class="center-page">
-                    <label>
-                        <input type="radio" name="hRadioFirmaPerContr" id="hRadioFirmaPerContr_part" value="parttime" />
-                        part-time
-                    </label><br /><br />
-                    
-                    <label>
-                        <input type="radio" name="hRadioFirmaPerContr" id="hRadioFirmaPerContr_full" value="fulltime" />
-                        full-time
-                    </label><br /><br />
-                </div>
-            </div>
-            
-            <div id="section-9" class="section invisible">
-                <h1 class="space-2020">Domenii de activitate în care faceți recrutare:</h1>
+                <h1 class="space-2020 center-text">Domenii de activitate în care faceți recrutare:</h1>
                 <br />
                 <table class="w80lst center-page">
                     <tr>
@@ -161,85 +204,42 @@
                 </table>
             </div>
             
-            <div id="section-10" class="section invisible">
-                <h1 class="space-2020">Orașe în care faceți recrutare:</h1>
+            <div id="section-8" class="section invisible">
+                <h1 class="space-2020 center-text">Vă rugăm să precizați dacă sunteți unitate protejată:</h1>
                 <br />
-                <table class="w60lst center-page">
-                    <tr>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_albaiulia" value="albaiulia" />Alba Iulia</label></td>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_alexandria" value="alexandria" />Alexandria</label></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_arad" value="arad" />Arad</label></td>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_baiamare" value="baiamare" />Baia Mare</label></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_bistritanasaud" value="bistritanasaud" />Bistrița Năsăud</label></td>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_braila" value="braila" />Brăila</label></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_bucuresti" value="bucuresti" />București</label></td>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_botosani" value="botosani" />Botoșani</label></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_brasov" value="brasov" />Brașov</label></td>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_bacau" value="bacau" />Bacău</label></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_buzau" value="buzau" />Buzău</label></td>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_calarasi" value="calarasi" />Călărași</label></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_clujnapoca" value="clujnapoca" />Cluj-Napoca</label></td>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_constanta" value="constanta" />Constanța</label></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_craiova" value="craiova" />Craiova</label></td>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_deva" value="deva" />Deva</label></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_iasi" value="iasi" />Iași</label></td>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_focsani" value="focsani" />Focșani</label></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_galati" value="galati" />Galați</label></td>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_giurgiu" value="giurgiu" />Giurgiu</label></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_oradea" value="oradea" />Oradea</label></td>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_ploiesti" value="ploiesti" />Ploiești</label></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_pitesti" value="pitesti" />Pitești</label></td>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_piatraneamt" value="piatraneamt" />Piatra Neamț</label></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_resita" value="resita" />Reșița</label></td>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_ramnicuvalcea" value="ramnicuvalcea" />Râmnicu Vâlcea</label></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_timisoara" value="timisoara" />Timișoara</label></td>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_targumures" value="targumures" />Târgu Mureș</label></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_targujiu" value="targujiu" />Târgu Jiu</label></td>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_slatina" value="slatina" />Slatina</label></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_sibiu" value="sibiu" />Sibiu</label></td>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_satumare" value="satumare" />Satu Mare</label></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_suceava" value="suceava" />Suceava</label></td>
-                        <td style="text-align: left;"><label><input type="checkbox" name="hCheck_Orase_vaslui" value="vaslui" />Vaslui</label></td>
-                    </tr>
-                </table>
+                <div style="width: 20%; text-align: left;" class="center-page">
+                    <label>
+                        <input type="radio" name="hRadioFirmaProtej" id="hRadioFirmaProtej_DA" value="da" />
+                        DA
+                    </label><br /><br />
+                    
+                    <label>
+                        <input type="radio" name="hRadioFirmaProtej" id="hRadioFirmaProtej_NU" value="nu" />
+                        NU
+                    </label><br /><br />
+                </div>
+            </div>
+            
+            <div id="section-9" class="section invisible">
+                <h1 class="space-2020 center-text">Sunteți companie cu peste 50 de angajați ?</h1>
+                <br />
+                <div style="width: 20%; text-align: left;" class="center-page">
+                    <label>
+                        <input type="radio" name="hRadioFirmaAngajati" id="hRadioFirmaAngajati_sub" value="sub50" />
+                        sub 50 de angajați
+                    </label><br /><br />
+                    
+                    <label>
+                        <input type="radio" name="hRadioFirmaAngajati" id="hRadioFirmaAngajati_peste" value="peste50" />
+                        peste 50 de angajați
+                    </label><br /><br />
+                </div>
             </div>
         </form>
         
         <form id="frm_uploadsigla" method="post" enctype="multipart/form-data">
-            <div id="section-11" class="section invisible">
-                <h1 class="space-2020" id="hStaticUploadTitle">Încărcați sigla brandului:</h1>
+            <div id="section-10" class="section invisible">
+                <h1 class="space-2020 center-text" id="hStaticUploadTitle">Încărcați sigla brandului:</h1>
                 <br />
                 <span id="hFileUploadContainer" class="btn btn-success fileinput-button" style="background: #2E295C;">
                     <i class="icon-plus icon-white"></i>
@@ -291,42 +291,42 @@
         
             switch (nCurrId)
             {
-                case 1:{
+                case 2:{
                     if ($('#hEditEmail').val().trim().length <= 0 || !ValidateEmail($('#hEditEmail').val())){
                         bMoveNext = false;
                         $('#hStaticErrorMsg').html('Trebuie să completați corect adresa de email !');
                     }
                 }break;
                 
-                case 2:{
+                case 1:{
                     if ($('#hEditNumeFirma').val().trim().length <= 0){
                         bMoveNext = false;
                         $('#hStaticErrorMsg').html('Trebuie să completați numele firmei !');
                     }
                 }break;
                 
-                case 3:{
+                case 4:{
                     if ($('#hEditAdresa').val().trim().length <= 0){
                         bMoveNext = false;
                         $('#hStaticErrorMsg').html('Trebuie să completați adresa !');
                     }
                 }break;
                 
-                case 4:{
+                case 6:{
                     if ($('#hEditCUI').val().trim().length <= 0){
                         bMoveNext = false;
                         $('#hStaticErrorMsg').html('Trebuie să completați codul unic de înregistrare !');
                     }
                 }break;
                 
-                case 5:{
+                case 3:{
                     if (!ValidatePassword($('#hEditParola').val())){
                         bMoveNext = false;
                         $('#hStaticErrorMsg').html('Trebuie să puneți o parolă corespunzătoare !');
                     }
                 }break;
                 
-                case 6:{
+                case 8:{
                     if (!$('#hRadioFirmaProtej_DA').prop('checked') && !$('#hRadioFirmaProtej_NU').prop('checked'))
                     {
                         bMoveNext = false;
@@ -334,7 +334,7 @@
                     }
                 }break;
                 
-                case 7:{
+                case 9:{
                     if (!$('#hRadioFirmaAngajati_sub').prop('checked') && !$('#hRadioFirmaAngajati_peste').prop('checked'))
                     {
                         bMoveNext = false;
@@ -342,18 +342,10 @@
                     }
                 }break;
                 
-                case 8:{
-                    if (!$('#hRadioFirmaPerContr_part').prop('checked') && !$('#hRadioFirmaPerContr_full').prop('checked'))
-                    {
-                        bMoveNext = false;
-                        $('#hStaticErrorMsg').html('Trebuie să bifați o opțiune !');
-                    }
-                }break;
-                
-                case 9:{
+                case 5:{
                     var bChecked = false;
                     
-                    $('#section-9').find('input[type="checkbox"]').each(function(nIndex, kElement){
+                    $('#section-5').find('input[type="checkbox"]').each(function(nIndex, kElement){
                         if ($(this).prop('checked')) bChecked = true;
                     });
                     
@@ -363,10 +355,10 @@
                     }
                 }break;
                 
-                case 10:{
+                case 7:{
                     var bChecked = false;
                     
-                    $('#section-10').find('input[type="checkbox"]').each(function(nIndex, kElement){
+                    $('#section-7').find('input[type="checkbox"]').each(function(nIndex, kElement){
                         if ($(this).prop('checked')) bChecked = true;
                     });
                     
@@ -386,7 +378,7 @@
                 
                 $('#hStaticErrorMsg').html('');
                 
-                if (nCurrId == 10){
+                if (nCurrId == 9){
                     var jqXHR=$.post("<?php echo qurl_s('api/web-createacc-angajatori'); ?>",
                         $('#frm_creeazacont').serialize(),
                         function(data){
@@ -414,7 +406,7 @@
                     });
                 }
                 
-                if (nCurrId == 11)
+                if (nCurrId == 10)
                     window.location = '<?php echo qurl_l('auth-angajator'); ?>';
             }
         }

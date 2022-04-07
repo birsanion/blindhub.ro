@@ -1,3 +1,3 @@
-header = htmlheader, header-short
+header = htmlheader, header-article
 content = ::content
-footer = footer-short, htmlfooter
+footer = footer-info, htmlfooter
