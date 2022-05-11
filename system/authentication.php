@@ -269,6 +269,12 @@ class CQAuth
         return $this->bAuthenticated;
     }
 
+    function GetUsername()
+    {
+        return $this->strUser;
+    }
+
+
     function GetNewSalt()
     {
         // this will return a 32 character base64 encoded salt

@@ -4,6 +4,7 @@
  * theme / desktopfront / view / common / htmlfooter.php
  */
 ?>
-
+			</div>
+		</div>
     </body>
 </html>

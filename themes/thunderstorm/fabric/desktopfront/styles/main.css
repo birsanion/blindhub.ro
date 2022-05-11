@@ -2,7 +2,7 @@
 body {
 	position: relative;
 	font-family: "Calibri", Arial, Helvetica, sans-serif;
-	background: #EAE9EE;
+	/*background: #EAE9EE; */
 }
 
 textarea {
@@ -77,17 +77,62 @@ p {
 	left: 10px;
 }
 
+.titlu {
+	color: #2E295C;
+	font-weight: bold;
+}
+
+.titlu:before {
+	content: "\2022";
+  	color: #A8772F;
+  	font-weight: bold;
+  	display: inline-block;
+  	width: 1em;
+}
+
+.subtitlu {
+	color: #A8772F;
+	font-weight: bold;
+	text-align: left;
+	margin-bottom: 20px;
+	text-decoration:underline;
+	text-decoration-style: dotted;
+	text-decoration-color: #2E295C;
+	text-underline-offset: 2px;
+}
+
+ul.lista li::before {
+	content: "\2022";
+  	color: #A8772F;
+  	font-weight: bold;
+  	display: inline-block;
+  	width: 1em;
+}
+
 .size-1,
 .size-1 p,
-.size-1 a,
 .size-1 input,
 .size-1 select,
 .size-1 textarea {
-	font-size: 18px;
+	font-size: 16px;
+	line-height: 24px;
 }
 
 .size-1 h1 {
-	font-size: 24px;
+	font-size: 26px;
+	margin-bottom: 20px;
+}
+
+.size-1 .subtitlu {
+	font-size: 20px;
+	line-height: 28px;
+}
+
+.size-1 ul.lista {
+	font-size: 16px;
+	line-height: 20px;
+	list-style: none;
+	list-style-position: inside;
 }
 
 .size-2,
@@ -97,10 +142,26 @@ p {
 .size-2 select,
 .size-2 textarea {
 	font-size: 20px;
+	line-height: 28px;
 }
 
 .size-2 h1 {
 	font-size: 26px;
+	margin-bottom: 20px;
+}
+
+.size-2 .subtitlu {
+	font-size: 22px;
+	line-height: 30px;
+	color: #F47E2A;
+	text-align: left;
+}
+
+.size-2 ul.lista {
+	font-size: 16px;
+	line-height: 22px;
+	list-style: none;
+	list-style-position: inside;
 }
 
 .size-3,
@@ -110,10 +171,26 @@ p {
 .size-3 select,
 .size-3 textarea {
 	font-size: 24px;
+	line-height: 30px;
 }
 
 .size-3 h1 {
 	font-size: 30px;
+	color: #2E295C;
+	text-align: left;
+	margin-bottom: 20px;
+}
+
+.size-3 .subtitlu {
+	font-size: 26px;
+	line-height: 34px;
+}
+
+.size-3 ul.lista {
+	font-size: 20px;
+	line-height: 26px;
+	list-style: none;
+	list-style-position: inside;
 }
 
 .size-4,
@@ -123,11 +200,28 @@ p {
 .size-4 select,
 .size-4 textarea {
 	font-size: 30px;
+	line-height: 36px;
 }
 
 .size-4 h1 {
 	font-size: 36px;
+	color: #2E295C;
+	text-align: left;
+	margin-bottom: 20px;
 }
+
+.size-4 .subtitlu {
+	font-size: 32px;
+	line-height: 40px;
+}
+
+.size-4 ul.lista {
+	font-size: 26px;
+	line-height: 32px;
+	list-style: none;
+	list-style-position: inside;
+}
+
 
 .size-5,
 .size-5 p,
@@ -136,11 +230,28 @@ p {
 .size-5 select,
 .size-5 textarea {
 	font-size: 36px;
+	line-height: 40px;
 }
 
 .size-5 h1 {
 	font-size: 42px;
+	color: #2E295C;
+	text-align: left;
+	margin-bottom: 20px;
 }
+
+.size-5 .subtitlu {
+	font-size: 38px;
+	line-height: 46px;
+}
+
+.size-5 ul.lista {
+	font-size: 32px;
+	line-height: 38px;
+	list-style: none;
+	list-style-position: inside;
+}
+
 
 .size-1 .larger {
 	font-size: 30px;
@@ -193,12 +304,6 @@ body.highcontrast div {
 	margin-bottom: 40px;
 }
 
-input[type="text"],
-input[type="password"],
-input[type="email"],
-input[type="number"] {
-	border: 1px solid #2E2A5E;
-}
 
 body.highcontrast input[type="text"],
 body.highcontrast input[type="password"],
@@ -231,8 +336,17 @@ header {
 }
 
 #header-logo {
-	width: 140px;
-	margin-top: 40px;
+	position: absolute;
+	left: 0;
+	width: 100px;
+	top: 40px;
+}
+
+#header-logo-fundatia {
+	position: absolute;
+	width: 160px;
+	top: 40px;
+	right: 0;
 }
 
 @media (max-width: 960px){
@@ -243,8 +357,14 @@ header {
 
 @media (max-width: 500px){
 	#header-logo {
-		width: 160px;
-		margin-top: 40px;
+		width: 80px;
+		top: 20px;
+		margin-bottom: 40px;
+	}
+
+	#header-logo-fundatia {
+		top: 20px;
+		width: 140px;
 	}
 }
 
@@ -255,23 +375,18 @@ header {
 
 @media (max-width: 960px){
 	.master-container {
-		width: 96%;
+		width: 93%;
 	}
 }
 
-#homepage-blindcontrol {
-	margin-top: 20px;
-	text-align: right;
-}
-
 header #homepage-blindcontrol {
-	margin-top: -40px;
 	text-align: right;
+	margin-top: 8px;
 }
 
 header #header-precontrol {
 	position: relative;
-	margin-top: -40px;
+	margin-top: -10px;
 }
 
 #homepage-blindcontrol a {
@@ -312,7 +427,7 @@ a.homepage-option div {
 	#tbl-homeoptions {
 		margin-top: 40px;
 	}
-	
+
 	#tbl-homeoptions td {
 		width: 33%;
 		vertical-align: top;
@@ -360,10 +475,12 @@ a.homepage-option div {
 
 footer {
 	clear: both;
-	margin: 20px 0;
 	padding: 10px;
 	background: #2E295C;
 	min-height: 100px;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
 
 footer a {
@@ -378,8 +495,6 @@ footer ol {
 footer ol li {
 	margin: 5px 0;
 }
-
-
 
 #hStaticMsgSurface {
 	position: relative;
@@ -445,9 +560,9 @@ ul.menu-root ul.submenu-level-1 {
 	top: 34px;
 	left: 0;
 	width: 100%;
-	
+
 	background: #2E295C;
-	
+
 	visibility: hidden;
 	display: none;
 	z-index: 1;
@@ -505,9 +620,9 @@ ul.menu-footer-root ul.submenu-level-1 {
 	top: 34px;
 	left: 0;
 	width: 100%;
-	
+
 	background: #2E295C;
-	
+
 	visibility: hidden;
 	display: none;
 	z-index: 1;

@@ -1,7 +1,57 @@
+    <div id="content" class="container mt-5">
+        <div class="row">
+            <div class="offset-lg-1 col-lg-10">
+                <h1 class="titlu mb-5">Postează o ofertă</h1>
+            </div>
+            <div class="offset-lg-3 col-lg-6 offset-md-1 col-md-10">
+                <form id="frm_oferta">
+                    <div class="form-group mb-4">
+                        <label class="form-label">
+                            <strong>Nume Facultate:</strong>
+                        </label>
+                        <input type="text" name="nume" class="form-control shadow" placeholder="nume facultate" required>
+                    </div>
 
-    <div class="master-container center-page">
+                    <div class="form-group mb-4">
+                        <label class="form-label"><strong>Domeniu de activitate:</strong></label>
+                        <select class="selectpicker form-control shadow" data-style="btn-white" data-live-search="true" data-size="12" required name="idx_domeniu_universitate">
+                            <option data-hidden="true"></option>
+                            <?php foreach ($this->DATA['domenii_universitate'] as $domeniu): ?>
+                            <option value="<?= $domeniu['idx'] ?>"><?= $domeniu['nume'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label class="form-label">
+                            <strong>Numar de locuri:</strong>
+                        </label>
+                        <input type="number" name="nrlocuri" class="form-control shadow" placeholder="Introdu aici numărul de locuri" required>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label class="form-label"><strong>Oraș:</strong></label>
+                        <select class="selectpicker form-control shadow" data-style="btn-white" data-live-search="true" data-size="12" required name="idx_oras">
+                            <option data-hidden="true"></option>
+                            <?php foreach ($this->DATA['orase'] as $oras): ?>
+                            <option value="<?= $oras['idx'] ?>"><?= $oras['nume'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="form-group my-5">
+                        <button type="submit" class="btn btn-primary btn-lg rounded-pill px-4">
+                            Adaugă ofertă
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="master-container center-page">
         <div class="center-text"><h1 class="bold space-4040">OFERTE</h1></div>
-        
+
         <div class="w80lst center-page">
             <form id="frm_oferta" enctype="multipart/form-data" method="post">
             <table id="tbl-posteaza-locmunca" class="fullwidth">
@@ -41,16 +91,56 @@
                 </tr>
             </table>
             </form>
-            
+
             <div class="center-text">
                 <div id="hStaticErrorMsg"></div>
                 <input type="button" name="hButtonNext" id="hButtonNext" value="ADAUGĂ ANUNȚ" class="standard-button rounded space-2020" />
             </div>
         </div>
-    </div>
-    
+    </div>-->
+
     <script type="text/javascript">
-    
+        $( document ).ready(function () {
+             $("#frm_oferta").validate({
+                errorClass: "text-danger",
+                errorPlacement: function (error, element) {
+                    var formGroup = element.closest('.form-group')
+                    formGroup.append(error)
+                },
+                submitHandler: function (form) {
+                    $submit = $(form).find('button[type="submit"]')
+                    $submit.html('<span class="spinner-border spinner-border-sm mx-2" role="status" aria-hidden="true"></span>Loading...').attr('disabled', true);
+                    $.ajax({
+                        url: "<?= qurl_s('api/web-universitate-publicaoferta') ?>",
+                        type: "POST",
+                        data: $(form).serialize()
+                    }).done(function (data) {
+                        $submit.html('Salvează').attr('disabled', false);
+                        bootbox.alert({
+                            message: "Oferta postată cu success!",
+                            closeButton: false,
+                            callback: function () {
+                                window.location = '<?= qurl_l('home-universitate'); ?>';
+                            }
+                        })
+                    }).fail(function (e) {
+                        $submit.html('Salvează').attr('disabled', false);
+                        var message = "A apărut o eroare. Va rugăm sa încercați mai târziu!"
+                        if (e.responseText) {
+                            var res = JSON.parse(e.responseText)
+                            if (res.result) {
+                                message = res.result
+                            }
+                        }
+                        bootbox.alert({
+                            closeButton: false,
+                            message: message,
+                        })
+                    })
+                }
+            })
+        })
+
         $('#hButtonNext').click(function(){
             if ($('#hEditFacultate').val().length > 0 && $('#hEditNrLocuri').val().length > 0){
                 var jqXHR=$.post("<?php echo qurl_s('api/web-universitate-publicaoferta'); ?>",
@@ -63,7 +153,7 @@
                         }
                     },
                 "json");
-                
+
                 jqXHR.fail(function(a,b,c){
                     alert("AJAX err: "+a+' - '+b);
                 });
@@ -71,7 +161,7 @@
                 $('#hStaticErrorMsg').html('Trebuie să completați facultatea și numărul de locuri !');
             }
         });
-        
+
     </script>
 
 

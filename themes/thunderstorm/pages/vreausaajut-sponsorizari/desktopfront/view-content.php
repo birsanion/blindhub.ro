@@ -1,7 +1,8 @@
-
-    <div class="master-container center-page">
+<div class="container my-5">
+    <div class="offset-lg-1 col-lg-10">
+        <h1 class="titlu mb-5">Sponsorizări</h1>
             <br />
-            
+
             <p>Redirectioneaza 20% din impozitul pe profit datorat ca persoana juridica catre beneficiarii directi nevazatori prin sponsorizarea programelor si proiectelor sociale, umanitare, educative, culturale si sportive ale Asociatiei Nevazatorilor din România (ANR).</p>
             <p></p>
             <p>DE CE?</p>
@@ -17,6 +18,7 @@
             <p>1. Pentru a sustine activitatea curenta a asociatiei</p>
             <p>2. Pentru a sustine programe si proiecte speciale pentru care organizatia cauta finantare</p>
             <p>Daca aveti in vedere finantarea unor proiecte specifice pe termen scurt sau mediu pe care ANR doreste sa le deruleze sau programe tinta pe care compania dumneavoastra le stabileste in cadrul politicii sale de responsibilitate sociala corporatista, va rugam sa ne contactati la adresa de e-mail secretargeneral@anvr.ro.</p>
-            
+
             <br /><br />
         </div>
+    </div>

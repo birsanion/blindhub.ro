@@ -1,137 +1,108 @@
-
-    <div class="master-container center-page">
-        <div class="center-text"><h1 class="bold space-4040">LOCURI DE MUNCĂ</h1></div>
-        
-        <div class="w80lst center-page">
-            <form id="frm_locmunca" enctype="multipart/form-data" method="post">
-            <table id="tbl-posteaza-locmunca" class="fullwidth">
-                <tr>
-                    <td>Oraș:</td>
-                    <td>
-                        <select name="hComboOras" class="w80lst rounded">
-                            <option value="albaiulia">Alba Iulia</option>
-                            <option value="alexandria">Alexandria</option>
-                            <option value="arad">Arad</option>
-                            <option value="baiamare">Baia Mare</option>
-                            <option value="bistritanasaud">Bistrița Năsăud</option>
-                            <option value="braila">Brăila</option>
-                            <option value="bucuresti">București</option>
-                            <option value="botosani">Botoșani</option>
-                            <option value="brasov">Brașov</option>
-                            <option value="bacau">Bacău</option>
-                            <option value="buzau">Buzău</option>
-                            <option value="calarasi">Călărași</option>
-                            <option value="clujnapoca">Cluj-Napoca</option>
-                            <option value="constanta">Constanța</option>
-                            <option value="craiova">Craiova</option>
-                            <option value="deva">Deva</option>
-                            <option value="iasi">Iași</option>
-                            <option value="focsani">Focșani</option>
-                            <option value="galati">Galați</option>
-                            <option value="giurgiu">Giurgiu</option>
-                            <option value="oradea">Oradea</option>
-                            <option value="ploiesti">Ploiești</option>
-                            <option value="pitesti">Pitești</option>
-                            <option value="piatraneamt">Piatra Neamț</option>
-                            <option value="resita">Reșița</option>
-                            <option value="ramnicuvalcea">Râmnicu Vâlcea</option>
-                            <option value="timisoara">Timișoara</option>
-                            <option value="targumures">Târgu Mureș</option>
-                            <option value="targujiu">Târgu Jiu</option>
-                            <option value="slatina">Slatina</option>
-                            <option value="sibiu">Sibiu</option>
-                            <option value="satumare">Satu Mare</option>
-                            <option value="suceava">Suceava</option>
-                            <option value="vaslui">Vaslui</option>
+<div id="content">
+     <div class="container my-5">
+        <div class="row">
+            <div class="offset-lg-1 col-lg-10">
+                <h1 class="titlu mb-5">Adaugă un loc de muncă</h1>
+                <?php if ($this->DATA['errormsg']): ?>
+                <div class="alert alert-danger mb-5" role="alert">
+                    <?= $this->DATA['errormsg'] ?>
+                </div>
+                <?php endif; ?>
+            </div>
+            <div class="offset-lg-3 col-lg-6 offset-md-1 col-md-10">
+                <form id="frm_locmunca">
+                    <div class="form-group mb-4">
+                        <label class="form-label"><strong>Titlu</strong></label>
+                        <input type="text" name="titlu" class="form-control" placeholder="Introdu titlul locului de muncă aici" required=>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="form-label"><strong>Oraș:</strong></label>
+                        <select class="selectpicker form-control" data-style="btn-white" data-live-search="true" data-size="12" required name="idx_oras">
+                            <option value="" data-hidden="true">Alege oraș</option>
+                            <?php foreach ($this->DATA['orase'] as $oras): ?>
+                            <option value="<?= $oras['idx'] ?>"><?= $oras['nume'] ?></option>
+                            <?php endforeach; ?>
                         </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Domeniu de activitate:</td>
-                    <td>
-                        <select name="hComboDomeniu" id="hComboDomeniu" class="rounded w80lst">
-                            <option value="it">IT</option>
-                            <option value="medical">Medical</option>
-                            <option value="callcenter">Call center</option>
-                            <option value="resurseumane">Resurse umane</option>
-                            <option value="asistentasociala">Asistență socială</option>
-                            <option value="jurnalism">Jurnalism și relații publice</option>
-                            <option value="radio">Radio</option>
-                            <option value="psihologie">Psihologie consiliere coaching</option>
-                            <option value="educatie">Educație și training</option>
-                            <option value="artistica">Industria creativă și artistică</option>
-                            <option value="administratie">Administrație publică și instituții</option>
-                            <option value="desk">Desk office</option>
-                            <option value="wellness">Wellness și SPA</option>
-                            <option value="traducator">Traducător / translator</option>
-                            <option value="diverse">Diverse</option>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="form-label"><strong>Domeniu de activitate:</strong></label>
+                        <select class="selectpicker form-control" data-style="btn-white" required name="idx_domeniu_cv">
+                            <option value="" data-hidden="true">Alege domeniu activitate</option>
+                            <?php foreach ($this->DATA['domenii_cv'] as $domeniu): ?>
+                            <option value="<?= $domeniu['idx'] ?>"><?= $domeniu['nume'] ?></option>
+                            <?php endforeach; ?>
                         </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Competențe necesare:</td>
-                    <td>
-                        <input type="text" name="hEditCompetente" id="hEditCompetente" value="" class="rounded w80lst" placeholder="competențe" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>Titlu:</td>
-                    <td>
-                        <input type="text" name="hEditTitlu" id="hEditTitlu" value="" class="rounded w80lst" placeholder="titlu loc de muncă" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>Descriere:</td>
-                    <td>
-                        <textarea name="hEditDescriere" id="hEditDescriere" class="rounded w80lst"></textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Data expirării anunțului:</td>
-                    <td>
-                        <input type="text" name="hEditDataExp" id="hEditDataExp" value="" class="rounded w40lst" placeholder="data expirării" />
-                    </td>
-                </tr>
-            </table>
-            </form>
-            
-            <div class="center-text">
-                <input type="button" name="hButtonNext" id="hButtonNext" value="ADAUGĂ ANUNȚ" class="standard-button rounded space-2020" />
-                <div id="hStaticErrorMsg"></div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="form-label"><strong>Tip job:</strong></label>
+                        <select class="selectpicker form-control" data-style="btn-white" data-size="12" required name="idx_optiune_tipslujba">
+                            <option value="" data-hidden="true">Alege tip job</option>
+                            <?php foreach ($this->DATA['optiuni']['tipslujba'] as $idx => $optiune): ?>
+                            <option value="<?= $idx ?>"><?= $optiune ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="form-label"><strong>Competențe necesare:</strong></label>
+                        <input type="text" name="competente" class="form-control" placeholder="Ce competențe necesită acest job" required=>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label cclass="form-label"><strong>Descriere:</strong></label>
+                        <textarea type="text" name="descriere" rows="3" class="form-control" placeholder="Adaugați o descriere pentru această poziție" required></textarea>
+                    </div>
+                    <div class="form-group  mb-4">
+                        <button type="submit" class="btn btn-primary btn-lg rounded-pill px-3">
+                            Adaugă anunț
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-    
+</div>
+
     <script type="text/javascript">
-        
-        $('#hEditDataExp').datepicker({
-            showWeek: true,
-            firstDay: 1,
-            showButtonPanel: true,
-            dateFormat: 'dd/mm/yy',
-            changeMonth: true,
-            changeYear: true
-        });
-        
-        $('#hButtonNext').click(function(){
-            if ($('#hEditTitlu').val().length > 0 && $('#hEditDataExp').val().length > 0){
-                var jqXHR=$.post("<?php echo qurl_s('api/web-addlocmunca'); ?>",
-                    $('#frm_locmunca').serialize(),
-                    function(data){
-                        if (data['result']=='success'){
-                            window.location = '<?php echo qurl_l('home-angajator'); ?>';
-                        }else{
-                            $('#hStaticErrorMsg').html(data['result']);
+
+        $( document ).ready(function () {
+             $("#frm_locmunca").validate({
+                errorClass: "text-danger",
+                errorPlacement: function (error, element) {
+                    var inputContainer = element.closest('.form-group')
+                    inputContainer.append(error)
+                },
+                submitHandler: function (form) {
+                    $submit = $(form).find('button[type="submit"]')
+                    $submit.html('<span class="spinner-border spinner-border-sm mx-2" role="status" aria-hidden="true"></span>Loading...').attr('disabled', true);
+                    $.ajax({
+                        url: "<?= qurl_s('api/web-addlocmunca') ?>",
+                        type: "POST",
+                        data: $(form).serialize()
+                    }).done(function (data) {
+                        $submit.html('Salvează').attr('disabled', false);
+                        bootbox.alert({
+                            message: "Locul de muncă a fost adăugat cu succes",
+                            closeButton: false,
+                            callback: function () {
+                                window.location = '<?= qurl_l('angajator-listeazalocuri'); ?>';
+                            }
+                        })
+                    }).fail(function (e) {
+                        $submit.html('Salvează').attr('disabled', false);
+                        var message = "A apărut o eroare. Va rugăm sa încercați mai târziu!"
+                        if (e.responseText) {
+                            var res = JSON.parse(e.responseText)
+                            if (res.result) {
+                                message = res.result
+                            }
                         }
-                    },
-                "json");
-                
-                jqXHR.fail(function(a,b,c){
-                    alert("AJAX err: "+a+' - '+b);
-                });
-            }else{
-                $('#hStaticErrorMsg').html('Trebuie să completați titlul și data expirării !');
-            }
-        });
-        
+                        bootbox.alert({
+                            closeButton: false,
+                            message: message,
+                        })
+                    })
+
+                }
+            })
+        })
+
     </script>

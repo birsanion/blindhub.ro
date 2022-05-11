@@ -1,5 +1,5 @@
 <?php
-
+/*
 $this->DATA = array(
     'result' => 'success',
     'tstamp' => date('YmdHis'),
@@ -14,7 +14,7 @@ if ((int)$this->AUTH->GetAdvancedDetail('tiputilizator') == 0){
             array('oras', '=', POST('hCombo_Oras'))
         )
     );
-    
+
     if (is_array($arrUniversitati) && !empty($arrUniversitati)){
         foreach ($arrUniversitati as $arrUniversitate){
             $arrLocuri = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'locuriuniversitate',
@@ -23,7 +23,7 @@ if ((int)$this->AUTH->GetAdvancedDetail('tiputilizator') == 0){
                     array('idxauth', '=', (int)$arrUniversitate['idxauth'])
                 )
             );
-            
+
             if (is_array($arrLocuri) && !empty($arrLocuri)){
                 foreach ($arrLocuri as $arrLoc){
                     $this->DATA['html'] .= '<tr>
@@ -48,15 +48,15 @@ if ((int)$this->AUTH->GetAdvancedDetail('tiputilizator') == 0){
                         </td>
                     </tr>
                     <tr><td colspan="2"><hr /></td></tr>';
-                    
-                    /*
+
+
                     $this->DATA['rezultate'][] = array(
                         'numeuniversitate' => $arrUniversitate['nume'],
                         'idxauth' => (int)$arrUniversitate['idxauth'],
                         'facultate' => $arrLoc['facultate'],
                         'nrlocuri' => $arrLoc['numarlocuri'],
                         'idxloc' => (int)$arrLoc['idx']
-                    );*/
+                    );
                 }
             }
         }
@@ -65,3 +65,61 @@ if ((int)$this->AUTH->GetAdvancedDetail('tiputilizator') == 0){
     if (strlen($this->DATA['html']) <= 0)
         $this->DATA['html'] = '<tr><td colspan="2">Nu există rezultate momentan !</td></tr>';
 }else $this->DATA['result'] = 'EROARE: acest utilizator nu este de tip angajat !';
+*/
+
+$this->handleAPIRequest(function() {
+    $this->DATA['rezultate'] = [];
+
+    $validation = $this->validator->make($_POST, [
+        'idxauthuniversitate'      => 'required',
+        'idx_domeniu_universitate' => 'required|numeric',
+    ]);
+
+    $validation->validate();
+    if ($validation->fails()) {
+        $errors = $validation->errors();
+        $error = array_values($errors->firstOfAll())[0];
+        throw new Exception("EROARE: {$error}!", 400);
+    }
+
+    $arrUniversitate = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'universitati', [
+        ['idxauth', '=', $validation->getValue('idxauthuniversitate')],
+    ]);
+    if ($arrUniversitate === false) {
+        throw new Exception("EROARE INTERNA", 500);
+    }
+    if (empty($arrUniversitate)) {
+        throw new Exception("Eroare: aceasta universitate nu exista", 400);
+    }
+
+    $arrUniversitate = $arrUniversitate[0];
+
+    $arrLocuri = $this->DATABASE->RunQuery(sprintf(
+        "SELECT locuriuniversitate.*, orase.nume AS oras " .
+        "FROM `%s` locuriuniversitate " .
+        "INNER JOIN `%s` orase " .
+        "ON (locuriuniversitate.idx_oras = orase.idx) " .
+        "WHERE locuriuniversitate.idx_domeniu_universitate = %d " .
+        "AND locuriuniversitate.idxauth = %d ",
+        SYSCFG_DB_PREFIX . 'locuriuniversitate',
+        SYSCFG_DB_PREFIX . 'orase',
+        $validation->getValue('idx_domeniu_universitate'),
+        (int)$arrUniversitate['idxauth']
+    ));
+    if ($arrLocuri === false) {
+        throw new Exception("EROARE INTERNA", 500);
+    }
+
+    $this->DATA['rezultate'] = [];
+    foreach ($arrLocuri as $arrLoc) {
+        $this->DATA['rezultate'][] = [
+            'numeuniversitate'         => $arrUniversitate['nume'],
+            'idxauth'                  => (int)$arrLoc['idxauth'],
+            'facultate'                => $arrLoc['facultate'],
+            'nrlocuri'                 => (int)$arrLoc['numarlocuri'],
+            'idxloc'                   => (int)$arrLoc['idx'],
+            'oras'                     => $arrLoc['oras'],
+            'idx_domeniu_universitate' => (int)$arrLoc['idx_domeniu_universitate'],
+        ];
+    }
+});

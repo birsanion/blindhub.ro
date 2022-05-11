@@ -3,7 +3,6 @@
 require_once('system/thirdparty/vendor/autoload.php');
 
 use Rakit\Validation\Validator;
-
 ////////////////////////////////////////////////////////////////////////////////
 // Part of Quick Web Frame
 // -- MIT Licensed. License details in LICENSE.txt file on the root folder.
@@ -257,6 +256,17 @@ class CQSingleLoader
         }
     }
 
+    function logException(\Exception $e) {
+        $msg = "\nGET PARAMS: " . http_build_query($_GET) . "\n";
+        $msg .= "POST PARAMS: " . print_r($_POST, true) . "\n";
+        $msg .= "FILES: " . print_r($_FILES, true) . "\n";
+        $msg .= "REQUEST URI: " . $_SERVER['REQUEST_URI'] . "\n";
+        $msg .= "REMOTE_ADDR: " . $_SERVER['REMOTE_ADDR'] . "\n";
+        $msg .= "User-Agent: " . (@$_SERVER['HTTP_USER_AGENT'] ? : 'UNKNOWN') . "\n";
+        $msg .= "Error message: " . $e->getMessage() . "\n";
+        $this->LOG->Log('error', $msg);
+    }
+
     function handleAPIRequest($callable) {
         $this->DATA = [
             'result' => 'success',
@@ -268,14 +278,7 @@ class CQSingleLoader
         } catch (\Exception $e) {
             $this->DATA['result'] = $e->getMessage();
             http_response_code($e->getCode());
-            $msg = "\nGET PARAMS: " . http_build_query($_GET) . "\n";
-            $msg .= "POST PARAMS: " . print_r($_POST, true) . "\n";
-            $msg .= "FILES: " . print_r($_FILES, true) . "\n";
-            $msg .= "REQUEST URI: " . $_SERVER['REQUEST_URI'] . "\n";
-            $msg .= "REMOTE_ADDR: " . $_SERVER['REMOTE_ADDR'] . "\n";
-            $msg .= "User-Agent: " . (@$_SERVER['HTTP_USER_AGENT'] ? : 'UNKNOWN') . "\n";
-            $msg .= "Error message: " . $e->getMessage() . "\n";
-            $this->LOG->Log('error', $msg);
+            $this->logException($e);
         }
     }
 }

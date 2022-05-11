@@ -1,7 +1,49 @@
+     <div id="content" class="container my-5">
+        <div class="row">
+            <div class="offset-lg-1 col-lg-10">
+                <h1 class="titlu mb-5">Caută candidați</h1>
+                <?php
+                    if (count($this->DATA['locuri']) > 0):
+                        foreach ($this->DATA['locuri'] as $arrLoc) :
+                ?>
+                <div class="card profile-header shadow-lg">
+                    <div class="body">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-12">
+                                <?php if ($arrLoc['cv_fisier_video']): ?>
+                                <div class="embed-responsive embed-responsive-1by1 h-100" >
+                                    <iframe class="embed-responsive-item w-100" height="100%" src="<?= qurl_file('media/uploads/'. $arrLoc['cv_fisier_video']) ?>"></iframe>
+                                </div>
+                                <?php else: ?>
+                                <img class="img-fluid" src="<?= qurl_f('images/novideo.png') ?>" />
+                                <?php endif; ?>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-12">
+                                <h3 class="m-t-0 m-b-0"><strong><?= $arrLoc['nume'] ?></strong></h3>
+                                <p class="m-0">Facultate: <?= $arrLoc['locuniversitate']['facultate'] ?></p>
+                                <p class="m-0">Grad handicap: <?= $arrLoc['gradhandicap'] ?></p>
+                                <p class="m-0">Nevoi speciale: <?= $arrLoc['nevoispecifice'] ?></p>
+                                <p class="m-0">Domeniu: <?= $arrLoc['locuniversitate']['domeniu_universitate'] ?></p>
+                                <p class="m-0">Oraș: <?= $arrLoc['locuniversitate']['oras'] ?></p>
+                                <div class="mt-3">
+                                    <a class="btn btn-primary rounded-pill px-3" href="<?= qurl_l('mesaje/' . $arrLoc['idxauthnevazator']) ?>">Trimite mesaj</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php
+                        endforeach;
+                    endif;
+                ?>
+            </div>
+        </div>
+    </div>
 
-    <div class="master-container center-page">
+
+    <!--<div class="master-container center-page">
         <div class="center-text"><h1 class="bold space-4040">CANDIDAȚI</h1></div>
-        
+
         <div class="w80lst center-page">
             <table id="tbl-rezultate-angajati" class="fullwidth">
                 <?php
@@ -16,7 +58,7 @@
                         <?php echo $arrLoc['nevoispecifice']; ?><br />
                         <?php echo 'Candidează în următoarele facultăți: ' . $arrLoc['facultati']; ?><br />
                         <br /><br />
-                        În data de 
+                        În data de
                         <input type="text" value="" class="rounded w40lst dateforinterviu" />
                         <select class="w20lst rounded">
                             <option>09:00</option>
@@ -27,43 +69,43 @@
                             <option>10:15</option>
                             <option>10:30</option>
                             <option>10:45</option>
-                            
+
                             <option>11:00</option>
                             <option>11:15</option>
                             <option>11:30</option>
                             <option>11:45</option>
-                            
+
                             <option>12:00</option>
                             <option>12:15</option>
                             <option>12:30</option>
                             <option>12:45</option>
-                            
+
                             <option>13:00</option>
                             <option>13:15</option>
                             <option>13:30</option>
                             <option>13:45</option>
-                            
+
                             <option>14:00</option>
                             <option>14:15</option>
                             <option>14:30</option>
                             <option>14:45</option>
-                            
+
                             <option>15:00</option>
                             <option>15:15</option>
                             <option>15:30</option>
                             <option>15:45</option>
-                            
+
                             <option>16:00</option>
                             <option>16:15</option>
                             <option>16:30</option>
                             <option>16:45</option>
-                            
+
                             <option>17:00</option>
                             <option>17:15</option>
                             <option>17:30</option>
                             <option>17:45</option>
                         </select>
-                        
+
                         <a href="#" class="block reference imgtextlink setinterviu" data-idx="<?php echo $arrLoc['idxauthnevazator']; ?>">
                             <img src="<?php echo qurl_f('images/icon_next_normal.png'); ?>" class="normal" />
                             <img src="<?php echo qurl_f('images/icon_next_mouseover.png'); ?>" class="over" />
@@ -89,10 +131,10 @@
                 ?>
             </table>
         </div>
-    </div>
-    
+    </div>-->
+
     <script type="text/javascript">
-        
+
         $('input.dateforinterviu').datepicker({
             showWeek: true,
             firstDay: 1,
@@ -101,13 +143,13 @@
             changeMonth: true,
             changeYear: true
         });
-        
+
         $('a.setinterviu').click(function(){
             var kElem = $(this);
             var strDate = $(this).parent().children('input.dateforinterviu').val();
             var nIdxAngajat = $(this).data('idx');
             var strOra = $(this).parent().children('select').val();
-            
+
             if (strDate.length > 0){
                 var jqXHR=$.post("<?php echo qurl_s('api/web-universitate-cautacandidati-initinterviu'); ?>",
                     {
@@ -129,7 +171,7 @@
                         }
                     },
                 "json");
-                
+
                 jqXHR.fail(function(a,b,c){
                     alert("AJAX err: "+a+' - '+b);
                 });
@@ -140,5 +182,5 @@
                 }, 5000);
             }
         });
-        
+
     </script>

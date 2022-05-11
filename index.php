@@ -6,6 +6,9 @@
 
 // include the system config file
 require_once 'system/config.php';
+require_once('system/thirdparty/vendor/autoload.php');
+
+use Dotenv\Dotenv;
 
 // let the rest of the world know we are inside the framework.
 // If you take away parts and use them in other places, they will detect this
@@ -44,6 +47,9 @@ class CQAPP
         $this->ROUTE = NULL;
         $this->AUTH = NULL;
         $this->LOADER = NULL;
+
+        $dotenv = Dotenv::createImmutable(__DIR__);
+        $dotenv->load();
 
         // initialize core object
         $this->CORE = new CQCore();

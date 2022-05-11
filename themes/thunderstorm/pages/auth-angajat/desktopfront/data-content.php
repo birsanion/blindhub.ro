@@ -18,28 +18,18 @@ call_user_func($this->fncCallback, 'htmlheader', 'structure-styles', MANOP_SET,
     )
 );
 
-//$this->GLOBAL['infomsg'] = 'info message';
-//$this->GLOBAL['errormsg'] = (string)$this->AUTH->GetLastActionResult();
-
-$this->DATA['login-failed'] = false;
-
-if ($this->AUTH->IsAuthenticated() && $this->AUTH->GetHasHadActions()){
-    switch ((int)$this->AUTH->GetAdvancedDetail('tiputilizator'))
-    {
-        case 0:{
+if ($this->AUTH->IsAuthenticated()) {
+    switch ((int)$this->AUTH->GetAdvancedDetail('tiputilizator')) {
+        case 0:
             $this->ROUTE->Redirect(qurl_l('home-nevaz'));
-        }break;
-            
-        case 1:{
+            break;
+
+        case 1:
             $this->ROUTE->Redirect(qurl_l('home-angajator'));
-        }break;
-            
-        case 2:{
+            break;
+
+        case 2:
             $this->ROUTE->Redirect(qurl_l('home-universitate'));
-        }break;
-    }
-}else{
-    if ($this->AUTH->GetLastActionResult() != AUTH_SUCCESS && $this->AUTH->GetHasHadActions()){
-        $this->DATA['login-failed'] = true;
+            break;
     }
 }

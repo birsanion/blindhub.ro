@@ -1,37 +1,64 @@
 <?php
 
-$this->DATA = array(
-    'result' => 'success',
-    'tstamp' => date('YmdHis'),
-    'debug' => ''
-);
+$this->handleAPIRequest(function() {
+    $validation = $this->validator->make($_POST, [
+        'idxlocmunca' => 'required|numeric'
+    ]);
 
-
-if ((int)$this->AUTH->GetAdvancedDetail('tiputilizator') == 0){
-    $arrLocMunca = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'locurimunca',
-        array('idx', '=', (int)POST('idxlocmunca')));
-    
-    if (is_array($arrLocMunca) && !empty($arrLocMunca)){
-        $arrLocMunca = $arrLocMunca[0];
-        
-        if ($this->DATABASE->RunQuickCount(SYSCFG_DB_PREFIX . 'angajati_locurisalvate',
-            array(
-                array('idxauthangajat', '=', $this->AUTH->GetUserId(), 'AND'),
-                array('idxauthangajator', '=', (int)$arrLocMunca['idxauth'], 'AND'),
-                array('idxlocmunca', '=', (int)POST('idxlocmunca'))
-            )) <= 0)
-        {
-            if (!$this->DATABASE->RunQuickInsert(SYSCFG_DB_PREFIX . 'angajati_locurisalvate',
-                    'idxauthangajat, idxauthangajator, idxlocmunca',
-                    array(array(
-                        'idxauthangajat' => $this->AUTH->GetUserId(),
-                        'idxauthangajator' => (int)$arrLocMunca['idxauth'],
-                        'idxlocmunca' => (int)POST('idxlocmunca')
-                    ))
-                ))
-            {
-                $this->DATA['result'] = 'EROARE: Nu s-a putut salva locul de muncă în listă !';
-            }
-        }else $this->DATA['result'] = 'Ați salvat deja acest loc de muncă în trecut !';
+    $validation->validate();
+    if ($validation->fails()) {
+        $errors = $validation->errors();
+        $error = array_values($errors->firstOfAll())[0];
+        throw new Exception("EROARE: {$error}!", 400);
     }
-}else $this->DATA['result'] = 'EROARE: acest utilizator nu este de tip angajat !';
+
+    $arrUser = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'auth_users', [
+        'idx', '=', $this->AUTH->GetUserId(),
+    ]);
+    if ($arrUser === false) {
+        throw new Exception("EROARE INTERNA", 500);
+    }
+    if (empty($arrUser)) {
+        throw new Exception("EROARE: acest utilizator nu există !", 400);
+    }
+
+    $arrUser = $arrUser[0];
+    if ($arrUser['tiputilizator'] != 0) {
+        throw new Exception("EROARE: acest utilizator nu este de tip angajat !", 400);
+    }
+
+    $arrLocMunca = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'locurimunca', [
+        'idx', '=', (int)$validation->getValue('idxlocmunca')
+    ]);
+    if ($arrLocMunca === false) {
+        throw new Exception("EROARE INTERNA", 500);
+    }
+    if (empty($arrLocMunca)) {
+        throw new Exception("EROARE: acest loc munca nu exista", 400);
+    }
+    $arrLocMunca = $arrLocMunca[0];
+
+    $res = $this->DATABASE->RunQuickCount(SYSCFG_DB_PREFIX . 'angajati_locurisalvate', [
+        ['idxauthangajat', '=', (int)$arrUser['idx'], 'AND'],
+        ['idxauthangajator', '=', (int)$arrLocMunca['idxauth'], 'AND'],
+        ['idxlocmunca', '=', (int)$validation->getValue('idxlocmunca')]
+    ]);
+    if ($res === false) {
+        throw new Exception("EROARE INTERNA", 500);
+    }
+    if (!$res) {
+        $res = $this->DATABASE->RunQuickInsert(SYSCFG_DB_PREFIX . 'angajati_locurisalvate', [
+            'idxauthangajat',
+            'idxauthangajator',
+            'idxlocmunca'
+        ], [[
+            'idxauthangajat'   => (int)$arrUser['idx'],
+            'idxauthangajator' => (int)$arrLocMunca['idxauth'],
+            'idxlocmunca'      => (int)$validation->getValue('idxlocmunca')
+        ]]);
+        if (!$res) {
+            throw new Exception("EROARE: Nu s-a putut salva locul de muncă în listă !", 500);
+        }
+    }
+});
+

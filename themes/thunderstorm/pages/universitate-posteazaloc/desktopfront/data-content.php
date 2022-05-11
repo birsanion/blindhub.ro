@@ -6,6 +6,7 @@
 call_user_func($this->fncCallback, 'htmlheader', 'structure-javascript', MANOP_SET,
     array(
         'jquery-ui-1-10-3-custom-min.js',
+        'bootbox.min.js',
         'jq-file-upload/jquery.iframe-transport.js',
         'jq-file-upload/jquery.fileupload.js'
     )
@@ -19,6 +20,23 @@ call_user_func($this->fncCallback, 'htmlheader', 'structure-styles', MANOP_SET,
 );
 
 if (!$this->AUTH->IsAuthenticated()) $this->ROUTE->Redirect(qurl_l(''));
+
+try {
+	$arrOrase = $this->DATABASE->RunQuickSelect(['idx', 'nume'], SYSCFG_DB_PREFIX . 'orase', NULL, ['nume']);
+    if ($arrOrase === false) {
+        throw new Exception("Eroare internă");
+    }
+
+    $arrDomeniiUniversitate = $this->DATABASE->RunQuickSelect(['idx', 'nume'], SYSCFG_DB_PREFIX . 'domenii_universitate', NULL, ['nume']);
+    if ($arrDomeniiUniversitate === false) {
+        throw new Exception("Eroare internă");
+    }
+
+    $this->DATA['orase'] = $arrOrase;
+    $this->DATA['domenii_universitate'] = $arrDomeniiUniversitate;
+} catch (\Exception $e) {
+    $this->GLOBAL['errormsg'] = $e->getMessage();
+}
 
 //$this->GLOBAL['infomsg'] = 'info message';
 //$this->GLOBAL['errormsg'] = (string)$this->AUTH->GetLastActionResult();

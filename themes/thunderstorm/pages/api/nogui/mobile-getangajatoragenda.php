@@ -79,7 +79,7 @@ $this->handleAPIRequest(function() {
             'dataora'           => MySQLDate_to_RomanianDate($arrInterviu['tstamp']),
             'idxauthnevazator'  => (int)$arrInterviu['idxauthangajat'],
             'tstampsecunde'     => MySQLDate_to_Seconds($arrInterviu['tstamp']),
-            'existalocmunca'    => $arrInterviu['idxlocmunca'] ? 1 : 0,
+            'existalocmunca'    => $arrInterviu['idxobject'] ? 1 : 0,
             'titlulocmunca'     => $arrInterviu['titlulocmunca'],
             'idx_oras_locmunca' => $arrInterviu['idx_oras_locmunca'] ? (int)$arrInterviu['idx_oras_locmunca'] : null,
             'vonagesessid'      => $arrInterviu['vonagesessid'],

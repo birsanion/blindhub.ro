@@ -1,30 +1,55 @@
 <?php
 
-function RomanianDate_to_MySQLDate($pcDate)
-{
-    return substr($pcDate,6,4).'-'.substr($pcDate,3,2).'-'.substr($pcDate,0,2).
-        (strlen($pcDate)>10 ? ' '.substr($pcDate, 11) : '');
-}
+$this->handleAPIRequest(function() {
+    $validation = $this->validator->make($_POST, [
+        'idx_domeniu_cv'        => 'required|numeric',
+        'idx_oras'              => 'required|numeric',
+        'competente'            => 'required',
+        'titlu'                 => 'required',
+        'descriere'             => 'required',
+        'idx_optiune_tipslujba' => 'required|numeric'
+    ]);
 
-$this->DATA = array(
-    'result' => 'success',
-    'tstamp' => date('YmdHis')
-);
+    $validation->validate();
+    if ($validation->fails()) {
+        $errors = $validation->errors();
+        $error = array_values($errors->firstOfAll())[0];
+        throw new Exception("EROARE: {$error}!", 400);
+    }
 
-if ((int)$this->AUTH->GetAdvancedDetail('tiputilizator') == 1){
-    // insert
-    $this->DATABASE->RunQuickInsert(SYSCFG_DB_PREFIX . 'locurimunca',
-        'idxauth, domeniu, oras, competente, titlu, descriere, expirare',
-        array(array(
-            'idxauth' => $this->AUTH->GetUserId(),
-            'domeniu' => POST('hComboDomeniu'),
-            'oras' => POST('hComboOras'),
-            'competente' => POST('hEditCompetente'),
-            'titlu' => POST('hEditTitlu'),
-            'descriere' => POST('hEditDescriere'),
-            'expirare' => RomanianDate_to_MySQLDate(POST('hEditDataExp'))
-        ))
-    );
-}else $this->DATA['result'] = 'EROARE: acest utilizator nu este de tip angajator !';
+    $arrUser = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'auth_users', [
+        'idx', '=', $this->AUTH->GetUserId()
+    ]);
+    if ($arrUser === false) {
+        throw new Exception("EROARE INTERNA", 500);
+    }
+    if (empty($arrUser)) {
+        throw new Exception("EROARE: acest utilizator nu există !", 400);
+    }
 
+    $arrUser = $arrUser[0];
+    if ($arrUser['tiputilizator'] != 1) {
+        throw new Exception("EROARE: acest utilizator nu este de tip angajator!", 400);
+    }
 
+    $res = $this->DATABASE->RunQuickInsert(SYSCFG_DB_PREFIX . 'locurimunca', [
+        'idxauth',
+        'idx_domeniu_cv',
+        'idx_oras',
+        'competente',
+        'titlu',
+        'descriere',
+        'idx_optiune_tipslujba',
+    ], [[
+        'idxauth'               => (int)$arrUser['idx'],
+        'idx_domeniu_cv'        => $validation->getValue('idx_domeniu_cv'),
+        'idx_oras'              => $validation->getValue('idx_oras'),
+        'competente'            => $validation->getValue('competente'),
+        'titlu'                 => $validation->getValue('titlu'),
+        'descriere'             => $validation->getValue('descriere'),
+        'idx_optiune_tipslujba' => $validation->getValue('idx_optiune_tipslujba')
+    ]]);
+    if ($res === false) {
+        throw new Exception($this->DATABASE->GetError(), 500);
+    }
+});

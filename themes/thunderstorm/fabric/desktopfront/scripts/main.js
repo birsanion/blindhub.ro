@@ -6,11 +6,15 @@
 
 // when document has finished completely loading, do some things
 
+
+$.validator.messages.required = 'Acest câmp este obligatoriu'
+$.validator.messages.email = 'Vă rugăm să introduceți o adresă de email validă'
+
 $(document).ready(function() {
-    
+
     $('#hButtonSitewideTextBigger').click(function(kEvent){
     	kEvent.preventDefault();
-    	
+
     	if ($('body').hasClass('size-1')){
     		$('body').removeClass('size-1');
     		$('body').addClass('size-2');
@@ -25,10 +29,10 @@ $(document).ready(function() {
     		$('body').addClass('size-5');
     	}
     });
-    
+
     $('#hButtonSitewideTextSmaller').click(function(kEvent){
     	kEvent.preventDefault();
-    	
+
     	if ($('body').hasClass('size-5')){
     		$('body').removeClass('size-5');
     		$('body').addClass('size-4');
@@ -43,17 +47,29 @@ $(document).ready(function() {
     		$('body').addClass('size-1');
     	}
     });
-    
+
     $('#hButtonSitewideHighContrast').click(function(kEvent){
     	kEvent.preventDefault();
-    	
+
     	if ($('body').hasClass('highcontrast')){
     		$('body').removeClass('highcontrast');
     	}else{
     		$('body').addClass('highcontrast');
     	}
     });
-    
+
+    $('.mobile-nav-toggle').click(function (e) {
+      $('#navbar').toggleClass('navbar-mobile')
+      $(this).toggleClass('bi-list')
+      $(this).toggleClass('bi-x')
+    })
+
+    $('.navbar .dropdown > a').click(function (e) {
+      if ($('#navbar').hasClass('navbar-mobile')) {
+        e.preventDefault()
+        $(this).next().toggleClass('dropdown-active')
+      }
+    })
 });
 
 // other useful functions and stuff
@@ -61,7 +77,7 @@ function htmlentities(pcString)
 {
     var pcStr=pcString;
     if (pcString==undefined) pcStr='';
-    
+
     pcStr=pcStr.replace(/\x26/g,'&amp;');
     pcStr=pcStr.replace(/\x22/g,'&quot;');
     pcStr=pcStr.replace(/\x27/g,'&apos;');
@@ -171,7 +187,7 @@ function htmlspecialchars(pcString)
 {
     var pcStr=pcString;
     if (pcString==undefined) pcStr='';
-    
+
     pcStr=pcStr.replace(/\x26/g,'&amp;');
     pcStr=pcStr.replace(/\x22/g,'&quot;');
     pcStr=pcStr.replace(/\x27/g,'&apos;');
@@ -185,7 +201,7 @@ function htmlentities_frombrowser(pcString)
 {
     var pcStr=pcString;
     if (pcString==undefined) pcStr='';
-    
+
     pcStr=pcStr.replace(/\x22/g,'&quot;');
     pcStr=pcStr.replace(/\x27/g,'&apos;');
     pcStr=pcStr.replace(/\xC2/g,'&Acirc;');
@@ -198,7 +214,7 @@ function htmlentities_frombrowser(pcString)
     pcStr=pcStr.replace(/\xEE/g,'&icirc;');
     pcStr=pcStr.replace(/\xF4/g,'&ocirc;');
     pcStr=pcStr.replace(/\xFB/g,'&ucirc;');
-    
+
     return pcStr;
 }
 
@@ -223,21 +239,21 @@ function sprintf()
   // * returns 3: '[####monkey]'
   // * example 4: sprintf("%d", 123456789012345);
   // * returns 4: '123456789012345'
-  
+
     // sprintf() is ...
-    // Copyright (c) 2013 Kevin van Zonneveld (http://kvz.io) 
+    // Copyright (c) 2013 Kevin van Zonneveld (http://kvz.io)
     // and Contributors (http://phpjs.org/authors)
-    //     
+    //
     // Permission is hereby granted, free of charge, to any person obtaining a copy of
     // this software and associated documentation files (the "Software"), to deal in
     // the Software without restriction, including without limitation the rights to
     // use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
     // of the Software, and to permit persons to whom the Software is furnished to do
     // so, subject to the following conditions:
-    //     
+    //
     // The above copyright notice and this permission notice shall be included in all
     // copies or substantial portions of the Software.
-    //     
+    //
     // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
     // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
     // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -245,7 +261,7 @@ function sprintf()
     // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
     // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     // SOFTWARE.
-  
+
   var regex = /%%|%(\d+\$)?([-+\'#0 ]*)(\*\d+\$|\*|\d+)?(\.(\*\d+\$|\*|\d+))?([scboxXuideEfFgG])/g;
   var a = arguments,
     i = 0,
