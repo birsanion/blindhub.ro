@@ -18,7 +18,7 @@ class ComposerStaticInit406f89e96557e0637a6dcbbce8594fd4
     );
 
     public static $prefixLengthsPsr4 = array (
-        'S' => 
+        'S' =>
         array (
             'Symfony\\Polyfill\\Php80\\' => 23,
             'Symfony\\Polyfill\\Php73\\' => 23,
@@ -31,11 +31,11 @@ class ComposerStaticInit406f89e96557e0637a6dcbbce8594fd4
             'Symfony\\Component\\Filesystem\\' => 29,
             'Symfony\\Component\\Cache\\' => 24,
         ),
-        'R' => 
+        'R' =>
         array (
             'Rakit\\Validation\\' => 17,
         ),
-        'P' => 
+        'P' =>
         array (
             'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
@@ -44,177 +44,184 @@ class ComposerStaticInit406f89e96557e0637a6dcbbce8594fd4
             'Psr\\Cache\\' => 10,
             'PhpOption\\' => 10,
         ),
-        'O' => 
+        'O' =>
         array (
             'OpenTok\\' => 8,
             'OpenTokTest\\' => 12,
         ),
-        'J' => 
+        'J' =>
         array (
             'JohnStevenson\\JsonWorks\\' => 24,
         ),
-        'I' => 
+        'I' =>
         array (
             'Intervention\\Image\\' => 19,
         ),
-        'G' => 
+        'G' =>
         array (
             'GuzzleHttp\\Psr7\\' => 16,
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
             'GrahamCampbell\\ResultType\\' => 26,
         ),
-        'F' => 
+        'F' =>
         array (
             'Firebase\\JWT\\' => 13,
         ),
-        'D' => 
+        'D' =>
         array (
             'Dotenv\\' => 7,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Symfony\\Polyfill\\Php80\\' => 
+        'Symfony\\Polyfill\\Php80\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
         ),
-        'Symfony\\Polyfill\\Php73\\' => 
+        'Symfony\\Polyfill\\Php73\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php73',
         ),
-        'Symfony\\Polyfill\\Mbstring\\' => 
+        'Symfony\\Polyfill\\Mbstring\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
         ),
-        'Symfony\\Polyfill\\Ctype\\' => 
+        'Symfony\\Polyfill\\Ctype\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
-        'Symfony\\Contracts\\Service\\' => 
+        'Symfony\\Contracts\\Service\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/service-contracts',
         ),
-        'Symfony\\Contracts\\Cache\\' => 
+        'Symfony\\Contracts\\Cache\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/cache-contracts',
         ),
-        'Symfony\\Component\\VarExporter\\' => 
+        'Symfony\\Component\\VarExporter\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/var-exporter',
         ),
-        'Symfony\\Component\\Process\\' => 
+        'Symfony\\Component\\Process\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/process',
         ),
-        'Symfony\\Component\\Filesystem\\' => 
+        'Symfony\\Component\\Filesystem\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/filesystem',
         ),
-        'Symfony\\Component\\Cache\\' => 
+        'Symfony\\Component\\Cache\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/cache',
         ),
-        'Rakit\\Validation\\' => 
+        'Rakit\\Validation\\' =>
         array (
             0 => __DIR__ . '/..' . '/rakit/validation/src',
         ),
-        'Psr\\Log\\' => 
+        'Psr\\Log\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
-        'Psr\\Http\\Message\\' => 
+        'Psr\\Http\\Message\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/http-factory/src',
             1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
-        'Psr\\Http\\Client\\' => 
+        'Psr\\Http\\Client\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/http-client/src',
         ),
-        'Psr\\Container\\' => 
+        'Psr\\Container\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
         ),
-        'Psr\\Cache\\' => 
+        'Psr\\Cache\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/cache/src',
         ),
-        'PhpOption\\' => 
+        'PhpOption\\' =>
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
         ),
-        'OpenTok\\' => 
+        'OpenTok\\' =>
         array (
             0 => __DIR__ . '/..' . '/opentok/opentok/src/OpenTok',
         ),
-        'OpenTokTest\\' => 
+        'OpenTokTest\\' =>
         array (
             0 => __DIR__ . '/..' . '/opentok/opentok/tests/OpenTokTest',
         ),
-        'JohnStevenson\\JsonWorks\\' => 
+        'JohnStevenson\\JsonWorks\\' =>
         array (
             0 => __DIR__ . '/..' . '/johnstevenson/json-works/src',
         ),
-        'Intervention\\Image\\' => 
+        'Intervention\\Image\\' =>
         array (
             0 => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image',
         ),
-        'GuzzleHttp\\Psr7\\' => 
+        'GuzzleHttp\\Psr7\\' =>
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
         ),
-        'GuzzleHttp\\Promise\\' => 
+        'GuzzleHttp\\Promise\\' =>
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/promises/src',
         ),
-        'GuzzleHttp\\' => 
+        'GuzzleHttp\\' =>
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
         ),
-        'GrahamCampbell\\ResultType\\' => 
+        'GrahamCampbell\\ResultType\\' =>
         array (
             0 => __DIR__ . '/..' . '/graham-campbell/result-type/src',
         ),
-        'Firebase\\JWT\\' => 
+        'Firebase\\JWT\\' =>
         array (
             0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
-        'Dotenv\\' => 
+        'Dotenv\\' =>
         array (
             0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
         ),
     );
 
     public static $prefixesPsr0 = array (
-        'N' => 
+        'N' =>
         array (
-            'Neutron' => 
+            'Neutron' =>
             array (
                 0 => __DIR__ . '/..' . '/neutron/temporary-filesystem/src',
             ),
-            'NMC' => 
+            'NMC' =>
             array (
                 0 => __DIR__ . '/..' . '/nmcteam/image-with-text/src',
             ),
         ),
-        'F' => 
+        'L' =>
         array (
-            'FFMpeg' => 
+            'LibMigration' =>
+            array (
+                0 => __DIR__ . '/..' . '/kohkimakimoto/lib-migration/src',
+            ),
+        ),
+        'F' =>
+        array (
+            'FFMpeg' =>
             array (
                 0 => __DIR__ . '/..' . '/php-ffmpeg/php-ffmpeg/src',
             ),
         ),
-        'E' => 
+        'E' =>
         array (
-            'Evenement' => 
+            'Evenement' =>
             array (
                 0 => __DIR__ . '/..' . '/evenement/evenement/src',
             ),
         ),
-        'A' => 
+        'A' =>
         array (
-            'Alchemy' => 
+            'Alchemy' =>
             array (
                 0 => __DIR__ . '/..' . '/alchemy/binary-driver/src',
             ),

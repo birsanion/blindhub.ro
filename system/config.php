@@ -16,20 +16,8 @@ define('SYSCAP_SYSCONFIG', true);
 // database type; accepted values: mysql
 define('SYSCFG_DB_TYPE',			'mysqli');
 
-// address of database server
-define('SYSCFG_DB_ADDRESS',			'localhost');
-
-// name of database
-define('SYSCFG_DB_NAME',			'blindhub');
-
 // table prefix; useful when having more websites in one database
 define('SYSCFG_DB_PREFIX',		    'qwf_');
-
-// username
-define('SYSCFG_DB_USER',			'blindhub');
-
-// password
-define('SYSCFG_DB_PASS',			'BLINDhub2021@');
 
 //// OTHER SYSTEM SETTINGS =====================================================
 // default timezone, the 'date_default_timezone_set()' function will be called

@@ -96,9 +96,7 @@ class CQAPP
 
         // initialize each system object (give each their dependencies)
         if ($this->DATABASE){
-            $this->DATABASE->Init(SYSCFG_DB_TYPE, SYSCFG_DB_ADDRESS,
-                SYSCFG_DB_NAME, SYSCFG_DB_USER, SYSCFG_DB_PASS);
-
+            $this->DATABASE->Init(SYSCFG_DB_TYPE, $_ENV['DB_HOST'], $_ENV['DB_DATABASE'], $_ENV['DB_USERNAME'],$_ENV['DB_PASSWORD']);
             $this->DATABASE->Open();
         }
 

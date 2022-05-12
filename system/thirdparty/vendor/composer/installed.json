@@ -692,6 +692,59 @@
         }
     },
     {
+        "name": "kohkimakimoto/lib-migration",
+        "version": "v1.2.0",
+        "version_normalized": "1.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/kohkimakimoto/lib-migration.git",
+            "reference": "fffa8dee71610d5a085ff2c22b73c6291ef5bd2b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/kohkimakimoto/lib-migration/zipball/fffa8dee71610d5a085ff2c22b73c6291ef5bd2b",
+            "reference": "fffa8dee71610d5a085ff2c22b73c6291ef5bd2b",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "phpunit/dbunit": "1.2.*",
+            "phpunit/phpunit": "3.*"
+        },
+        "time": "2014-03-05T04:29:29+00:00",
+        "bin": [
+            "bin/phpmigrate"
+        ],
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "LibMigration": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache License 2.0"
+        ],
+        "authors": [
+            {
+                "name": "Kohki Makimoto",
+                "email": "kohki.makimoto@gmail.com",
+                "homepage": "http://kohkimakimoto.hatenablog.com/"
+            }
+        ],
+        "description": "LibMigration is a minimum database migration library and framework for MySQL.",
+        "homepage": "https://github.com/kohkimakimoto/lib-migration",
+        "keywords": [
+            "database",
+            "db",
+            "migrations",
+            "mysql"
+        ]
+    },
+    {
         "name": "neutron/temporary-filesystem",
         "version": "3.0.1",
         "version_normalized": "3.0.1.0",

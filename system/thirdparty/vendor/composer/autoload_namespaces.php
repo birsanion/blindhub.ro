@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'Neutron' => array($vendorDir . '/neutron/temporary-filesystem/src'),
     'NMC' => array($vendorDir . '/nmcteam/image-with-text/src'),
+    'LibMigration' => array($vendorDir . '/kohkimakimoto/lib-migration/src'),
     'FFMpeg' => array($vendorDir . '/php-ffmpeg/php-ffmpeg/src'),
     'Evenement' => array($vendorDir . '/evenement/evenement/src'),
     'Alchemy' => array($vendorDir . '/alchemy/binary-driver/src'),
