@@ -1,6 +1,5 @@
 <?php
 
-
 $this->handleAPIRequest(function() {
     $validation = $this->validator->make($_POST, [
         'parolaveche' => 'required',
@@ -26,8 +25,8 @@ $this->handleAPIRequest(function() {
     }
 
     $arrUser = $arrUser[0];
-    $passHash = $this->AUTH->GetPasswordHash($validation->getValue('parolaveche'), $arrUser['username'], $arrUser['salt']))
-    if (!$this->AUTH->CompareHashes($arrUser['passhash'], $passHash) {
+    $passHash = $this->AUTH->GetPasswordHash($validation->getValue('parolaveche'), $arrUser['username'], $arrUser['salt']);
+    if (!$this->AUTH->CompareHashes($arrUser['passhash'], $passHash)) {
         throw new Exception("EROARE: Parola veche este incorectă !", 400);
     }
 
@@ -35,7 +34,7 @@ $this->handleAPIRequest(function() {
         throw new Exception("EROARE: Parola nu a putut fi modificată !", 400);
     }
 
-    $this->DATA['result'] = 'success'
+    $this->DATA['result'] = 'success';
 });
 /*
 $this->DATA = array(
