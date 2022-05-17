@@ -54,7 +54,7 @@ class BlindhubIpnMessages
      */
     public function getDownSQL()
     {
-        return "DROP TABLE `qvf_ipn_messages`";
+        return "DROP TABLE `qwf_ipn_messages`";
     }
 
 }
