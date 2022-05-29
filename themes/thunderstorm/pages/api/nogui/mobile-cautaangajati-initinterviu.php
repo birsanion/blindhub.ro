@@ -8,9 +8,6 @@ use OpenTok\ArchiveMode;
 use OpenTok\Session;
 use OpenTok\Role;
 
-define('VONAGE_API_KEY', '47381251');
-define('VONAGE_API_SECRET', 'b906f5b041ad14c221930bd5230305abee699c5e');
-
 function RomanianDate_to_MySQLDate($pcDate)
 {
     return substr($pcDate,6,4).'-'.substr($pcDate,3,2).'-'.substr($pcDate,0,2).
@@ -19,7 +16,7 @@ function RomanianDate_to_MySQLDate($pcDate)
 
 $this->handleAPIRequest(function() {
     $validation = $this->validator->make($_POST, [
-        'userkey'          => 'required',
+        'userkey'          => 'nullable',
         'datacalend'       => 'required|date:d/m/Y',
         'ora'              => 'required',
         'idxauthnevazator' => 'required|numeric',
@@ -33,9 +30,16 @@ $this->handleAPIRequest(function() {
         throw new Exception("EROARE: {$error}!", 400);
     }
 
-    $arrUser = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'auth_users', [
-        'apploginid', '=', $validation->getValue('userkey')
-    ]);
+    $conds = [];
+    if ($validation->getValue('userkey')) {
+        $conds = [ 'apploginid', '=', $validation->getValue('userkey') ];
+    } else if ($this->AUTH->IsAuthenticated()) {
+        $conds = [ 'idx', '=', $this->AUTH->GetUserId() ];
+    } else {
+        throw new Exception("Cerere invalida", 400);
+    }
+
+    $arrUser = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'auth_users', $conds);
     if ($arrUser === false) {
         throw new Exception("EROARE INTERNA", 500);
     }
@@ -56,9 +60,10 @@ $this->handleAPIRequest(function() {
     if ($arrInterviu === false) {
         throw new Exception("EROARE INTERNA", 500);
     }
+
     if (empty($arrInterviu)) {
         try {
-            $kOpentok = new OpenTok(VONAGE_API_KEY, VONAGE_API_SECRET);
+            $kOpentok = new OpenTok($_ENV['VONAGE_API_KEY'], $_ENV['VONAGE_API_SECRET']);
             $kSession = $kOpentok->createSession();
             $strSessionId = $kSession->getSessionId();
             $strNevazatorKey = $kOpentok->generateToken($strSessionId);
@@ -98,7 +103,7 @@ $this->handleAPIRequest(function() {
             ['idxobject', '=', (int)$validation->getValue('idxlocmunca')]
         ]);
         if (!$res) {
-            throw new Exception("EROARE INTERNA", 500);
+            throw new Exception($this->DATABASE->GetError(), 500);
         }
 
         $idxInterviu = $arrInterviu[0]['idx'];

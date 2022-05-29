@@ -180,76 +180,6 @@
         </div>
     </div>
 
-    <!--
-
-     <div class="form-group mb-4">
-                        <label class="form-label"><strong>Ce sectoare de activitate vă interesează?</strong></label>
-                        <select class="selectpicker form-control" data-style="btn-white" multiple required name="idx_domenii_cv[]">
-                            <option value="" data-hidden="true"></option>
-                            <?php foreach ($this->DATA['domenii_cv'] as $domeniu): ?>
-                            <option value="<?= $domeniu['idx'] ?>" <?php if (in_array($domeniu['idx'], $this->DATA['details']['idx_domenii_cv'])) echo 'selected'; ?>><?= $domeniu['nume'] ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-
-                    <div class="form-group mb-4">
-                        <label class="form-label"><strong>În ce oraș vrei să muncești?</strong></label>
-                        <select class="selectpicker form-control" data-style="btn-white" multiple data-live-search="true" data-size="12" required name="idx_oras">
-                            <option value="" data-hidden="true"></option>
-                            <?php foreach ($this->DATA['orase'] as $oras): ?>
-                            <option value="<?= $oras['idx'] ?>" <?php if (in_array($oras['idx'], $this->DATA['details']['idx_orase'])) echo 'selected'; ?>><?= $oras['nume'] ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-    -->
-
-    <!--<div class="master-container center-page center-text">
-        <h1 class="bold space-4040">EDITARE PROFIL NEVĂZĂTOR</h1>
-
-        <form id="frm_creeazacont" method="post" enctype="multipart/form-data">
-
-            <div id="section-1" class="section selected">
-                <h1 class="space-2020">Salutare !<br />Care este numele tău ?</h1>
-                <input type="text" name="nume" id="hEditNume" value="<?php
-                    echo htmlspecialchars($this->DATA['details']['nume']); ?>" class="center-text rounded space-0040 w60lst" placeholder="introduceți numele aici" tabindex="0" />
-            </div>
-
-            <div id="section-2" class="section invisible">
-                <h1 class="space-2020">Care este prenumele tău ?</h1>
-                <input type="text" name="prenume" id="hEditPrenume" value="<?php
-                    echo htmlspecialchars($this->DATA['details']['prenume']); ?>" class="center-text rounded space-0040 w60lst" placeholder="introduceți prenumele aici" />
-            </div>
-
-            <div id="section-3" class="section invisible">
-                <h1 class="space-2020">Sunteți o persoană cu handicap vizual ...</h1>
-
-                <?php if (!empty($this->DATA['optiuni']['gradhandicap']) > 0): ?>
-                <div style="width: 20%; text-align: left;" class="center-page">
-                    <?php foreach ($this->DATA['optiuni']['gradhandicap'] as $idx => $optiune): ?>
-                    <label>
-                        <input type="radio" name="idx_optiune_gradhandicap" value="<?= $idx ?>" <?php
-                            if ($this->DATA['details']['idx_optiune_gradhandicap'] == $idx) echo ' checked="checked"'; ?>/>
-                        <?= $optiune ?>
-                    </label><br /><br />
-                    <?php endforeach; ?>
-                </div>
-                <?php endif; ?>
-            </div>
-
-            <div id="section-4" class="section invisible">
-                <h1 class="space-2020">Nevoi specifice de adaptare</h1>
-                <input type="text" name="hEditNevoiSpecifice" id="hEditNevoiSpecifice" value="<?php
-                    echo htmlspecialchars($this->DATA['details']['nevoispecifice']); ?>" class="center-text rounded space-0040 w60lst" placeholder="introduceți nevoi specifice aici" />
-            </div>
-
-            <input type="hidden" name="userkey" value="mod" />
-        </form>
-
-        <br /><br />
-        <div id="hStaticErrorMsg"></div>
-        <input type="button" name="hButtonNext" id="hButtonNext" value="URMĂTORUL PAS &rArr;" class="standard-button rounded space-2020" />
-    </div>-->
-
     <script type="text/javascript">
         $( document ).ready(function () {
             $("#frm_editcont").validate({
@@ -291,6 +221,4 @@
                 }
             })
         })
-
-
     </script>

@@ -6,106 +6,59 @@
 
             <div class="offset-lg-3 col-lg-6 offset-md-1 col-md-10">
                 <form id="frm_cauta" method="post" enctype="multipart/form-data">
-                <div id="section-1" class="section selected">
-                    <!--<h1 class="space-2020">Orașul dorit:</h1>
-
-                    <br />-->
-                    <div class="form-group mb-4">
-                        <label class="form-label"><strong>Orașul dorit?</strong></label>
-                        <select class="selectpicker form-control shadow" data-size="10" id="hCombo_Oras" data-style="btn-white" required name="idx_oras">
-                            <option value="" data-hidden="true"></option>
-                            <?php foreach ($this->DATA['orase'] as $oras): ?>
-                            <option value="<?= $oras['idx'] ?>"><?= $oras['nume'] ?></option>
-                            <?php endforeach; ?>
-                        </select>
+                    <div data-index="0" class="section selected">
+                        <div class="form-group mb-4">
+                            <label class="form-label"><strong>Orașul dorit?</strong></label>
+                            <select class="selectpicker form-control shadow" data-size="10" id="hCombo_Oras" data-style="btn-white" required name="idx_oras">
+                                <option value="" data-hidden="true"></option>
+                                <?php foreach ($this->DATA['orase'] as $oras): ?>
+                                <option value="<?= $oras['idx'] ?>"><?= $oras['nume'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
                     </div>
 
-                    <!--<select name="hCombo_Oras" id="hCombo_Oras" class="w60lst center-text">
-                        <option value="albaiulia">Alba Iulia</option>
-                        <option value="alexandria">Alexandria</option>
-                        <option value="arad">Arad</option>
-                        <option value="baiamare">Baia Mare</option>
-                        <option value="bistritanasaud">Bistrița Năsăud</option>
-                        <option value="braila">Brăila</option>
-                        <option value="bucuresti">București</option>
-                        <option value="botosani">Botoșani</option>
-                        <option value="brasov">Brașov</option>
-                        <option value="bacau">Bacău</option>
-                        <option value="buzau">Buzău</option>
-                        <option value="calarasi">Călărași</option>
-                        <option value="clujnapoca">Cluj-Napoca</option>
-                        <option value="constanta">Constanța</option>
-                        <option value="craiova">Craiova</option>
-                        <option value="deva">Deva</option>
-                        <option value="iasi">Iași</option>
-                        <option value="focsani">Focșani</option>
-                        <option value="galati">Galați</option>
-                        <option value="giurgiu">Giurgiu</option>
-                        <option value="oradea">Oradea</option>
-                        <option value="ploiesti">Ploiești</option>
-                        <option value="pitesti">Pitești</option>
-                        <option value="piatraneamt">Piatra Neamț</option>
-                        <option value="resita">Reșița</option>
-                        <option value="ramnicuvalcea">Râmnicu Vâlcea</option>
-                        <option value="timisoara">Timișoara</option>
-                        <option value="targumures">Târgu Mureș</option>
-                        <option value="targujiu">Târgu Jiu</option>
-                        <option value="slatina">Slatina</option>
-                        <option value="sibiu">Sibiu</option>
-                        <option value="satumare">Satu Mare</option>
-                        <option value="suceava">Suceava</option>
-                        <option value="vaslui">Vaslui</option>
-                    </select>-->
-                </div>
-
-                <div id="section-2" class="section invisible">
-                     <div class="form-group mb-4">
-                        <label class="form-label"><strong>Universitate</strong></label>
-                        <select class="selectpicker form-control shadow" data-size="10"  id="hCombo_Universitate" data-style="btn-white" required name="idxauthuniversitate">
-                        </select>
+                    <div data-index="1" class="section invisible">
+                        <div class="form-group mb-4">
+                            <label class="form-label"><strong>Universitate</strong></label>
+                            <select class="selectpicker form-control shadow" data-size="10"  id="hCombo_Universitate" data-style="btn-white" required name="idxauthuniversitate">
+                            </select>
+                        </div>
                     </div>
-                    <!--<h1 class="space-2020">Universitatea:</h1>
-                    <br />
-                    <select name="hCombo_Universitate" id="hCombo_Universitate" class="center-text"></select>-->
-                </div>
 
-                <div id="section-3" class="section invisible">
-                    <div class="form-group mb-4">
-                        <label class="form-label"><strong>Domeniu de interes:</strong></label>
-                        <select class="selectpicker form-control shadow" data-size="10" id="hCombo_Domeniu" data-style="btn-white" required name="idx_domeniu_universitate">
-                            <option value="" data-hidden="true"></option>
-                            <?php foreach ($this->DATA['domenii_universitate'] as $domeniu): ?>
-                            <option value="<?= $domeniu['idx'] ?>"><?= $domeniu['nume'] ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                    <!--<h1 class="space-2020">Domeniu de interes:</h1>
-                    <br />
-                    <select name="hCombo_Domeniu" id="hCombo_Domeniu" class="center-text">
-                        <option value="it">IT</option>
-                        <option value="medical">Medical</option>
-                        <option value="callcenter">Call center</option>
-                        <option value="resurseumane">Resurse umane</option>
-                        <option value="asistentasociala">Asistență socială</option>
-                        <option value="jurnalism">Jurnalism și relații publice</option>
-                        <option value="radio">Radio</option>
-                        <option value="psihologie">Psihologie consiliere coaching</option>
-                        <option value="educatie">Educație și training</option>
-                        <option value="artistica">Industria creativă și artistică</option>
-                        <option value="administratie">Administrație publică și instituții</option>
-                        <option value="desk">Desk office</option>
-                        <option value="wellness">Wellness și SPA</option>
-                        <option value="traducator">Traducător / translator</option>
-                        <option value="diverse">Diverse</option>
-                    </select>-->
+
+                    <div data-index="2" class="section invisible">
+                        <div class="form-group mb-4">
+                            <label class="form-label"><strong>Domeniu de interes:</strong></label>
+                            <select class="selectpicker form-control shadow" data-size="10" id="hCombo_Domeniu" data-style="btn-white" required name="idx_domeniu_universitate">
+                                <option value="" data-hidden="true"></option>
+                                <?php foreach ($this->DATA['domenii_universitate'] as $domeniu): ?>
+                                <option value="<?= $domeniu['idx'] ?>"><?= $domeniu['nume'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
                     </div>
                 </form>
-                <button type="button" name="hButtonNext" id="hButtonNext" class="btn btn-primary btn-lg rounded-pill ox-4" >
-                    Următorul pas
-                </button>
+
+                <div class="row mt-5">
+                    <div class="col-6">
+                        <button type="button" name="hButtonPrev" id="hButtonPrev" class="btn btn-link btn-lg" style="display:none" >
+                            Înapoi
+                        </button>
+                    </div>
+                    <div class="col-6" style="text-align:right">
+                        <button type="button" name="hButtonNext" id="hButtonNext" class="btn btn-primary btn-lg rounded-pill ox-4" >
+                            Următorul pas
+                        </button>
+                    </div>
+                </div>
             </div>
+
             <div class="offset-lg-1 col-lg-10">
-                <div id="section-4" class="section invisible" >
+                <div id="results-container" data-index="3" class="section invisible" >
+                    <button type="button" id="hButtonStart" class="btn btn-link btn-lg mb-4">
+                        Înapoi
+                    </button>
                     <div id="tbl-rezultate-locmunca"></div>
                 </div>
             </div>
@@ -113,6 +66,11 @@
     </div>
 
     <script type="text/javascript">
+        const STEP_CITY = 0
+        const STEP_UNIVERSITY = 1
+        const STEP_DOMAIN = 2
+        const STEP_RESULTS = 3
+
         $(document).on('click', '.btn-solicita-info', function (e) {
             $this = $(this)
             $this.html('<span class="spinner-border spinner-border-sm mx-2" role="status" aria-hidden="true"></span>Loading...').
@@ -128,7 +86,7 @@
                 $this.html('Solicită informații').attr('disabled', false);
                 bootbox.alert({
                     closeButton: false,
-                    message: 'Ai aplicat cu success',
+                    message: 'Ai aplicat cu success la această facultate!',
                 })
             }).fail(function (e) {
                 $this.html('Solicită informații').attr('disabled', false);
@@ -146,103 +104,194 @@
             })
         })
 
+        function getUniversities(cityId, onSuccess, onError) {
+            $.ajax({
+                url: "<?= qurl_s('api/web-getlistauniversitati') ?>",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    idx_oras: cityId
+                }
+            }).done(function (data) {
+                onSuccess(data)
+            }).fail(function (e) {
+                onError(e)
+                var message = "A apărut o eroare. Va rugăm sa încercați mai târziu!"
+                if (e.responseText) {
+                    var res = JSON.parse(e.responseText)
+                    if (res.result) {
+                        message = res.result
+                    }
+                }
+                bootbox.alert({
+                    closeButton: false,
+                    message: message,
+                })
+            })
+        }
 
-        $('#hButtonNext').click(function(){
-            var nCurrId = parseInt($('div.section.selected').attr('id').substring(8));
+        $( document ).ready(function () {
+            var form = $("#frm_cauta");
+            var btnNext = $('#hButtonNext')
+            var btnPrev = $('#hButtonPrev')
+            var btnStart = $('#hButtonStart')
+            var cityInput = $('#hCombo_Oras')
+            var universityInput = $('#hCombo_Universitate')
+            var domainInput = $('#hCombo_Domeniu')
+            var resultsContainer = $('#tbl-rezultate-locmunca')
+            var currStep = STEP_CITY
 
-            $('#section-' + nCurrId).removeClass('selected');
-            $('#section-' + nCurrId).addClass('invisible');
+            function goToStep (step) {
+                $('.section.selected').addClass('invisible');
+                $('.section.selected').removeClass('selected');
+                console.log(step)
+                if (step >= 0) {
+                    $('.section[data-index="' + step + '"]').addClass('selected');
+                    $('.section[data-index="' + step + '"]').removeClass('invisible');
+                    currStep = step
+                }
 
-            $('#section-' + (nCurrId + 1)).addClass('selected');
-            $('#section-' + (nCurrId + 1)).removeClass('invisible');
+                if (!step) {
+                    btnPrev.hide()
+                } else {
+                    btnPrev.show()
+                }
 
-            switch (nCurrId) {
-                case 1:
-                    var jqXHR = $.post("<?php echo qurl_s('api/web-getlistauniversitati'); ?>", {
-                        idx_oras: $('#hCombo_Oras').val()
-                    }, function (data) {
-                        for (var i = 0; i < data['universitati'].length; i++){
-                            $('#hCombo_Universitate').append('<option value=' + data['universitati'][i]['idxauth'] + '>' + data['universitati'][i]['nume'] + '</option>');
-                        }
-                        $('#hCombo_Universitate').selectpicker('refresh');
-                    }, "json");
-
-                    jqXHR.fail(function (a,b,c){
-                        alert("AJAX err: "+a+' - '+b);
-                    });
-                    break;
-
-                case 2:
-                    $('#hButtonNext').val('FINALIZARE');
-                    break;
-
-                case 3:
-                    $('#hButtonNext').remove();
-
-                    var jqXHR = $.post("<?= qurl_s('api/web-cautauniversitati') ?>", $('#frm_cauta').serialize(), function (response) {
-                        var html = '<div class="card shadow">' +
-                            '<div class="table-vcenter table-mobile-md table-responsive">' +
-                            '   <table class="table b-table m-0">' +
-                            '       <thead>' +
-                            '           <tr>' +
-                            '               <th>Universitate</th>' +
-                            '               <th>Facultate</th>' +
-                            '               <th>Oraș</th>' +
-                            '               <th>Număr de locuri</th>' +
-                            '               <th class="w-1 text-right"></th>' +
-                            '           </tr>' +
-                            '       </thead>' +
-                            '       <tbody>';
-
-                        response.rezultate.forEach(function (elem) {
-                            html += '<tr>' +
-                                    '   <td class="py-4"><strong>' + elem.numeuniversitate + '</strong></td>' +
-                                    '   <td data-label="Domeniu">' + elem.facultate + '</td>' +
-                                    '   <td data-label="Oraș">' + elem.oras + '</td>' +
-                                    '   <td data-label="Număr de locuri">' + elem.nrlocuri + '</td>' +
-                                    '   <td align="right">' +
-                                    '       <a class="btn btn-primary rounded-pill px-3 btn-solicita-info" data-idxauthuniversitate="' + elem.idxauth + '" data-idxloc="' + elem.idxloc + '">' +
-                                    '           Solicită informații' +
-                                    '       </a>' +
-                                    '   </td>' +
-                                    '</tr>'
-                        })
-                        html += '           </tbody>' +
-                                '       </table>' +
-                                '   </div>' +
-                                '</div>'
-
-                        $('#tbl-rezultate-locmunca').html(html);
-
-                        $('a.solicitinfo').click(function(kEvent){
-                            kEvent.preventDefault();
-
-                            var nIdxUniv = $(this).data('idxuniv');
-                            var nIdxLoc = $(this).data('idxloc');
-                            var kElem = $(this);
-
-                            var jqXHR2 = $.post("<?php echo qurl_s('api/web-cautauniversitati-solicitainfo'); ?>", {
-                                idxauthuniversitate: nIdxUniv,
-                                idxlocuniversitate: nIdxLoc
-                            }, function (data) {
-                                kElem.append('<div class="adhocinfo">Operațiune realizată cu succes !</div>');
-                                setTimeout(function(){
-                                    $('div.adhocinfo').remove();
-                                }, 5000);
-                            }, "json");
-
-                            jqXHR2.fail(function(a,b,c){
-                                alert("AJAX err: "+a+' - '+b);
-                            });
-                        });
-                    }, "json");
-
-                    jqXHR.fail(function(a,b,c){
-                        alert("AJAX err: "+a+' - '+b);
-                    });
-                break;
+                if (step >= STEP_RESULTS) {
+                    btnNext.hide()
+                    btnPrev.hide()
+                } else {
+                    btnNext.show()
+                }
             }
-        });
 
+            function showResults (container, results) {
+                var html =
+                    '<h4><strong>' + results.length + ' rezultate</strong></h4>' +
+                    '<div class="card shadow">' +
+                    '   <div class="table-vcenter table-mobile-md table-responsive">' +
+                    '       <table class="table b-table m-0">' +
+                    '           <thead>' +
+                    '               <tr>' +
+                    '                   <th>Universitate</th>' +
+                    '                   <th>Facultate</th>' +
+                    '                   <th>Oraș</th>' +
+                    '                   <th>Număr de locuri</th>' +
+                    '                   <th class="w-1 text-right"></th>' +
+                    '               </tr>' +
+                    '           </thead>' +
+                    '           <tbody>';
+
+                results.forEach(function (elem) {
+                    html +=
+                        '<tr>' +
+                        '   <td class="py-4"><strong>' + elem.numeuniversitate + '</strong></td>' +
+                        '   <td data-label="Domeniu">' + elem.facultate + '</td>' +
+                        '   <td data-label="Oraș">' + elem.oras + '</td>' +
+                        '   <td data-label="Număr de locuri">' + elem.nrlocuri + '</td>' +
+                        '   <td align="right">' +
+                        '       <a class="btn btn-primary rounded-pill px-3 btn-solicita-info" data-idxauthuniversitate="' + elem.idxauth + '" data-idxloc="' + elem.idxloc + '">' +
+                        '           Solicită informații' +
+                        '       </a>' +
+                        '   </td>' +
+                        '</tr>'
+                    })
+                    html +=
+                        '           </tbody>' +
+                        '       </table>' +
+                        '   </div>' +
+                        '</div>'
+                container.html(html)
+                goToStep(STEP_RESULTS)
+            }
+
+            form.validate({
+                errorClass: "text-danger",
+                errorPlacement: function (error, element) {
+                    var formGroup = element.closest('.form-group')
+                    formGroup.append(error)
+                },
+                submitHandler: function (form) {
+                    $.ajax({
+                        url: "<?= qurl_s('api/web-cautauniversitati') ?>",
+                        type: "POST",
+                        dataType: "json",
+                        data: $(form).serialize()
+                    }).done(function (data) {
+                        showResults(resultsContainer, data.rezultate)
+                    }).fail(function (e) {
+                        onError(e)
+                        var message = "A apărut o eroare. Va rugăm sa încercați mai târziu!"
+                        if (e.responseText) {
+                            var res = JSON.parse(e.responseText)
+                            if (res.result) {
+                                message = res.result
+                            }
+                        }
+                        bootbox.alert({
+                            closeButton: false,
+                            message: message,
+                        })
+                    })
+                }
+            })
+
+
+            btnStart.click(function () {
+                goToStep(STEP_CITY)
+            })
+
+            btnPrev.click(function () {
+                goToStep(currStep - 1)
+            })
+
+            btnNext.click(function () {
+                $this = $(this)
+
+                switch (currStep) {
+                    case STEP_CITY:
+                        if (!cityInput.valid()) {
+                            return
+                        }
+
+                        $this.html('<span class="spinner-border spinner-border-sm mx-2" role="status" aria-hidden="true"></span>Loading...').attr('disabled', true)
+                        getUniversities(cityInput.val(), function (data) {
+                            $this.html('Următorul pas').attr('disabled', false)
+                            if (!data.universitati.length) {
+                                showResults(resultsContainer, [])
+                                return
+                            }
+
+                            universityInput.html('')
+                            for (var i = 0; i < data.universitati.length; i++){
+                                universityInput.append('<option value=' + data.universitati[i].idxauth + '>' + data.universitati[i].nume + '</option>')
+                            }
+
+                            universityInput.selectpicker('refresh');
+                            goToStep(currStep + 1)
+                        }, function () {
+                            $this.html('Următorul pas').attr('disabled', false)
+                        })
+                        break;
+
+                    case 1:
+                        if (!universityInput.valid()) {
+                            return
+                        }
+
+                        goToStep(currStep + 1)
+                        break;
+
+                    case 2:
+                        if (!domainInput.valid()) {
+                            return
+                        }
+
+
+                        form.submit()
+                        break;
+                }
+            })
+        })
     </script>
 

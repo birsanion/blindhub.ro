@@ -918,23 +918,23 @@ class CQAuth
 
         $nResults = (is_array($arrResult) ? count($arrResult) : 0);
 
-        if ($nResults != 0) return AUTH_USEREXISTSALREADY;
-        else{
+        if ($nResults != 0) {
+            return AUTH_USEREXISTSALREADY;
+        } else {
             $strNewSalt = $this->GetNewSalt();
             $strNewHash = $this->GetPasswordHash($strNewPass, $strUser, $strNewSalt);
-
-            $nNewId = $this->DATABASE->GetNextAutoincrement(SYSCFG_DB_PREFIX.'auth_users');
-
-            if ($this->DATABASE->RunQuickInsert(SYSCFG_DB_PREFIX.'auth_users',
-                'passhash, salt, username',
+            if ($this->DATABASE->RunQuickInsert(SYSCFG_DB_PREFIX.'auth_users', 'passhash, salt, username',
                 array(array(
                     'username' => $strUser,
                     'passhash' => $strNewHash,
                     'salt' => $strNewSalt
                 ))))
             {
+                $nNewId = $this->DATABASE->GetLastInsertID();
                 return AUTH_SUCCESS;
-            }else return AUTH_DATABASEERR;
+            } else {
+                return AUTH_DATABASEERR;
+            }
         }
     }
 

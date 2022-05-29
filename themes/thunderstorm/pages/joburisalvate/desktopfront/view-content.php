@@ -10,63 +10,24 @@
                     <div class="card shadow-lg mb-4">
                         <div class="card-body">
                             <h4><strong><?= $loc['titlu'] ?></strong></h4>
-                            <h5><?= $loc['vechimeanunt'] ?></h5>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Tip Job:</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <?= $loc['tipslujba'] ?>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Companie</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <?= $loc['companie'] ?>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Oraș</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <?= $loc['oras'] ?>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Domeniu</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <?= $loc['domeniu_cv'] ?>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Competențe necesare</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <?= $loc['competente'] ?>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Descriere</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <?= $loc['descriere'] ?>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12 mt-3">
-                                    <button class="btn btn-primary btn-aplica rounded-pill px-4" data-idx="<?= $loc['idxlocmunca'] ?>">
-                                        Aplică
-                                    </button>
-                                </div>
-                            </div>
+                            <h5><i><?= $loc['vechimeanunt'] ?></i></h5>
+                            <h6>Tip Job:  <?= $loc['tipslujba'] ?></h6>
+                            <h6>Companie:  <?= $loc['companie'] ?></h6>
+                            <h6>Oraș:  <?= $loc['oras'] ?></h6>
+                            <h6>Domeniu:  <?= $loc['domeniu_cv'] ?></h6>
+                            <h6>Competențe necesare:  <?= $loc['competente'] ?></h6>
+                            <h6>Descriere:  <?= $loc['descriere'] ?></h6>
+                            <?php if ($loc['idxcerereinterviu']): ?>
+                            <h5><strong class="text-success">Ați aplicat pentru acest job</strong></h5>
+                            <?php endif; ?>
                         </div>
+                        <?php if (!$loc['idxcerereinterviu']): ?>
+                        <div class="card-footer">
+                            <button class="btn btn-primary btn-aplica rounded-pill px-4" data-idx="<?= $loc['idxlocmunca'] ?>">
+                                Aplică
+                            </button>
+                        </div>
+                        <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
             </div>

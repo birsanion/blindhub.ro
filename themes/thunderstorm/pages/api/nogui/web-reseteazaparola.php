@@ -15,9 +15,8 @@ $this->handleAPIRequest(function() {
     }
 
     $arrUser = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'auth_users', [
-        ['idx', '=', $validation->getValue('hStaticUserIdx'), 'AND']
+        ['idx', '=', $validation->getValue('hStaticUserIdx'), 'AND'],
         ['recoverhash', '=', $validation->getValue('hStaticUserKey'), 'AND']
-
     ]);
     if ($arrUser === false) {
         throw new Exception("EROARE INTERNA", 500);

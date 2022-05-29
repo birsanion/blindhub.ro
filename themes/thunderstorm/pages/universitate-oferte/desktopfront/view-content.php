@@ -3,7 +3,7 @@
             <div class="offset-lg-1 col-lg-10">
                 <h1 class="titlu mb-5">Ofertele mele</h1>
                 <?php if (count($this->DATA['locuri'])): ?>
-                <div class="card shadow">
+                <div class="card shadow-lg">
                     <div class="table-vcenter table-mobile-md table-responsive">
                         <table class="table b-table m-0">
                             <thead>
@@ -26,6 +26,9 @@
                                         <a class="btn btn-primary rounded-pill px-3" href="<?= qurl_l('universitate-editloc/' . $loc['idx'] ) ?>">
                                             Editează
                                         </a>
+                                        <a class="btn btn-danger btn-delete rounded-pill px-3" data-idx="<?= $loc['idx'] ?>">
+                                            Șterge
+                                        </a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -39,3 +42,62 @@
             </div>
         </div>
     </div>
+
+    <script>
+    $( document ).ready(function () {
+        function deleteFaculty (id, onSuccess) {
+            $.ajax({
+                url: "<?= qurl_s('api/web-universitate-stergeoferta') ?>",
+                data: {
+                    idxloc: idx,
+                },
+                type: "POST",
+            }).done(function (data) {
+                onSuccess()
+            }).fail(function (e) {
+                var message = "A apărut o eroare. Va rugăm sa încercați mai târziu!"
+                if (e.responseText) {
+                    var res = JSON.parse(e.responseText)
+                    if (res.result) {
+                        message = res.result
+                    }
+                }
+                bootbox.alert({
+                    closeButton: false,
+                    message: message,
+                })
+            })
+        }
+
+        $(".btn-delete").click(function () {
+            idx = $(this).data('idx')
+            bootbox.confirm({
+                message: "Sunteți sigur că doriți să ștergeți acestă ofertă?",
+                closeButton: false,
+                buttons: {
+                    confirm: {
+                        label: 'Da',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'Nu',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        deleteFaculty(idx, function () {
+                            bootbox.alert({
+                                closeButton: false,
+                                message: 'Oferta a fost ștersă cu succes!',
+                                callback: function () {
+                                    window.location = '<?= qurl_l('universitate-oferte'); ?>';
+                                }
+                            })
+                        })
+                    }
+                }
+            })
+        })
+    })
+</script>

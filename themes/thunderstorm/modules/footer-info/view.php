@@ -1,23 +1,3 @@
-  <!--  <br><br><br><br><br><br>
-    <footer>
-        <div class="footer-content master-container center-page">
-            <ul class="menu-footer-root" style="text-align: right;">
-                <li class="menu-level-0" style="text-align: left;">
-                    <a>Vreau să ajut</a>
-
-                    <ul class="submenu-level-1">
-                        <li class="menu-level-1"><a href="<?php echo qurl_l('vreausaajut-redirectioneaza'); ?>">Redirecționează</a></li>
-                        <li class="menu-level-1"><a href="<?php echo qurl_l('vreausaajut-sponsorizari'); ?>">Sponsorizări</a></li>
-                        <li class="menu-level-1"><a href="<?php echo qurl_l('vreausaajut-donatii'); ?>">Donații</a></li>
-                    </ul>
-                </li>
-                <li class="menu-level-0">
-                    <a href="<?php echo qurl_l('contact'); ?>">Contact</a>
-                </li>
-            </ul>
-        </div>
-    </footer>-->
-
 <footer id="footer" class="footer sticky-footer">
     <div class="footer-bottom">
         <div class="container">

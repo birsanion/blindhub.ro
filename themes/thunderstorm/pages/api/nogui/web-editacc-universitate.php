@@ -1,13 +1,5 @@
 <?php
 
-function getPlaceholderImg() {
-    $dir = "placeholder/";
-    $images = glob("media/uploads/{$dir}*.png");
-    $randKey = array_rand($images);
-    return $dir . basename($images[$randKey]);
-}
-
-
 $this->handleAPIRequest(function() {
     $validation = $this->validator->make($_POST, [
         'nume'                             => 'required',

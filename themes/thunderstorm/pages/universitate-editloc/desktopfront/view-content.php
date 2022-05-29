@@ -1,10 +1,10 @@
-    <div class="container mt-5">
+    <div id="content" class="container mt-5">
         <div class="row">
             <div class="offset-lg-1 col-lg-10">
                 <h1 class="titlu mb-5">Editează ofertă</h1>
-                <?php if ($this->DATA['errormsg']): ?>
+                <?php if ($this->GLOBAL['errormsg']): ?>
                 <div class="alert alert-danger mb-5" role="alert">
-                    <?= $this->DATA['errormsg'] ?>
+                    <?= $this->GLOBAL['errormsg'] ?>
                 </div>
                 <?php endif; ?>
             </div>

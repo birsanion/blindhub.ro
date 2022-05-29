@@ -18,26 +18,9 @@ call_user_func($this->fncCallback, 'htmlheader', 'structure-styles', MANOP_SET,
     )
 );
 
-if (!$this->AUTH->IsAuthenticated()) $this->ROUTE->Redirect(qurl_l(''));
-/*
-try {
-	$arrDomeniiCv = $this->DATABASE->RunQuickSelect(['idx', 'nume'], SYSCFG_DB_PREFIX . 'domenii_cv', NULL);
-	if ($arrDomeniiCv === false) {
-   		throw new Exception("Eroare internă");
- 	}
-
- 	$arrOrase = $this->DATABASE->RunQuickSelect(['idx', 'nume'], SYSCFG_DB_PREFIX . 'orase', NULL, ['nume']);
-	if ($arrOrase === false) {
-   		throw new Exception("Eroare internă");
- 	}
-
-    $this->DATA['orase'] = $arrOrase;
-    $this->DATA['domenii_cv'] = $arrDomeniiCv;
-} catch (\Exception $e) {
-   	$this->GLOBAL['errormsg'] = $e->getMessage();
+if (!$this->AUTH->IsAuthenticated()) {
+    $this->ROUTE->Redirect(qurl_l(''));
 }
-*/
-
 
 try {
     $arrDetails = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'angajati', [

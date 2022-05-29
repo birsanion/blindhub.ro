@@ -2,34 +2,32 @@
         <div class="row">
             <div class="offset-lg-1 col-lg-10">
                 <h1 class="titlu mb-5">Caută candidați</h1>
+                <?php if (!count($this->DATA['locuri'])): ?>
+                <h4><strong>Nu am găsit aplicanți</strong></h4>
+                <p>Vă recomandăm să actiulizati lista cu oprtunități cât mai des</p>
+                <?php endif; ?>
                 <?php
                     if (count($this->DATA['locuri']) > 0):
                         foreach ($this->DATA['locuri'] as $arrLoc) :
                 ?>
-                <div class="card profile-header shadow-lg">
-                    <div class="body">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-4 col-12">
-                                <?php if ($arrLoc['cv_fisier_video']): ?>
-                                <div class="embed-responsive embed-responsive-1by1 h-100" >
-                                    <iframe class="embed-responsive-item w-100" height="100%" src="<?= qurl_file('media/uploads/'. $arrLoc['cv_fisier_video']) ?>"></iframe>
-                                </div>
-                                <?php else: ?>
-                                <img class="img-fluid" src="<?= qurl_f('images/novideo.png') ?>" />
-                                <?php endif; ?>
-                            </div>
-                            <div class="col-lg-8 col-md-8 col-12">
-                                <h3 class="m-t-0 m-b-0"><strong><?= $arrLoc['nume'] ?></strong></h3>
-                                <p class="m-0">Facultate: <?= $arrLoc['locuniversitate']['facultate'] ?></p>
-                                <p class="m-0">Grad handicap: <?= $arrLoc['gradhandicap'] ?></p>
-                                <p class="m-0">Nevoi speciale: <?= $arrLoc['nevoispecifice'] ?></p>
-                                <p class="m-0">Domeniu: <?= $arrLoc['locuniversitate']['domeniu_universitate'] ?></p>
-                                <p class="m-0">Oraș: <?= $arrLoc['locuniversitate']['oras'] ?></p>
-                                <div class="mt-3">
-                                    <a class="btn btn-primary rounded-pill px-3" href="<?= qurl_l('mesaje/' . $arrLoc['idxauthnevazator']) ?>">Trimite mesaj</a>
-                                </div>
-                            </div>
-                        </div>
+                <div class="card shadow-lg mb-4">
+                    <div class="card-body">
+                        <h4><strong><?= $arrLoc['nume'] ?></strong></h4>
+                        <h6>Facultate: <?= $arrLoc['locuniversitate']['facultate'] ?></h6>
+                        <h6>Grad handicap: <?= $arrLoc['gradhandicap'] ?></h6>
+                        <h6>Nevoi speciale: <?= $arrLoc['nevoispecifice'] ?></h6>
+                        <h6>Domeniu: <?= $arrLoc['locuniversitate']['domeniu_universitate'] ?></h6>
+                        <h6>Oraș: <?= $arrLoc['locuniversitate']['oras'] ?></h6>
+                        <?php if ($arrLoc['interviu_tstamp']): ?>
+                        <h6><strong>Interviu planificat: <?= $arrLoc['interviu_tstamp'] ?></strong></h6>
+                        <?php endif; ?>
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-primary rounded-pill px-3 mb-2" href="<?= qurl_l('mesaje/' . $arrLoc['idxauthnevazator']) ?>">Trimite mesaj</a>
+                        <a class="btn btn-info rounded-pill px-3 mb-2" href="<?= qurl_l('cv-video/' . $arrLoc['idxauthnevazator']) ?>">Vizioneză CV-ul video</a>
+                        <?php if (!$arrLoc['interviu_tstamp']): ?>
+                        <button class="btn btn-warning rounded-pill btn-interviu  px-3 mb-2" data-idxauth="<?= $arrLoc['idxauthnevazator'] ?>" data-idxobject="<?= $arrLoc['locuniversitate']['idx'] ?>">Planifică interviu</button>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <?php
@@ -40,98 +38,125 @@
         </div>
     </div>
 
+    <script type="text/javascript">
+        $( document ).ready(function () {
+            $('.btn-interviu').click(function () {
+                var btn = $(this)
+                var message =
+                    '<p>Vă rugăm să selectați data și ora la care doriți să setați interviul</p>' +
+                    '<form id="frm-interviu">' +
+                    '   <input name="idxauthnevazator" value="' + btn.data('idxauth') + '" hidden/>' +
+                    '   <input name="idxoferta" value="' + btn.data('idxobject') + '" hidden/>' +
+                    '   <div class="form-group mb-3">' +
+                    '       <label>Ora</label>' +
+                    '       <select class="form-select" name="ora" required>' +
+                    '           <option>09:00</option>' +
+                    '           <option>09:15</option>' +
+                    '           <option>09:30</option>' +
+                    '           <option>09:45</option>' +
+                    '           <option>10:00</option>' +
+                    '           <option>10:15</option>' +
+                    '           <option>10:30</option>' +
+                    '           <option>10:45</option>' +
+                    '           <option>11:00</option>' +
+                    '           <option>11:15</option>' +
+                    '           <option>11:30</option>' +
+                    '           <option>11:45</option>' +
+                    '           <option>12:00</option>' +
+                    '           <option>12:15</option>' +
+                    '           <option>12:30</option>' +
+                    '           <option>12:45</option>' +
+                    '           <option>13:00</option>' +
+                    '           <option>13:15</option>' +
+                    '           <option>13:30</option>' +
+                    '           <option>13:45</option>' +
+                    '           <option>14:00</option>' +
+                    '           <option>14:15</option>' +
+                    '           <option>14:30</option>' +
+                    '           <option>14:45</option>' +
+                    '           <option>15:00</option>' +
+                    '           <option>15:15</option>' +
+                    '           <option>15:30</option>' +
+                    '           <option>15:45</option>' +
+                    '           <option>16:00</option>' +
+                    '           <option>16:15</option>' +
+                    '           <option>16:30</option>' +
+                    '           <option>16:45</option>' +
+                    '           <option>17:00</option>' +
+                    '           <option>17:15</option>' +
+                    '           <option>17:30</option>' +
+                    '           <option>17:45</option>' +
+                    '       </select>' +
+                    '   </div>' +
+                    '   <div class="form-group">' +
+                    '       <label>Data</label>' +
+                    '       <input type="text" class="form-control datepicker" name="datacalend" required/>' +
+                    '   </div>' +
+                    '</form>'
 
-    <!--<div class="master-container center-page">
-        <div class="center-text"><h1 class="bold space-4040">CANDIDAȚI</h1></div>
+                var dialog = bootbox.dialog({
+                    title: 'Planifică interviu',
+                    message: message,
+                    closeButton: false,
+                    buttons: {
+                        cancel: {
+                            label: "Anulează",
+                            className: 'btn-danger rounded-pill',
+                        },
+                        ok: {
+                            label: "Planifică interviu",
+                            className: 'btn-primary btn-ok rounded-pill',
+                            callback: function () {
+                                var form = dialog.find('form')
+                                if (!form.valid()) {
+                                    return false
+                                }
 
-        <div class="w80lst center-page">
-            <table id="tbl-rezultate-angajati" class="fullwidth">
-                <?php
-                    if (count($this->DATA['locuri']) > 0){
-                        foreach ($this->DATA['locuri'] as $arrLoc){
-                ?>
-                <tr>
-                    <td style="width: 50%; padding: 5px;">
-                        <h1><?php echo $arrLoc['nume']; ?></h1>
-                        <br />
-                        <?php echo $arrLoc['gradhandicap']; ?><br />
-                        <?php echo $arrLoc['nevoispecifice']; ?><br />
-                        <?php echo 'Candidează în următoarele facultăți: ' . $arrLoc['facultati']; ?><br />
-                        <br /><br />
-                        În data de
-                        <input type="text" value="" class="rounded w40lst dateforinterviu" />
-                        <select class="w20lst rounded">
-                            <option>09:00</option>
-                            <option>09:15</option>
-                            <option>09:30</option>
-                            <option>09:45</option>
-                            <option>10:00</option>
-                            <option>10:15</option>
-                            <option>10:30</option>
-                            <option>10:45</option>
+                                $this = dialog.find('.btn-ok')
+                                $this.html('<span class="spinner-border spinner-border-sm mx-2" role="status" aria-hidden="true"></span>Loading...').attr('disabled', true);
+                                $.ajax({
+                                    url: "<?= qurl_s('api/web-universitate-cautacandidati-initinterviu') ?>",
+                                    type: "POST",
+                                    data: $(form).serialize()
+                                }).done(function () {
+                                    dialog.modal('hide')
+                                    bootbox.alert({
+                                        closeButton: false,
+                                        message: 'Interviul a fost planificat cu succes!',
+                                        callback: function() {
+                                            window.location = '<?= qurl_l('universitate-candidati'); ?>';
+                                        }
+                                    })
+                                }).fail(function (e) {
+                                    $this.html('Planifică interviu').attr('disabled', false);
+                                    var message = "A apărut o eroare. Va rugăm sa încercați mai târziu!"
+                                    if (e.responseText) {
+                                        var res = JSON.parse(e.responseText)
+                                        if (res.result) {
+                                            message = res.result
+                                        }
+                                    }
+                                    bootbox.alert({
+                                        closeButton: false,
+                                        message: message,
+                                    })
+                                })
 
-                            <option>11:00</option>
-                            <option>11:15</option>
-                            <option>11:30</option>
-                            <option>11:45</option>
-
-                            <option>12:00</option>
-                            <option>12:15</option>
-                            <option>12:30</option>
-                            <option>12:45</option>
-
-                            <option>13:00</option>
-                            <option>13:15</option>
-                            <option>13:30</option>
-                            <option>13:45</option>
-
-                            <option>14:00</option>
-                            <option>14:15</option>
-                            <option>14:30</option>
-                            <option>14:45</option>
-
-                            <option>15:00</option>
-                            <option>15:15</option>
-                            <option>15:30</option>
-                            <option>15:45</option>
-
-                            <option>16:00</option>
-                            <option>16:15</option>
-                            <option>16:30</option>
-                            <option>16:45</option>
-
-                            <option>17:00</option>
-                            <option>17:15</option>
-                            <option>17:30</option>
-                            <option>17:45</option>
-                        </select>
-
-                        <a href="#" class="block reference imgtextlink setinterviu" data-idx="<?php echo $arrLoc['idxauthnevazator']; ?>">
-                            <img src="<?php echo qurl_f('images/icon_next_normal.png'); ?>" class="normal" />
-                            <img src="<?php echo qurl_f('images/icon_next_mouseover.png'); ?>" class="over" />
-                            <span>Inițiază interviu</span>
-                        </a>
-                    </td>
-                    <td>
-                        <?php
-                            if (file_exists(qurl_serverfile('media/uploads/nevazator_cv_'. $arrLoc['idxauthnevazator'] .'.mp4'))){
-                        ?>
-                        <video controls style="position: relative; width: 100%;">
-                            <source src="<?php echo qurl_file('media/uploads/nevazator_cv_'. $arrLoc['idxauthnevazator'] .'.mp4'); ?>" type="video/mp4"></source>
-                        </video>
-                        <?php
+                                return false
                             }
-                        ?>
-                    </td>
-                </tr>
-                <tr><td colspan="2"><hr /></td></tr>
-                <?php
                         }
                     }
-                ?>
-            </table>
-        </div>
-    </div>-->
+                })
+
+                dialog.on("shown.bs.modal", function() {
+                    $('.datepicker').datepicker({
+                        dateFormat: 'dd/mm/yy',
+                        minDate: 0,
+                    })
+                })
+            })
+        })
+    </script>
 
     <script type="text/javascript">
 

@@ -16,12 +16,17 @@ $this->handleAPIRequest(function() {
         throw new Exception("EROARE: cerere invalida !", 400);
     }
 
+    $conds = [];
     $strUserKey = POST('userkey', GET('userkey', PARAM(2)));
+    if ($strUserKey) {
+        $conds = [ 'apploginid', '=', $strUserKey ];
+    } else if ($this->AUTH->IsAuthenticated()) {
+        $conds = [ 'idx', '=', $this->AUTH->GetUserId() ];
+    } else {
+        throw new Exception("Cerere invalida", 400);
+    }
 
-    $arrUser = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'auth_users', [
-        'apploginid', '=', $strUserKey
-    ]);
-
+    $arrUser = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'auth_users', $conds);
     if ($arrUser === false) {
         throw new Exception("EROARE INTERNA", 500);
     }

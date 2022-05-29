@@ -25,6 +25,22 @@
                         </select>
                     </div>
 
+                    <div class="form-group mb-4">
+                        <div>
+                            <label class="form-label"><strong>Încarcă CV video</strong></label>
+                        </div>
+                        <div class="text-center" id="video-container">
+                            <?php if ($this->DATA['details']['cv_fisier_video']): ?>
+                            <video width="320" height="240" controls src="<?= qurl_file('media/uploads/'. $this->DATA['details']['cv_fisier_video']) ?>" >
+                                Your browser does not support the video tag.
+                            </video>
+                            <?php else: ?>
+                            <img class="img-fluid" src="<?= qurl_f('images/novideo.png') ?>" />
+                            <?php endif; ?>
+                        </div>
+                        <input type="file" accept="video/*" class="custom-file-input shadow form-control" id="file-video">
+                    </div>
+
                     <div class="form-group my-5">
                         <button type="submit" class="btn btn-primary btn-lg rounded-pill px-4">
                             Salvează
@@ -35,77 +51,31 @@
         </div>
     </div>
 
-    <!--<div class="master-container center-page center-text">
-        <h1 class="bold space-4040">CURRICULUM VITAE</h1>
-
-        <form id="frm_cv" method="post" enctype="multipart/form-data">
-        <div id="section-1" class="section selected">
-            <h1 class="space-2020">Ce sectoare de activitate vă interesează ?</h1>
-
-            <br />
-            <table class="w80lst center-page">
-                <?php foreach ($this->DATA['domenii_cv'] as $index => $value): ?>
-
-                <?php if ($index % 2 == 0): ?>
-                <tr>
-                <?php endif; ?>
-
-                <td style="text-align: left;">
-                    <label><input type="checkbox" name="idx_domenii_cv[]" value="<?= $value['idx'] ?>" /> <?= $value['nume'] ?> </label>
-                </td>
-
-                <?php if (($index + 1) % 2 == 0): ?>
-                </tr>
-                <?php endif; ?>
-
-                <?php endforeach; ?>
-
-            </table>
-        </div>
-
-        <div id="section-2" class="section invisible">
-            <h1 class="space-2020">În ce oraș vrei să muncești ?</h1>
-
-            <br />
-            <table class="w80lst center-page">
-                <?php foreach ($this->DATA['orase'] as $index => $value): ?>
-
-                <?php if ($index % 2 == 0): ?>
-                <tr>
-                <?php endif; ?>
-
-                <td style="text-align: left;">
-                    <label><input type="checkbox" name="idx_orase[]" value="<?= $value['idx'] ?>" /> <?= $value['nume'] ?> </label>
-                </td>
-
-                <?php if (($index + 1) % 2 == 0): ?>
-                </tr>
-                <?php endif; ?>
-
-                <?php endforeach; ?>
-            </table>
-        </div>
-        </form>
-
-        <div id="section-3" class="section invisible">
-            <h1 class="space-2020" id="hStaticUploadTitle">Upload CV Video</h1>
-
-            <form>
-            <span id="hFileUploadContainer" class="btn btn-success fileinput-button" style="background: #2E295C;">
-                <i class="icon-plus icon-white"></i>
-                <span>ÎNCARCĂ VIDEO</span>
-                <input id="hFileUpload" type="file" name="files[]">
-            </span>
-            </form>
-        </div>
-
-        <br /><br />
-        <div id="hStaticErrorMsg"></div>
-        <input type="button" name="hButtonNext" id="hButtonNext" value="URMĂTORUL PAS &rArr;" class="standard-button rounded space-2020" />
-    </div>-->
-
     <script type="text/javascript">
         $( document ).ready(function () {
+            var file = null
+            document.getElementById("file-video").onchange = function(event) {
+                file = event.target.files[0];
+                let blobURL = URL.createObjectURL(file);
+                document.querySelector("#video-container").innerHTML = '<video width="320" height="240" controls src="' + blobURL + '" >Your browser does not support the video tag</video>';
+            }
+
+            var uploadFile = function(file, onSuccess, onError) {
+                var formData = new FormData();
+                formData.append('uploaded_file', file);
+                $.ajax({
+                    url: "<?= qurl_s('api/web-angajat-upload') ?>",
+                    type: "POST",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                }).done(function (data) {
+                    onSuccess(data)
+                }).fail(function (e) {
+                    onError(e)
+                })
+            }
+
             $("#frm_editcv").validate({
                 errorClass: "text-danger",
                 errorPlacement: function (error, element) {
@@ -113,13 +83,10 @@
                     formGroup.append(error)
                 },
                 submitHandler: function (form) {
-                    $submit = $(form).find('button[type="submit"]')
+                    var $submit = $(form).find('button[type="submit"]')
                     $submit.html('<span class="spinner-border spinner-border-sm mx-2" role="status" aria-hidden="true"></span>Loading...').attr('disabled', true);
-                    $.ajax({
-                        url: "<?= qurl_s('api/web-setcv') ?>",
-                        type: "POST",
-                        data: $(form).serialize()
-                    }).done(function (data) {
+
+                    var onSuccess = function () {
                         $submit.html('Salvează').attr('disabled', false);
                         bootbox.alert({
                             message: "Actualizarea CV-ului a avut loc cu success",
@@ -128,7 +95,9 @@
                                 window.location = '<?= qurl_l('profil-angajat'); ?>';
                             }
                         })
-                    }).fail(function (e) {
+                    }
+
+                    var onError = function (e) {
                         $submit.html('Salvează').attr('disabled', false);
                         var message = "A apărut o eroare. Va rugăm sa încercați mai târziu!"
                         if (e.responseText) {
@@ -141,102 +110,24 @@
                             closeButton: false,
                             message: message,
                         })
+                    }
+
+                    $.ajax({
+                        url: "<?= qurl_s('api/web-setcv') ?>",
+                        type: "POST",
+                        data: $(form).serialize()
+                    }).done(function (data) {
+                        if (file) {
+                            uploadFile(file, onSuccess, onError)
+                            return
+                        }
+
+                        onSuccess()
+                    }).fail(function (e) {
+                        onError(e)
                     })
                 }
             })
         })
-
-            function Next()
-            {
-                var nCurrId = parseInt($('div.section.selected').attr('id').substring(8));
-
-                var bMoveNext = true;
-
-                switch (nCurrId)
-                {
-                    case 1:{
-                        var bChecked = false;
-
-                        $('#section-1').find('input[type="checkbox"]').each(function(nIndex, kElement){
-                            if ($(this).prop('checked')) bChecked = true;
-                        });
-
-                        if (!bChecked){
-                            bMoveNext = false;
-                            $('#hStaticErrorMsg').html('Trebuie să bifați cel puțin o opțiune !');
-                        }
-                    }break;
-                }
-
-                if (bMoveNext){
-                    $('#section-' + nCurrId).removeClass('selected');
-                    $('#section-' + nCurrId).addClass('invisible');
-
-                    $('#section-' + (nCurrId + 1)).addClass('selected');
-                    $('#section-' + (nCurrId + 1)).removeClass('invisible');
-
-                    $('#hStaticErrorMsg').html('');
-
-                    if (nCurrId == 2){
-                        var jqXHR=$.post("<?php echo qurl_s('api/web-setcv'); ?>",
-                            $('#frm_cv').serialize(),
-                            function(data){
-                                if (data['result']=='success'){
-                                    $('#hStaticErrorMsg').html('');
-                                    $('#hButtonNext').removeClass('invisible');
-                                    $('#hButtonNext').val('FINALIZARE');
-                                }else{
-                                    $('div.section').addClass('invisible');
-                                    $('div.section').removeClass('selected');
-
-                                    $('#section-1').removeClass('invisible');
-                                    $('#section-1').addClass('selected');
-
-                                    $('#hButtonNext').removeClass('invisible');
-                                    $('#hStaticErrorMsg').html(data['result']);
-                                }
-                            },
-                        "json");
-
-                        jqXHR.fail(function(a,b,c){
-                            alert("AJAX err: "+a+' - '+b);
-                        });
-                    }
-
-                    if (nCurrId == 3)
-                        window.location = '<?php echo qurl_l('home-nevaz'); ?>';
-                }
-            }
-
-            $('#hButtonNext').click(Next);
-            $(document).keyup(function(kEvent){
-                if (kEvent.keyCode === 13){
-                    kEvent.preventDefault();
-                    Next();
-                }
-            });
-
-            function Upload(obj)
-            {
-                'use strict';
-
-                $('#hStaticUploadTitle').html('Vă rugăm să așteptați !');
-
-                $('#'+obj['target']['id']).fileupload({
-                    url: '<?php echo qurl_s('cvitae/upload'); ?>',
-                    dataType: 'json',
-                    done: function (e, data) {
-                        // if error show it
-                        if (data['result'] == 'success'){
-                            console.log(data);
-                            $('#hStaticUploadTitle').html('SUCCES');
-                        }else{
-                            $('#hStaticUploadTitle').html(data['result']);
-                        }
-                    }
-                });
-            }
-
-            $('#hFileUploadContainer').click(Upload);
 
         </script>

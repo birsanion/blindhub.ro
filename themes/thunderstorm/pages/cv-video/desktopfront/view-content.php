@@ -1,6 +1,6 @@
   <div id="content" class="container mt-5">
         <div class="row">
-            <div class="offset-lg-1 col-lg-10">
+            <div class="offset-lg-1 col-lg-10 mb-5">
                 <h1 class="titlu mb-5">CV Video</h1>
                 <?php if ($this->GLOBAL['errormsg']): ?>
                 <div class="alert alert-danger mb-5" role="alert">

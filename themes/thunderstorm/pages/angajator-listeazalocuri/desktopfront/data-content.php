@@ -1,6 +1,14 @@
 <?php
 
-if (!$this->AUTH->IsAuthenticated()) $this->ROUTE->Redirect(qurl_l(''));
+call_user_func($this->fncCallback, 'htmlheader', 'structure-javascript', MANOP_SET,
+    array(
+        'bootbox.min.js'
+    )
+);
+
+if (!$this->AUTH->IsAuthenticated()) {
+    $this->ROUTE->Redirect(qurl_l(''));
+}
 
 $this->handleAPIRequest(function() {
     $arrLocuriMunca = $this->DATABASE->RunQuery(sprintf(

@@ -13,11 +13,11 @@
                 <form id="frm_locmunca">
                     <div class="form-group mb-4">
                         <label class="form-label"><strong>Titlu</strong></label>
-                        <input type="text" name="titlu" class="form-control" placeholder="Introdu titlul locului de muncă aici" required=>
+                        <input type="text" name="titlu" class="form-control shadow" placeholder="Introdu titlul locului de muncă aici" required=>
                     </div>
                     <div class="form-group mb-4">
                         <label class="form-label"><strong>Oraș:</strong></label>
-                        <select class="selectpicker form-control" data-style="btn-white" data-live-search="true" data-size="12" required name="idx_oras">
+                        <select class="selectpicker form-control shadow" data-style="btn-white" data-live-search="true" data-size="12" required name="idx_oras">
                             <option value="" data-hidden="true">Alege oraș</option>
                             <?php foreach ($this->DATA['orase'] as $oras): ?>
                             <option value="<?= $oras['idx'] ?>"><?= $oras['nume'] ?></option>
@@ -26,7 +26,7 @@
                     </div>
                     <div class="form-group mb-4">
                         <label class="form-label"><strong>Domeniu de activitate:</strong></label>
-                        <select class="selectpicker form-control" data-style="btn-white" required name="idx_domeniu_cv">
+                        <select class="selectpicker form-control shadow" data-style="btn-white" required name="idx_domeniu_cv">
                             <option value="" data-hidden="true">Alege domeniu activitate</option>
                             <?php foreach ($this->DATA['domenii_cv'] as $domeniu): ?>
                             <option value="<?= $domeniu['idx'] ?>"><?= $domeniu['nume'] ?></option>
@@ -35,7 +35,7 @@
                     </div>
                     <div class="form-group mb-4">
                         <label class="form-label"><strong>Tip job:</strong></label>
-                        <select class="selectpicker form-control" data-style="btn-white" data-size="12" required name="idx_optiune_tipslujba">
+                        <select class="selectpicker form-control shadow" data-style="btn-white" data-size="12" required name="idx_optiune_tipslujba">
                             <option value="" data-hidden="true">Alege tip job</option>
                             <?php foreach ($this->DATA['optiuni']['tipslujba'] as $idx => $optiune): ?>
                             <option value="<?= $idx ?>"><?= $optiune ?></option>
@@ -44,11 +44,11 @@
                     </div>
                     <div class="form-group mb-4">
                         <label class="form-label"><strong>Competențe necesare:</strong></label>
-                        <input type="text" name="competente" class="form-control" placeholder="Ce competențe necesită acest job" required=>
+                        <input type="text" name="competente" class="form-control shadow" placeholder="Ce competențe necesită acest job" required=>
                     </div>
                     <div class="form-group mb-4">
                         <label cclass="form-label"><strong>Descriere:</strong></label>
-                        <textarea type="text" name="descriere" rows="3" class="form-control" placeholder="Adaugați o descriere pentru această poziție" required></textarea>
+                        <textarea type="text" name="descriere" rows="3" class="form-control shadow" placeholder="Adaugați o descriere pentru această poziție" required></textarea>
                     </div>
                     <div class="form-group  mb-4">
                         <button type="submit" class="btn btn-primary btn-lg rounded-pill px-3">
@@ -62,7 +62,6 @@
 </div>
 
     <script type="text/javascript">
-
         $( document ).ready(function () {
              $("#frm_locmunca").validate({
                 errorClass: "text-danger",
@@ -78,7 +77,7 @@
                         type: "POST",
                         data: $(form).serialize()
                     }).done(function (data) {
-                        $submit.html('Salvează').attr('disabled', false);
+                        $submit.html('Adaugă anunț').attr('disabled', false);
                         bootbox.alert({
                             message: "Locul de muncă a fost adăugat cu succes",
                             closeButton: false,
@@ -87,7 +86,7 @@
                             }
                         })
                     }).fail(function (e) {
-                        $submit.html('Salvează').attr('disabled', false);
+                        $submit.html('Adaugă anunț').attr('disabled', false);
                         var message = "A apărut o eroare. Va rugăm sa încercați mai târziu!"
                         if (e.responseText) {
                             var res = JSON.parse(e.responseText)
@@ -104,5 +103,4 @@
                 }
             })
         })
-
     </script>

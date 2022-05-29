@@ -7,7 +7,7 @@ $this->handleAPIRequest(function() {
     $validation = $this->validator->make($_POST, [
         'idxauthuniversitate'      => 'required',
         'idx_domeniu_universitate' => 'required|numeric',
-        'userkey'                  => 'required',
+        'userkey'                  => 'nullable',
     ]);
 
     $validation->validate();
@@ -17,10 +17,16 @@ $this->handleAPIRequest(function() {
         throw new Exception("EROARE: {$error}!", 400);
     }
 
-    $arrUser = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'auth_users', [
-        'apploginid', '=', $validation->getValue('userkey')
-    ]);
+    $conds = [];
+    if ($validation->getValue('userkey')) {
+        $conds = [ 'apploginid', '=', $validation->getValue('userkey') ];
+    } else if ($this->AUTH->IsAuthenticated()) {
+        $conds = [ 'idx', '=', $this->AUTH->GetUserId() ];
+    } else {
+        throw new Exception("Cerere invalida", 400);
+    }
 
+    $arrUser = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'auth_users', $conds);
     if ($arrUser === false) {
         throw new Exception("EROARE INTERNA", 500);
     }
@@ -45,11 +51,18 @@ $this->handleAPIRequest(function() {
     }
 
     $arrUniversitate = $arrUniversitate[0];
-
-    $arrLocuri = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'locuriuniversitate', [
-        ['idx_domeniu_universitate', '=', $validation->getValue('idx_domeniu_universitate'), 'AND'],
-        ['idxauth', '=', (int)$arrUniversitate['idxauth']]
-    ]);
+    $arrLocuri = $this->DATABASE->RunQuery(sprintf(
+        "SELECT locuriuniversitate.*, orase.nume AS oras " .
+        "FROM `%s` locuriuniversitate " .
+        "INNER JOIN `%s` orase " .
+        "ON (locuriuniversitate.idx_oras = orase.idx) " .
+        "WHERE locuriuniversitate.idx_domeniu_universitate = %d " .
+        "AND locuriuniversitate.idxauth = %d ",
+        SYSCFG_DB_PREFIX . 'locuriuniversitate',
+        SYSCFG_DB_PREFIX . 'orase',
+        $validation->getValue('idx_domeniu_universitate'),
+        (int)$arrUniversitate['idxauth']
+    ));
     if ($arrLocuri === false) {
         throw new Exception("EROARE INTERNA", 500);
     }
@@ -65,6 +78,7 @@ $this->handleAPIRequest(function() {
             'nrlocuri'                 => (int)$arrLoc['numarlocuri'],
             'idxloc'                   => (int)$arrLoc['idx'],
             'idx_oras'                 => (int)$arrLoc['idx_oras'],
+            'oras'                     => $arrLoc['oras'],
             'idx_domeniu_universitate' => (int)$arrLoc['idx_domeniu_universitate'],
         ];
     }

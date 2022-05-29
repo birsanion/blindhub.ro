@@ -13,6 +13,7 @@
                                 <tr>
                                     <th>Candidat</th>
                                     <th>Data și ora</th>
+                                    <th>Facultate</th>
                                     <th class="w-1 text-right"></th>
                                 </tr>
                             </thead>
@@ -21,8 +22,9 @@
                                 <tr>
                                     <td class="py-4"><strong><?= $loc['nume'] ?></strong></td>
                                     <td data-label="Domeniu"><?= $loc['dataora'] ?></td>
+                                    <td data-label="Facultate"><?= $loc['facultate'] ?></td>
                                     <td align="right">
-                                        <a class="btn btn-primary rounded-pill px-3" href="<?= qurl_l('interviu-cv/' . $loc['idx'] ) ?>">
+                                        <a class="btn btn-primary rounded-pill px-3" href="<?= qurl_l('cv-video/' . $loc['idxauthnevazator'] ) ?>">
                                             Vizionează CV-ul video
                                         </a>
                                     </td>
@@ -36,5 +38,3 @@
             </div>
         </div>
     </div>
-
-

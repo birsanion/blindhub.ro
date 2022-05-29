@@ -13,11 +13,11 @@
                 <form id="frm_locmunca">
                     <div class="form-group mb-4">
                         <label class="form-label"><strong>Titlu</strong></label>
-                        <input type="text" name="titlu" class="form-control" placeholder="Introdu titlul locului de muncă aici" required value="<?= $this->DATA['loc']['titlu'] ?>">
+                        <input type="text" name="titlu" class="form-control shadow" placeholder="Introdu titlul locului de muncă aici" required value="<?= $this->DATA['loc']['titlu'] ?>">
                     </div>
                     <div class="form-group mb-4">
                         <label class="form-label"><strong>Oraș:</strong></label>
-                        <select class="selectpicker form-control" data-style="btn-white" data-live-search="true" data-size="12" required name="idx_oras">
+                        <select class="selectpicker form-control shadow" data-style="btn-white" data-live-search="true" data-size="12" required name="idx_oras">
                             <option value="" data-hidden="true">Alege oraș</option>
                             <?php foreach ($this->DATA['orase'] as $oras): ?>
                             <option value="<?= $oras['idx'] ?>" <?php if ($this->DATA['loc']['idx_oras'] == $oras['idx']) echo 'selected'; ?>><?= $oras['nume'] ?></option>
@@ -26,7 +26,7 @@
                     </div>
                     <div class="form-group mb-4">
                         <label class="form-label"><strong>Domeniu de activitate:</strong></label>
-                        <select class="selectpicker form-control" data-style="btn-white" required name="idx_domeniu_cv">
+                        <select class="selectpicker form-control shadow" data-style="btn-white" required name="idx_domeniu_cv">
                             <option value="" data-hidden="true">Alege domeniu activitate</option>
                             <?php foreach ($this->DATA['domenii_cv'] as $domeniu): ?>
                             <option value="<?= $domeniu['idx'] ?>" <?php if ($this->DATA['loc']['idx_domeniu_cv'] == $domeniu['idx']) echo 'selected'; ?>><?= $domeniu['nume'] ?></option>
@@ -35,7 +35,7 @@
                     </div>
                     <div class="form-group mb-4">
                         <label class="form-label"><strong>Tip job:</strong></label>
-                        <select class="selectpicker form-control" data-style="btn-white" data-size="12" required name="idx_optiune_tipslujba">
+                        <select class="selectpicker form-control shadow" data-style="btn-white" data-size="12" required name="idx_optiune_tipslujba">
                             <option value="" data-hidden="true">Alege tip job</option>
                             <?php foreach ($this->DATA['optiuni']['tipslujba'] as $idx => $optiune): ?>
                             <option value="<?= $idx ?>" <?php if ($this->DATA['loc']['idx_optiune_tipslujba'] == $idx) echo 'selected'; ?>><?= $optiune ?></option>
@@ -44,11 +44,11 @@
                     </div>
                     <div class="form-group mb-4">
                         <label class="form-label"><strong>Competențe necesare:</strong></label>
-                        <input type="text" name="competente" class="form-control" placeholder="Ce competențe necesită acest job" required value="<?= $this->DATA['loc']['competente'] ?>">
+                        <input type="text" name="competente" class="form-control shadow" placeholder="Ce competențe necesită acest job" required value="<?= $this->DATA['loc']['competente'] ?>">
                     </div>
                     <div class="form-group mb-4">
                         <label cclass="form-label"><strong>Descriere:</strong></label>
-                        <textarea type="text" name="descriere" rows="3" class="form-control" placeholder="Adaugați o descriere pentru această poziție" required><?= $this->DATA['loc']['descriere'] ?></textarea>
+                        <textarea type="text" name="descriere" rows="3" class="form-control shadow" placeholder="Adaugați o descriere pentru această poziție" required><?= $this->DATA['loc']['descriere'] ?></textarea>
                     </div>
                     <input hidden name="idxloc" value="<?= $this->DATA['loc']['idx'] ?>">
                     <div class="form-group  mb-4">
@@ -63,7 +63,6 @@
 </div>
 
     <script type="text/javascript">
-
         $( document ).ready(function () {
              $("#frm_locmunca").validate({
                 errorClass: "text-danger",

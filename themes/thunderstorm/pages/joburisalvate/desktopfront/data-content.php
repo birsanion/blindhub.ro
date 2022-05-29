@@ -1,21 +1,8 @@
 <?php
-////////////////////////////////////////////////////////////////////////////////
-// Part of theme Thunderstorm, of Quick Web Frame
-// -- MIT Licensed. License details in LICENSE.txt file on the root folder.
 
 call_user_func($this->fncCallback, 'htmlheader', 'structure-javascript', MANOP_SET,
     array(
-        'jquery-ui-1-10-3-custom-min.js',
         'bootbox.min.js',
-        'jq-file-upload/jquery.iframe-transport.js',
-        'jq-file-upload/jquery.fileupload.js'
-    )
-);
-
-call_user_func($this->fncCallback, 'htmlheader', 'structure-styles', MANOP_SET,
-    array(
-        'jquery-ui-1-10-3-custom.css',
-        'jquery-fileupload-ui.css'
     )
 );
 
@@ -33,12 +20,15 @@ try {
     $arrRezultate = $this->DATABASE->RunQuery(sprintf(
         "SELECT locurimunca.*, " .
         "       angajatori.companie, " .
+        "       cereriinterviu.idx AS idxcerereinterviu, " .
         "       optiuni.nume AS tipslujba, " .
         "       orase.nume AS oras, " .
         "       domenii_cv.nume AS domeniu_cv " .
         "FROM `%s` angajati_locurisalvate " .
         "INNER JOIN `%s` locurimunca " .
         "ON (angajati_locurisalvate.idxlocmunca = locurimunca.idx) " .
+        "LEFT JOIN `%s` cereriinterviu " .
+        "ON (angajati_locurisalvate.idxauthangajat = cereriinterviu.idxauthangajat AND angajati_locurisalvate.idxauthangajator = cereriinterviu.idxauthangajator AND angajati_locurisalvate.idxlocmunca = cereriinterviu.idxlocmunca) " .
         "INNER JOIN `%s` angajatori " .
         "ON (locurimunca.idxauth = angajatori.idxauth) " .
         "INNER JOIN %s optiuni " .
@@ -50,6 +40,7 @@ try {
         "WHERE angajati_locurisalvate.idxauthangajat = %d",
         SYSCFG_DB_PREFIX . 'angajati_locurisalvate',
         SYSCFG_DB_PREFIX . 'locurimunca',
+        SYSCFG_DB_PREFIX . 'cereriinterviu',
         SYSCFG_DB_PREFIX . 'angajatori',
         SYSCFG_DB_PREFIX . 'optiuni',
         SYSCFG_DB_PREFIX . 'orase',
@@ -73,6 +64,7 @@ try {
                             'acum ' . $nTimeDiff . ' de zile'))),
             'idxlocmunca'           => (int)$arrRezultat['idx'],
             'idxauth'               => (int)$arrRezultat['idxauth'],
+            'idxcerereinterviu'     => $arrRezultat['idxcerereinterviu'],
             'titlu'                 => $arrRezultat['titlu'],
             'descriere'             => $arrRezultat['descriere'],
             'competente'            => $arrRezultat['competente'],

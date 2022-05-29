@@ -6,121 +6,40 @@
                 <h4><strong>Nu există nici o oportunitate</strong></h4>
                 <?php endif; ?>
                 <?php foreach ($this->DATA['locuri'] as $loc): ?>
-                    <div class="card shadow mb-4">
+                    <div class="card shadow-lg mb-4">
                         <div class="card-body">
-                            <h4><strong><?= $loc['titlu'] ?></strong></h4>
-                            <h5><?= $loc['vechimeanunt'] ?></h5>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Tip Job:</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <?= $loc['tipslujba'] ?>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Companie</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <?= $loc['nume'] ?>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Oraș</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <?= $loc['oras'] ?>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Domeniu</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <?= $loc['domeniu_cv'] ?>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Competențe necesare</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <?= $loc['competente'] ?>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Descriere</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <?= $loc['descriere'] ?>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12 mt-3">
-                                    <button class="btn btn-primary btn-salveaza rounded-pill px-4" data-idx="<?= $loc['idxlocmunca'] ?>">
-                                        Salvează job
-                                    </button>
-                                    <button class="btn btn-primary btn-aplica rounded-pill px-4" data-idx="<?= $loc['idxlocmunca'] ?>">
-                                        Aplică
-                                    </button>
-                                </div>
-                            </div>
+                            <h4><strong><?= $loc['titlu'] ?></strong>
+                            <h5><i><?= $loc['vechimeanunt'] ?></i></h5>
+                            <h6>Tip Job: <?= $loc['tipslujba'] ?></h6>
+                            <h6>Companie:  <?= $loc['nume'] ?></h6>
+                            <h6>Oraș:  <?= $loc['oras'] ?></h6>
+                            <h6>Domeniu:  <?= $loc['domeniu_cv'] ?></h6>
+                            <h6>Competențe necesare:  <?= $loc['competente'] ?></h6>
+                            <h6>Descriere:  <?= $loc['descriere'] ?></h6>
+                            <?php if ($loc['idxcerereinterviu']): ?>
+                            <h5><strong class="text-success">Ați aplicat pentru acest job</strong></h5>
+                            <?php endif; ?>
                         </div>
+                        <?php if (!$loc['locsalvat'] || !$loc['idxcerereinterviu']): ?>
+                        <div class="card-footer">
+                            <?php if (!$loc['locsalvat']): ?>
+                            <button class="btn btn-primary btn-salveaza rounded-pill px-4" data-idx="<?= $loc['idxlocmunca'] ?>">
+                                Salvează job
+                            </button>
+                            <?php endif; ?>
+                            <?php if (!$loc['idxcerereinterviu']): ?>
+                            <button class="btn btn-primary btn-aplica rounded-pill px-4" data-idx="<?= $loc['idxlocmunca'] ?>">
+                                Aplică
+                            </button>
+                            <?php endif; ?>
+                        </div>
+                        <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
             </div>
         </div>
     </div>
-    <!--
-    <div class="master-container center-page">
-        <div class="center-text"><h1 class="bold space-4040">OPORTUNITĂȚI DE MUNCĂ</h1></div>
 
-        <?php
-            if (isset($this->GLOBAL['errormsg']) && !empty($this->GLOBAL['errormsg'])){
-        ?>
-        <div class="center-text"><?php echo $this->GLOBAL['errormsg']; ?></div>
-        <?php
-            }
-        ?>
-
-        <div class="w80lst center-page">
-            <table id="tbl-rezultate-locmunca" class="fullwidth">
-                <?php
-                    if (count($this->DATA['locuri']) > 0){
-                        foreach ($this->DATA['locuri'] as $arrLoc){
-                ?>
-                <tr>
-                    <td style="width: 50%; padding: 5px;"><h1><?php echo htmlspecialchars($arrLoc['nume']); ?></h1></td>
-                    <td>
-                        <ol>
-                            <li><?php echo htmlspecialchars($arrLoc['firmaprotejata']); ?></li>
-                            <li><?php echo htmlspecialchars($arrLoc['dimensiunefirma']); ?></li>
-                            <li><?php echo htmlspecialchars($arrLoc['tipslujba']); ?></li>
-                        </ol>
-                        <br />
-                        <a href="#" class="block reference imgtextlink initinterviu" data-idx="<?php echo $arrLoc['idxangajator']; ?>">
-                            <img src="<?php echo qurl_f('images/icon_next_normal.png'); ?>" class="normal" />
-                            <img src="<?php echo qurl_f('images/icon_next_mouseover.png'); ?>" class="over" />
-                            <span>Inițiază interviu</span>
-                        </a>
-                    </td>
-                </tr>
-                <tr><td colspan="2"><hr /></td></tr>
-                <?php
-                        } // end foreach
-                    }else{
-                ?>
-                    <div class="center-text">Nu există niciun rezultat momentan !</div>
-                <?php
-                    }
-                ?>
-            </table>
-        </div>
-    </div>
-    -->
     <script type="text/javascript">
         $( document ).ready(function () {
             $('.btn-aplica').click(function (Event) {
@@ -137,6 +56,9 @@
                     bootbox.alert({
                         closeButton: false,
                         message: "Ai aplicat cu success la acest loc de muncă",
+                        callback: function() {
+                            window.location = '<?= qurl_l('cautaoportunitati'); ?>';
+                        }
                     })
                 }).fail(function (e) {
                     $this.html('Aplică').attr('disabled', false);
@@ -185,35 +107,5 @@
                 })
             })
         })
-
-        $('a.initinterviu').click(function(kEvent){
-            kEvent.preventDefault();
-
-            var nIdx = $(this).data('idx');
-            var kElem = $(this);
-
-            var jqXHR=$.post("<?php echo qurl_s('api/web-cautaoportunitati-initinterviu'); ?>",
-                {
-                    idxangajator: nIdx
-                },
-                function(data){
-                    if (data['result']=='success'){
-                        kElem.append('<div class="adhocinfo">Operațiune realizată cu succes !</div>');
-                        setTimeout(function(){
-                            $('div.adhocinfo').remove();
-                        }, 5000);
-                    }else{
-                        kElem.append('<div class="adhocinfo">'+ data['result'] +'</div>');
-                        setTimeout(function(){
-                            $('div.adhocinfo').remove();
-                        }, 5000);
-                    }
-                },
-            "json");
-
-            jqXHR.fail(function(a,b,c){
-                alert("AJAX err: "+a+' - '+b);
-            });
-        });
 
     </script>

@@ -29,56 +29,24 @@ function MySQLDate_to_RomanianDate($strDate)
     return substr($strDate, 8, 2) . '/' . substr($strDate, 5, 2) . '/' .
         substr($strDate, 0, 4) . substr($strDate, 10, 6);
 }
-/*
-$this->DATA['locuri'] = array();
 
-if ((int)$this->AUTH->GetAdvancedDetail('tiputilizator') == 1){
-    $arrInterviuri = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'interviuri',
-        array(
-            array('idxauthangajator', '=', $this->AUTH->GetUserId(), 'AND'),
-            array('tstamp', '>=', date('Y-m-d') . ' 00:00:00')
-        ),
-        'tstamp'
-    );
-
-    if (is_array($arrInterviuri) && !empty($arrInterviuri)){
-        foreach ($arrInterviuri as $arrInterviu){
-            $arrAngajat = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'angajati',
-                array('idxauth', '=', (int)$arrInterviu['idxauthangajat']));
-
-            if (is_array($arrAngajat) && !empty($arrAngajat)){
-                $arrAngajat = $arrAngajat[0];
-
-                $strNumeSiPrenume = $arrAngajat['nume'] . ' ' . $arrAngajat['prenume'];
-                $strGradHandicap = $arrAngajat['gradhandicap'];
-                $strNevoi = $arrAngajat['nevoispecifice'];
-
-                $this->DATA['locuri'][] = array(
-                    'nume' => $strNumeSiPrenume,
-                    'gradhandicap' => 'grad de handicap ' . $strGradHandicap,
-                    'nevoispecifice' => 'nevoi specifice: ' . $strNevoi,
-                    'dataora' => MySQLDate_to_RomanianDate($arrInterviu['tstamp']),
-                    'idxauthnevazator' => (int)$arrInterviu['idxauthangajat']
-                );
-            }
-        }
-    }
-}else $this->DATA['result'] = 'EROARE: acest utilizator nu este de tip angajator !';
-
-*/
 try {
     $arrInterviuri = $this->DATABASE->RunQuery(sprintf(
         "SELECT interviuri.*, " .
         "       angajati.nume, " .
-        "       angajati.prenume " .
+        "       angajati.prenume, " .
+        "       locurimunca.titlu AS locmunca " .
         "FROM `%s` interviuri " .
         "INNER JOIN `%s` angajati " .
         "ON (interviuri.idxauthangajat = angajati.idxauth) " .
+        "LEFT JOIN `%s` locurimunca " .
+        "ON (locurimunca.idx = interviuri.idxobject) " .
         "WHERE interviuri.idxauthangajator = %d " .
         "AND interviuri.tstamp >= CURDATE() " .
         "ORDER BY interviuri.tstamp",
         SYSCFG_DB_PREFIX . 'interviuri',
         SYSCFG_DB_PREFIX . 'angajati',
+        SYSCFG_DB_PREFIX . 'locurimunca',
         $this->AUTH->GetUserId()
     ));
     if ($arrInterviuri === false) {
@@ -93,6 +61,7 @@ try {
             'dataora'            => MySQLDate_to_RomanianDate($arrInterviu['tstamp']),
             'idxauthnevazator'   => (int)$arrInterviu['idxauthangajat'],
             'existaloc'          => $arrInterviu['idxobject'] ? 1 : 0,
+            'locmunca'           => $arrInterviu['locmunca'],
             'facultate'          => $arrInterviu['facultate'],
         ];
     }

@@ -2,12 +2,12 @@
 
 $this->handleAPIRequest(function() {
     $validation = $this->validator->make($_POST, [
-        'userkey'                  => 'required',
+        'userkey'                  => 'nullable',
         'nume'                     => 'required',
         'nrlocuri'                 => 'required|numeric',
         'idx_domeniu_universitate' => 'required|numeric',
         'idx_oras'                 => 'required|numeric',
-        'idxloc'                  => 'required|numeric',
+        'idxloc'                   => 'required|numeric',
     ]);
 
     $validation->validate();
@@ -17,9 +17,16 @@ $this->handleAPIRequest(function() {
         throw new Exception("EROARE: {$error}!", 400);
     }
 
-    $arrUser = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'auth_users', [
-        'apploginid', '=', $validation->getValue('userkey')
-    ]);
+    $conds = [];
+    if ($validation->getValue('userkey')) {
+        $conds = [ 'apploginid', '=', $validation->getValue('userkey') ];
+    } else if ($this->AUTH->IsAuthenticated()) {
+        $conds = [ 'idx', '=', $this->AUTH->GetUserId() ];
+    } else {
+        throw new Exception("Cerere invalida", 400);
+    }
+
+    $arrUser = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'auth_users', $conds);
     if ($arrUser === false) {
         throw new Exception("EROARE INTERNA", 500);
     }

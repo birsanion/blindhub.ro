@@ -11,54 +11,12 @@
                         <div class="card-body">
                             <h4><strong><?= $loc['titlu'] ?></strong></h4>
                             <h5><?= $loc['vechimeanunt'] ?></h5>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Tip Job:</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <?= $loc['tipslujba'] ?>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Companie</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <?= $loc['companie'] ?>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Oraș</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <?= $loc['oras'] ?>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Domeniu</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <?= $loc['domeniu_cv'] ?>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Competențe necesare</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <?= $loc['competente'] ?>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Descriere</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <?= $loc['descriere'] ?>
-                                </div>
-                            </div>
+                            <h6>Tip Job: <?= $loc['tipslujba'] ?></h6>
+                            <h6>Companie: <?= $loc['companie'] ?></h6>
+                            <h6>Oraș: <?= $loc['oras'] ?></h6>
+                            <h6>Domeniu: <?= $loc['domeniu_cv'] ?></h6>
+                            <h6>Competențe necesare: <?= $loc['competente'] ?></h6>
+                            <h6>Descriere: <?= $loc['descriere'] ?></h6>
                         </div>
                     </div>
                 <?php endforeach; ?>
