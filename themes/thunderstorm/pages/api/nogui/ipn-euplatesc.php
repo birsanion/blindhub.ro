@@ -33,7 +33,7 @@ try {
 		'nonce'      => addslashes(trim(@$_POST['nonce'])),
 	);
 
-	$data['fp_hash'] = $this->EpPay->hmac($data);
+	$data['fp_hash'] = strtoupper($this->EpPay->hmac($data));
 	$fp_hash = addslashes(trim(@$_POST['fp_hash']));
 	if ($data['fp_hash'] !== $fp_hash) {
         throw new Exception("EROARE: semantura invalida!", 400);
@@ -87,7 +87,7 @@ try {
 } catch (\Exception $e) {
     $this->logException($e);
 	$errCode = 500;
-	if ($e->getCode == 400) {
+	if ($e->getCode() == 400) {
 		$errCode = 400;
 	}
 
