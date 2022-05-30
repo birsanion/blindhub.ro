@@ -14,7 +14,7 @@ $this->handleAPIRequest(function() {
     }
 
 
-    $res = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'payments', [
+    $res = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'card_authorizations', [
         ['invoice_id', '=', $validation->getValue('invoice_id'), 'AND'],
         ['ep_id', '=', $validation->getValue('ep_id')],
     ]);
