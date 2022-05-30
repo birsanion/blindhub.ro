@@ -9,19 +9,6 @@ call_user_func($this->fncCallback, 'htmlheader', 'structure-javascript', MANOP_S
     )
 );
 
-function euplatesc_mac($data, $key) {
-    $str = NULL;
-    foreach($data as $d){
-        if($d === NULL || strlen($d) == 0){
-            $str .= '-';
-        }else{
-            $str .= strlen($d) . $d;
-        }
-    }
-
-    return hash_hmac('MD5',$str, pack('H*', $key));
-}
-
 try {
     $validation = $this->validator->make($_POST, [
         'fname'   => 'required',
@@ -42,17 +29,9 @@ try {
         throw new Exception("EROARE: {$error}!", 400);
     }
 
-    $data = array(
-        'amount'     => number_format($validation->getValue('amount'), 2, '.', ''),
-        'curr'       => 'RON',
-        'invoice_id' => uniqid("", true),
-        'order_desc' => 'Donatie',
-        'merch_id'   => $_ENV['EUPLATESC_MERCHANT_ID'],
-        'timestamp'  => date('YmdHis'),
-        'nonce'      => md5(mt_rand().time()),
-    );
-
-    $data['fp_hash'] = strtoupper(euplatesc_mac($data, $_ENV['EUPLATESC_KEY']));
+    $currency = 'RON';
+    $desc = 'Donation';
+    $data = $this->EpPay->initTransactionPayload($validation->getValue('amount'), $currency, $desc);
     $data['fname'] = $validation->getValue('fname');
     $data['lname'] = $validation->getValue('lname');
     $data['email'] = $validation->getValue('email');
@@ -68,7 +47,7 @@ try {
         'backtosite'        => qurl_l(''),
     ];
 
-    $res = $this->DATABASE->RunQuickInsert(SYSCFG_DB_PREFIX . 'payments', [
+    $res = $this->DATABASE->RunQuickInsert(SYSCFG_DB_PREFIX . 'card_authorizations', [
         'payment_processor',
         'invoice_id',
         'first_name',
@@ -106,4 +85,3 @@ try {
 } catch (\Exception $e) {
     $this->GLOBAL['errormsg'] = $e->getMessage();
 }
-

@@ -2,7 +2,7 @@
 /**
  * Migration Task class.
  */
-class BlindhubPayments
+class BlindhubCardAuthorizations
 {
     public function preUp()
     {
@@ -32,7 +32,7 @@ class BlindhubPayments
     public function getUpSQL()
     {
         return <<<END
-            CREATE TABLE `qwf_payments` (
+            CREATE TABLE IF NOT EXISTS `qwf_card_authorizations` (
                 `idx` int(11) unsigned NOT NULL AUTO_INCREMENT,
                 `payment_processor` enum('euplatesc') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
                 `invoice_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -49,6 +49,8 @@ class BlindhubPayments
                 `currency` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
                 `order_desc` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
                 `status` enum('approved','failed') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+                `recurent_exp` DATE NULL DEFAULT NULL,
+                `recurent_freq` int(5) NULL DEFAULT NULL,
                 `last_ipn_message_idx` int(11) unsigned DEFAULT NULL,
                 `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
                 PRIMARY KEY (`idx`),
@@ -66,7 +68,6 @@ class BlindhubPayments
      */
     public function getDownSQL()
     {
-        return "DROP TABLE `qwf_payments`";
+        return "DROP TABLE IF EXISTS `qwf_card_authorizations`";
     }
-
 }

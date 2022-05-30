@@ -1,17 +1,5 @@
 <?php
 
-function euplatesc_mac($data, $key) {
-	$str = NULL;
-	foreach($data as $d) {
-		if ($d === NULL || strlen($d) == 0) {
-			$str .= '-';
-		} else {
-			$str .= strlen($d) . $d;
-		}
-	}
-	return hash_hmac('MD5',$str, pack('H*', $key));
-}
-
 try {
 	$validation = $this->validator->make($_POST, [
         'amount'      => 'required|numeric',
@@ -45,13 +33,13 @@ try {
 		'nonce'      => addslashes(trim(@$_POST['nonce'])),
 	);
 
-	$data['fp_hash'] = strtoupper(euplatesc_mac($data, $_ENV['EUPLATESC_KEY']));
+	$data['fp_hash'] = $this->EpPay->hmac($data);
 	$fp_hash = addslashes(trim(@$_POST['fp_hash']));
 	if ($data['fp_hash'] !== $fp_hash) {
         throw new Exception("EROARE: semantura invalida!", 400);
 	}
 
-    $res = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'payments', [
+    $res = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'card_authorizations', [
         'invoice_id', '=', $validation->getValue('invoice_id')
     ]);
     if ($res === false) {
@@ -63,23 +51,23 @@ try {
 
     $payment = $res[0];
     $res = $this->DATABASE->RunQuickInsert(SYSCFG_DB_PREFIX . 'ipn_messages', [
-        'payment_idx',
+        'card_authorization_idx',
         'action',
         'message',
         'approval',
         'json_dump',
     ], [[
-        'payment_idx' => $payment['idx'],
-        'action'      => $validation->getValue('action'),
-        'message'     => $validation->getValue('message'),
-        'approval'    => $validation->getValue('approval'),
-        'json_dump'   => json_encode($_POST),
+        'card_authorization_idx' => $payment['idx'],
+        'action'                 => $validation->getValue('action'),
+        'message'                => $validation->getValue('message'),
+        'approval'               => $validation->getValue('approval'),
+        'json_dump'              => json_encode($_POST),
     ]]);
     if ($res === false) {
         throw new Exception($this->DATABASE->getError(), 500);
     }
 
-    $res = $this->DATABASE->RunQuickUpdate(SYSCFG_DB_PREFIX . 'payments', [
+    $res = $this->DATABASE->RunQuickUpdate(SYSCFG_DB_PREFIX . 'card_authorizations', [
     	'ep_id',
     	'status',
     	'last_ipn_message_idx',

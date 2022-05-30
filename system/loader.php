@@ -1,6 +1,7 @@
 <?php
 
 require_once('system/thirdparty/vendor/autoload.php');
+require_once 'payment_processors/euplatesc.php';
 
 use Rakit\Validation\Validator;
 ////////////////////////////////////////////////////////////////////////////////
@@ -47,6 +48,7 @@ class CQSingleLoader
     private $arrLoadedFiles;
 
     private $validator;
+    private $EpPay;
 
     function __construct()
     {
@@ -70,6 +72,7 @@ class CQSingleLoader
 
         $this->arrLoadedFiles = array();
         $this->validator = new Validator;
+        $this->EpPay = new EpPay();
     }
 
     function Init($strLayout, $strModule, $nIndex, $fncCall, &$arrPublicVars,
@@ -302,6 +305,7 @@ class CQLoader
     private $arrLayout;
     private $arrModules;
     private $arrModuleData;
+    private $EpPay;
 
     function __construct()
     {
@@ -351,6 +355,11 @@ class CQLoader
         $this->CORE = $kCore;
         $this->AUTH = $kAuth;
         $this->LOG = $kLog;
+    }
+
+    function SetEpPaymentProcessor($EpPay)
+    {
+        $this->EpPay = $EpPay;
     }
 
     private function ProcessConfigText($strContent, $strKeyValueDelim = NULL,

@@ -604,3 +604,71 @@ footer.sticky-footer {
 .btn-favorite input[type="checkbox"]:checked ~ .bi-star-fill {
   opacity: 1;
 }
+
+ul.list-checkbox-img {
+  list-style-type: none;
+}
+
+ul.list-checkbox-img li {
+  display: inline-block;
+}
+
+ul.list-checkbox-img input[type="radio"] {
+  display: none;
+}
+
+ul.list-checkbox-img label {
+  border: 1px solid #fff;
+  display: block;
+  position: relative;
+  margin: 10px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+ul.list-checkbox-img label:before {
+  background-color: white;
+  color: white;
+  content: " ";
+  display: block;
+  border-radius: 50%;
+  border: 1px solid grey;
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  line-height: 28px;
+  transition-duration: 0.4s;
+  transform: scale(0);
+}
+
+ul.list-checkbox-img label img {
+  height: 100px;
+  width: 100px;
+  transition-duration: 0.2s;
+  transform-origin: 50% 50%;
+}
+
+ul.list-checkbox-img :checked + label {
+  border-color: #ddd;
+}
+
+ul.list-checkbox-img :checked + label:before {
+  content: "✓";
+  background-color: grey;
+  transform: scale(1);
+}
+
+ul.list-checkbox-img :checked + label img {
+  transform: scale(0.9);
+  /* box-shadow: 0 0 5px #333; */
+  z-index: -1;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #013289;
+  border-color: #013289;
+}
