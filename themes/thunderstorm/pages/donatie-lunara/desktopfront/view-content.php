@@ -15,7 +15,10 @@
                     <input name="merch_id" value="<?= $this->DATA['merch_id'] ?>" hidden required>
                     <input name="timestamp" value="<?= $this->DATA['timestamp'] ?>" hidden required>
                     <input name="nonce" value="<?= $this->DATA['nonce'] ?>" hidden required>
+                    <input name="recurent_freq" value="<?= $this->DATA['recurent_freq'] ?>" hidden required>
+                    <input name="recurent_exp" value="<?= $this->DATA['recurent_exp'] ?>" hidden required>
                     <input name="fp_hash" value="<?= $this->DATA['fp_hash'] ?>" hidden required>
+                    <input name="recurent" value="<?= $this->DATA['recurent'] ?>" hidden required>
                     <input name="fname" value="<?= $this->DATA['fname'] ?>" hidden required>
                     <input name="lname" value="<?= $this->DATA['lname'] ?>" hidden required>
                     <input name="email" value="<?= $this->DATA['email'] ?>" hidden required>
