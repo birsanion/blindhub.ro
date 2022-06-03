@@ -70,6 +70,14 @@ $(document).ready(function() {
         $(this).next().toggleClass('dropdown-active')
       }
     })
+
+    $(".img-hover").hover(function () {
+      $(this).attr("src", $(this).attr("src-over"))
+    })
+
+    $(".img-hover").mouseout(function () {
+      $(this).attr("src", $(this).attr("src-normal"))
+    })
 });
 
 // other useful functions and stuff

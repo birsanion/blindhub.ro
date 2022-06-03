@@ -47,7 +47,7 @@
         <script src="<?php echo qurl_f('scripts/jquery.validate.min.js'); ?>"></script>
         <script src="<?php echo qurl_f('vendor/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
-        <script src="<?php echo qurl_f('scripts/main.js'); ?>"></script>
+        <script src="<?php echo qurl_f('scripts/main.js?v=1'); ?>"></script>
     </head>
 
     <body class="size-1">

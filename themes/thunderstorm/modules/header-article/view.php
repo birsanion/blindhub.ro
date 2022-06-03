@@ -6,9 +6,21 @@
                     <img src="<?= qurl_f('images/logo_final_blindhub.png'); ?>" alt="">
                 </a>
 
-                <a href="#" class="logo d-flex align-items-center float-right">
+
+                <a href="<?= qurl_l('doneaza') ?>" class="logo d-flex align-items-center">
+                    <img
+                        src="<?php echo qurl_f('images/icon_doneaza_normal.png'); ?>"
+                        src-normal="<?php echo qurl_f('images/icon_doneaza_normal.png'); ?>"
+                        src-over="<?php echo qurl_f('images/icon_doneaza_mouseover.png'); ?>"
+                        class="img-hover"
+                        style="margin-right:7px" />
+                    <h5><strong>Donează</strong></h5>
+                </a>
+
+                <a href="#" class="logo ">
                     <img src="<?= qurl_f('images/logo_fundatia-orange.png'); ?>" alt="">
                 </a>
+
             </div>
         </div>
         <div class="container">
