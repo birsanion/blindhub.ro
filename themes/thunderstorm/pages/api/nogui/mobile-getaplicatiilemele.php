@@ -61,11 +61,10 @@ $this->handleAPIRequest(function() {
         $nTimeDiff = GetTimeDifferenceFromNow($arrRezultat['datapostare']);
         $this->DATA['locuri'][] = [
             'nume'                  => $arrRezultat['companie'],
-            'vechimeanunt'          => 'anunț postat ' .
-                ($nTimeDiff <= 0 ? 'astăzi' :
-                    ($nTimeDiff <= 1 ? ' acum o zi' :
-                        ($nTimeDiff <= 19 ? 'acum ' . $nTimeDiff . ' zile' :
-                            'acum ' . $nTimeDiff . ' de zile'))),
+            'vechimeanunt'          =>
+                ($nTimeDiff <= 0 ? $this->LANG('announcement_posted_today') :
+                    ($nTimeDiff <= 1 ? $this->LANG('announcement_posted_a_day_ago') :
+                        sprintf($this->LANG('announcement_posted_x_days_ago'), $nTimeDiff))),
             'idxlocmunca'           => (int)$arrRezultat['idx'],
             'idxauth'               => (int)$arrRezultat['idxauth'],
             'titlu'                 => $arrRezultat['titlu'],

@@ -18,25 +18,25 @@ class CQSyslog
     private static $hInstance = NULL;
     private $nType;
     private $DATABASE;
-    
+
     function __construct()
     {
         $this->nType = LOGTYPE_FILE;
         $this->DATABASE = NULL;
     }
-    
+
     static function GetInstance()
     {
         if (self::$hInstance === NULL) self::$hInstance = new CQSyslog();
-        
+
         return self::$hInstance;
     }
-    
+
     function Init(&$kDatabase)
     {
         $this->DATABASE = $kDatabase;
     }
-    
+
     function Log($strLocation, $mxContent, $bReverseLogging = false)
     {
         switch ($this->nType)
@@ -60,7 +60,7 @@ class CQSyslog
             }break;
         }
     }
-    
+
     function Write($mxContent)
     {
         switch ($this->nType)
@@ -74,14 +74,14 @@ class CQSyslog
             }break;
         }
     }
-    
+
     function Debug($strWhat, $strContent, $bPostDevelop = false)
     {
         if ((defined('DEBUGMODE') && DEBUGMODE) || $bPostDevelop){
             if (is_string($strContent))
                 file_put_contents("logs/debug-$strWhat.txt", date('Y-m-d H:i:s').
                     " - $strContent\r\n", FILE_APPEND);
-            
+
             if (is_array($strContent))
                 file_put_contents("logs/debug-$strWhat.txt", date('Y-m-d H:i:s').
                     " - " . print_r($strContent, true) . "\r\n", FILE_APPEND);
@@ -110,9 +110,9 @@ function SysErrorHandler($nErrNo, $strErr, $strErrFile, $strErrLine)
             $strError = 'Unknown';
             break;
     }
-    
+
     $LOG = CQSyslog::GetInstance();
-    
+
     $LOG->Write("PHP $strError: $strErr in $strErrFile on line $strErrLine");
 
     return true;
@@ -124,7 +124,7 @@ set_error_handler('SysErrorHandler');
 function SysExceptionHandler($kException)
 {
     $LOG = CQSyslog::GetInstance();
-    
+
     $LOG->Write('PHP Exception: ' . $kException->getMessage() . ' in file ' .
         $kException->getFile() . ' on line ' . $kException->getLine() .
         "\r\n\t" . str_replace("\n", "\n\t", $kException->getTraceAsString()));

@@ -109,12 +109,8 @@ $this->handleAPIRequest(function() {
         $idxInterviu = $arrInterviu[0]['idx'];
     }
 
-    $titlu = "Invitație interviu";
-    $mesaj = sprintf(
-        "Ați fost invitat la un interviu pe data de %s la ora %s!",
-        $validation->getValue('datacalend'),
-        $validation->getValue('ora')
-    );
+    $titlu = $this->LANG('interview_invitation_title');
+    $mesaj = sprintf($this->LANG('interview_invitation_message'), $validation->getValue('datacalend'), $validation->getValue('ora'));
     $arrNotificare = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'notificari', [
         ['idxauth', '=', $validation->getValue('idxauthnevazator'), 'AND'],
         ['idxinterviu', '=', $idxInterviu]

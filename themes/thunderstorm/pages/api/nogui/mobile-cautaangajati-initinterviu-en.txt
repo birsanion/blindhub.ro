@@ -1,0 +1,2 @@
+interview_invitation_title = Interview invitation
+interview_invitation_message = You have been invited to an interview on %s at %s!
