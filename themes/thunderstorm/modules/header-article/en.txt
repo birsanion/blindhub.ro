@@ -1,0 +1,11 @@
+Despre proiect = About project
+Obiective = Objectives
+Echipa = Team
+Ambasadori = Ambassadors
+Comunitate BlindHub = BlindHub community
+Dezvoltare profesională = Professional Development
+CV = CV
+Interviu = Interview
+Beneficii pentru companie = Benefits for the company
+Educație și formare = Education and Training
+Universitatea incluzivă = Inclusive university

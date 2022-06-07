@@ -6,7 +6,7 @@
                     <img src="<?= qurl_f('images/logo_final_blindhub.png'); ?>" alt="">
                 </a>
 
-
+                <?php if ($_ENV['PAYMENT_PROCESSOR']): ?>
                 <a href="<?= qurl_l('doneaza') ?>" class="logo d-flex align-items-center">
                     <img
                         src="<?php echo qurl_f('images/icon_doneaza_normal.png'); ?>"
@@ -16,6 +16,7 @@
                         style="margin-right:7px" />
                     <h5><strong>Donează</strong></h5>
                 </a>
+                <?php endif;?>
 
                 <a href="#" class="logo ">
                     <img src="<?= qurl_f('images/logo_fundatia-orange.png'); ?>" alt="">
@@ -47,36 +48,41 @@
             <div class="offset-lg-1 col-lg-10 d-flex justify-content-between">
                 <nav id="navbar" class="navbar" >
                     <ul>
-                        <li class="dropdown"><a href="#"><span>Despre proiect</span> <i class="bi bi-chevron-down"></i></a>
+                        <li class="dropdown"><a href="#"><span><?= $this->LANG('Despre proiect') ?></span> <i class="bi bi-chevron-down"></i></a>
                             <ul>
-                                <li><a href="<?= qurl_l('despre-obiective') ?>">Obiective</a></li>
+                                <li><a href="<?= qurl_l('despre-obiective') ?>"><?= $this->LANG('Obiective') ?></a></li>
+                                <?php if ($this->ROUTE->GetFlagsLanguage() == 'ro') :?>
                                 <li><a href="<?= qurl_l('evenimente') ?>">Evenimente</a></li>
+                                <?php endif; ?>
                             </ul>
                         </li>
-                        <li class="dropdown"><a href="#"><span>Comunitate BlindHub</span> <i class="bi bi-chevron-down"></i></a>
+                        <li class="dropdown"><a href="#"><span><?= $this->LANG('Comunitate BlindHub') ?></span> <i class="bi bi-chevron-down"></i></a>
                             <ul>
+                                <?php if ($this->ROUTE->GetFlagsLanguage() == 'ro') :?>
                                 <li><a href="<?= qurl_l('comunitate-misiune') ?>">Misiune</a></li>
                                 <li><a href="<?= qurl_l('comunitate-centre') ?>">Centre BlindHUB</a></li>
-                                <li><a href="<?= qurl_l('comunitate-echipa') ?>">Echipa</a></li>
-                                <li><a href="<?= qurl_l('comunitate-ambasadori') ?>">Ambasadori</a></li>
+                                <?php endif; ?>
+                                <li><a href="<?= qurl_l('comunitate-echipa') ?>"><?= $this->LANG('Echipa') ?></a></li>
+                                <li><a href="<?= qurl_l('comunitate-ambasadori') ?>"><?= $this->LANG('Ambasadori') ?></a></li>
                             </ul>
                         </li>
-                        <li class="dropdown"><a href="#"><span>Dezvoltare profesională</span> <i class="bi bi-chevron-down"></i></a>
+                        <li class="dropdown"><a href="#"><span><?= $this->LANG('Dezvoltare profesională') ?></span> <i class="bi bi-chevron-down"></i></a>
                             <ul>
-                                <li><a href="<?= qurl_l('dezvoltare-profesionala-cv') ?>">CV</a></li>
-                                <li><a href="<?= qurl_l('dezvoltare-profesionala-interviu') ?>">Interviu</a></li>
-                                <li><a href="<?= qurl_l('dezvoltare-profesionala-beneficii') ?>">Beneficii pentru companie</a></li>
+                                <li><a href="<?= qurl_l('dezvoltare-profesionala-cv') ?>"><?= $this->LANG('CV') ?></a></li>
+                                <li><a href="<?= qurl_l('dezvoltare-profesionala-interviu') ?>"><?= $this->LANG('Interviu') ?></a></li>
+                                <li><a href="<?= qurl_l('dezvoltare-profesionala-beneficii') ?>"><?= $this->LANG('Beneficii pentru companie') ?></a></li>
                             </ul>
                         </li>
-                        <li class="dropdown"><a href="#"><span>Educație și formare</span> <i class="bi bi-chevron-down"></i></a>
+                        <li class="dropdown"><a href="#"><span><?= $this->LANG('Educație și formare') ?></span> <i class="bi bi-chevron-down"></i></a>
                             <ul>
-                                <li><a href="<?= qurl_l('educatie-universitatea-incluziva') ?>">Universitatea incluzivă</a></li>
+                                <li><a href="<?= qurl_l('educatie-universitatea-incluziva') ?>"><?= $this->LANG('Universitatea incluzivă') ?></a></li>
                             </ul>
                         </li>
 
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav>
+                <?php if ($this->ROUTE->GetFlagsLanguage() == 'ro') :?>
                 <nav class="navbar" >
                     <ul>
                         <?php if ($this->AUTH->IsAuthenticated()): ?>
@@ -100,6 +106,7 @@
                         <?php endif; ?>
                     </ul>
                 </nav>
+                <?php endif; ?>
             </div>
         </div>
     </header>

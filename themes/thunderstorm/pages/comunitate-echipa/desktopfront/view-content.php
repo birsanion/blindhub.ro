@@ -3,7 +3,7 @@
         <div class="container aos-init aos-animate" data-aos="fade-up">
             <div class="row">
                 <div class="offset-lg-1 col-lg-10">
-                    <h1 class="titlu">Echipa</h1>
+                    <h1 class="titlu"><?= $this->LANG('Echipa') ?></h1>
                 </div>
             </div>
             <div class="row">
@@ -30,7 +30,7 @@
                                 <div class="member-info">
                                     <h4>Dacian Pribeanu</h4>
                                     <span>
-                                        Expert relatii publice, 12 ani de experienta in lucrul cu persoane cu dizabilitati, trainer MindGames64 si membru al Asociatiei Nevazatorilor din România
+                                        <?= $this->LANG('Expert relații publice, 12 ani de experiența în lucrul cu persoane cu dizabilități, trainer MindGames64 și membru al Asociatiei Nevăzătorilor din România') ?>
                                     </span>
                                 </div>
                             </div>
@@ -43,7 +43,7 @@
                                 <div class="member-info">
                                     <h4>Ioana Sereme</h4>
                                     <span>
-                                        Expert financiar, Secretar General Asociatia Nevazatorilor din România
+                                        <?= $this->LANG('Expert financiar, Secretar General Asociația Nevăzătorilor din România') ?>
                                     </span>
                                 </div>
                             </div>
@@ -56,7 +56,7 @@
                                 <div class="member-info">
                                     <h4>Ana Corello</h4>
                                     <span>
-                                        Expert social media, absolventa a Facultatii de Sociologie si Asistenta Sociala,  lucreaza predominant cu persoane din categorii vulnerabile la Asociatia Carusel, cât si in cadrul Universitatii din Bucuresti in diverse proiecte ce sustin incluziunea pentru persoanele cu dizabilitati.
+                                        <?= $this->LANG('Expert social media, absolventă a Facultății de Sociologie și Asistentă Socială, lucrează predominant cu persoane din categorii vulnerabile la Asociația Carusel, cât și în cadrul Universitații din București în diverse proiecte ce susțin incluziunea pentru persoanele cu dizabilitați.') ?>
                                     </span>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                                 <div class="member-info">
                                     <h4>Oana Tomescu</h4>
                                     <span>
-                                        Consilier, cu experienta in zona de HR de peste 10 ani, studii in zona de psihologie &amp; sociologie, comunicare, deschisa catre proiecte cu impact in zona sociala.
+                                        <?= $this->LANG('Consilier, cu experiență în zona de HR de peste 10 ani, studii în zona de psihologie & sociologie, comunicare, deschisă către proiecte cu impact în zona socială.') ?>
                                     </span>
                                 </div>
                             </div>
@@ -82,7 +82,7 @@
                                 <div class="member-info">
                                     <h4>Mihai Tomescu</h4>
                                     <span>
-                                        specialist in incluziune, cadru didactic asociat Universitatea Bucuresti, fondator Grupul de Inovatie si Expertiza Sociala
+                                        <?= $this->LANG('specialist în incluziune, cadru didactic asociat Universitatea București, fondator Grupul de Inovație și Expertiză Socială') ?>
                                     </span>
                                 </div>
                             </div>
