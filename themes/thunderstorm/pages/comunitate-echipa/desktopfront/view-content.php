@@ -17,7 +17,7 @@
                                 <div class="member-info">
                                     <h4>Carmen Rotaru</h4>
                                     <span>
-                                        Manager proiect, consultant international VIA University College, Danemarca, vice presedinte Grupul de Inovatie si Expertiza Sociala
+                                        Manager proiect, consultant internațional VIA University College, Danemarca, vice președinte Grupul de Inovație și Expertiză Socială
                                     </span>
                                 </div>
                             </div>

@@ -3,7 +3,11 @@
         <div class="container">
             <div class="row">
                 <div class="offset-lg-1 col-lg-10">
+                    <?php if ($this->ROUTE->GetFlagsLanguage() == 'ro'): ?>
                     <img src="<?php echo qurl_f('images/banner-nologin.jpg'); ?>" class="fullwidth" />
+                    <?php else: ?>
+                    <img src="<?php echo qurl_f('images/banner-nologin-en.png'); ?>" class="fullwidth" />
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

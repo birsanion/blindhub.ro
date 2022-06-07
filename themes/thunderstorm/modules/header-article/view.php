@@ -3,7 +3,11 @@
             <div class="offset-lg-1 col-lg-10 d-flex align-items-center justify-content-between">
 
                 <a href="<?= qurl_l(''); ?>" class="logo d-flex align-items-center">
+                    <?php if ($this->ROUTE->GetFlagsLanguage() == 'ro'): ?>
                     <img src="<?= qurl_f('images/logo_final_blindhub.png'); ?>" alt="">
+                    <?php else: ?>
+                    <img src="<?= qurl_f('images/logo_final_blindhub_en.png'); ?>" alt="">
+                    <?php endif; ?>
                 </a>
 
                 <?php if ($_ENV['PAYMENT_PROCESSOR']): ?>
@@ -18,30 +22,34 @@
                 </a>
                 <?php endif;?>
 
-                <a href="#" class="logo ">
-                    <img src="<?= qurl_f('images/logo_fundatia-orange.png'); ?>" alt="">
-                </a>
+                <div>
+                    <?php if ($this->ROUTE->GetFlagsLanguage() == 'ro'): ?>
+                    <a href="#" class="logo ">
+                        <img src="<?= qurl_f('images/logo_fundatia-orange.png'); ?>" alt="">
+                    </a>
+                    <?php endif;?>
+                    <div id="homepage-blindcontrol">
+                        <a href="#" id="hButtonSitewideHighContrast" class="block reference imglink">
+                            <img src="<?php echo qurl_f('images/icon_highcontrast_normal.png'); ?>" class="normal" />
+                            <img src="<?php echo qurl_f('images/icon_highcontrast_mouseover.png'); ?>" class="over" />
+                        </a>
 
+                        <a href="#" id="hButtonSitewideTextBigger" class="block reference imglink">
+                            <img src="<?php echo qurl_f('images/icon_plussizetext_normal.png'); ?>" class="normal" />
+                            <img src="<?php echo qurl_f('images/icon_plussizetext_mouseover.png'); ?>" class="over" />
+                        </a>
+
+                        <a href="#" id="hButtonSitewideTextSmaller" class="block reference imglink">
+                            <img src="<?php echo qurl_f('images/icon_minussizetext_normal.png'); ?>" class="normal" />
+                            <img src="<?php echo qurl_f('images/icon_minussizetext_mouseover.png'); ?>" class="over" />
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="container">
             <div class="offset-lg-1 col-lg-10 d-flex align-items-center justify-content-end">
-                <div id="homepage-blindcontrol">
-                    <a href="#" id="hButtonSitewideHighContrast" class="block reference imglink">
-                        <img src="<?php echo qurl_f('images/icon_highcontrast_normal.png'); ?>" class="normal" />
-                        <img src="<?php echo qurl_f('images/icon_highcontrast_mouseover.png'); ?>" class="over" />
-                    </a>
 
-                    <a href="#" id="hButtonSitewideTextBigger" class="block reference imglink">
-                        <img src="<?php echo qurl_f('images/icon_plussizetext_normal.png'); ?>" class="normal" />
-                        <img src="<?php echo qurl_f('images/icon_plussizetext_mouseover.png'); ?>" class="over" />
-                    </a>
-
-                    <a href="#" id="hButtonSitewideTextSmaller" class="block reference imglink">
-                        <img src="<?php echo qurl_f('images/icon_minussizetext_normal.png'); ?>" class="normal" />
-                        <img src="<?php echo qurl_f('images/icon_minussizetext_mouseover.png'); ?>" class="over" />
-                    </a>
-                </div>
             </div>
         </div>
         <div class="container mt-4">
