@@ -61,6 +61,8 @@
                                 <li><a href="<?= qurl_l('despre-obiective') ?>"><?= $this->LANG('Obiective') ?></a></li>
                                 <?php if ($this->ROUTE->GetFlagsLanguage() == 'ro') :?>
                                 <li><a href="<?= qurl_l('evenimente') ?>">Evenimente</a></li>
+                                <?php else: ?>
+                                <li><a href="<?= qurl_l('avantaje') ?>"><?= $this->LANG('Avantaje') ?></a></li>
                                 <?php endif; ?>
                             </ul>
                         </li>

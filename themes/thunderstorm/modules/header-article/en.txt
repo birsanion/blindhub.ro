@@ -1,5 +1,6 @@
 Despre proiect = About project
 Obiective = Objectives
+Avantaje = Advantages
 Echipa = Team
 Ambasadori = Ambassadors
 Comunitate BlindHub = BlindHub community
