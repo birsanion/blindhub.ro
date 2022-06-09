@@ -3,9 +3,9 @@
      <div class="container mt-5">
         <div class="row">
             <div class="offset-lg-1 col-lg-10">
-                <h1 class="titlu mb-5">Donează</h1>
+                <h1 class="titlu mb-5"><?= $this->LANG('Donează') ?></h1>
 
-                <h6 class="text-uppercase mb-3"><strong>Donația ta</strong></h6>
+                <h6 class="text-uppercase mb-3"><strong><?= $this->LANG('Donația ta') ?></strong></h6>
                 <ul class="nav  nav-tabs " id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active px-4" id="home-tab" data-bs-toggle="tab" data-bs-target="#donatie-singulara" type="button" role="tab" aria-controls="donatie-singulara" aria-selected="true"><h5 class="m-0"><strong>Singulară</strong></h5></button>
@@ -20,7 +20,7 @@
                         <form id="frm_donatie_singulara" method="post" enctype="multipart/form-data" action="<?= qurl_l('donatie-singulara') ?>">
                             <div class="form-group mb-4">
                                 <label class="form-label">
-                                    <strong>Vreau să donez suma:</strong>
+                                    <strong><?= $this->LANG('Vreau să donez suma') ?>:</strong>
                                 </label>
                                 <div class="input-group input-group-lg  shadow" style="width:300px">
                                     <div class="input-group-prepend">

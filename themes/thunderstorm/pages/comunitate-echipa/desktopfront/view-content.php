@@ -12,12 +12,25 @@
                         <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
                             <div class="member shadow">
                                 <div class="member-img">
+                                    <img src="<?= qurl_f('images/foto_mihaitomescu.jpg') ?>" class="img-fluid w-100" alt="">
+                                </div>
+                                <div class="member-info">
+                                    <h4>Mihai Tomescu</h4>
+                                    <span>
+                                        <?= $this->LANG('specialist în incluziune, cadru didactic asociat Universitatea București, fondator Grupul de Inovație și Expertiză Socială') ?>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                            <div class="member shadow">
+                                <div class="member-img">
                                     <img src="<?= qurl_f('images/foto_carmenrotaru.jpg') ?>" class="img-fluid" alt="">
                                 </div>
                                 <div class="member-info">
                                     <h4>Carmen Rotaru</h4>
                                     <span>
-                                        Manager proiect, consultant internațional VIA University College, Danemarca, vice președinte Grupul de Inovație și Expertiză Socială
+                                    <?= $this->LANG('Manager proiect, consultant internațional VIA University College, Danemarca, vice președinte Grupul de Inovație și Expertiză Socială') ?>
                                     </span>
                                 </div>
                             </div>
@@ -74,19 +87,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-                            <div class="member shadow">
-                                <div class="member-img">
-                                    <img src="<?= qurl_f('images/foto_mihaitomescu.jpg') ?>" class="img-fluid w-100" alt="">
-                                </div>
-                                <div class="member-info">
-                                    <h4>Mihai Tomescu</h4>
-                                    <span>
-                                        <?= $this->LANG('specialist în incluziune, cadru didactic asociat Universitatea București, fondator Grupul de Inovație și Expertiză Socială') ?>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>

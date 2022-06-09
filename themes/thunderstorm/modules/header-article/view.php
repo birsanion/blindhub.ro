@@ -5,22 +5,22 @@
                 <a href="<?= qurl_l(''); ?>" class="logo d-flex align-items-center">
                     <?php if ($this->ROUTE->GetFlagsLanguage() == 'ro'): ?>
                     <img src="<?= qurl_f('images/logo_final_blindhub.png'); ?>" alt="">
+                    <?php elseif ($this->ROUTE->GetFlagsLanguage() == 'de'): ?>
+                    <img src="<?= qurl_f('images/logo_final_blindhub_de.png'); ?>" alt="">
                     <?php else: ?>
                     <img src="<?= qurl_f('images/logo_final_blindhub_en.png'); ?>" alt="">
                     <?php endif; ?>
                 </a>
 
-                <?php if ($_ENV['PAYMENT_PROCESSOR']): ?>
-                <a href="<?= qurl_l('doneaza') ?>" class="logo d-flex align-items-center">
+                <a href="<?= $_ENV['PAYMENT_PROCESSOR'] ? qurl_l('doneaza') : '#' ?>" class="logo d-flex align-items-center">
                     <img
                         src="<?php echo qurl_f('images/icon_doneaza_normal.png'); ?>"
                         src-normal="<?php echo qurl_f('images/icon_doneaza_normal.png'); ?>"
                         src-over="<?php echo qurl_f('images/icon_doneaza_mouseover.png'); ?>"
                         class="img-hover"
                         style="margin-right:7px" />
-                    <h5><strong>Donează</strong></h5>
+                    <h5><strong><?= $this->LANG('Donează') ?></strong></h5>
                 </a>
-                <?php endif;?>
 
                 <div>
                     <?php if ($this->ROUTE->GetFlagsLanguage() == 'ro'): ?>

@@ -10,3 +10,4 @@ Interviu = Interview
 Beneficii pentru companie = Benefits for the company
 Educație și formare = Education and Training
 Universitatea incluzivă = Inclusive university
+Donează = Donate
