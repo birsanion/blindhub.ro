@@ -279,6 +279,8 @@ body.highcontrast a,
 body.highcontrast input,
 body.highcontrast select,
 body.highcontrast textarea,
+body.highcontrast header,
+body.highcontrast footer,
 body.highcontrast div {
 	background: #000 !important;
 	color: #FFF !important;

@@ -10,6 +10,10 @@
 $.validator.messages.required = 'Acest câmp este obligatoriu'
 $.validator.messages.email = 'Vă rugăm să introduceți o adresă de email validă'
 
+$.fn.hasAttr = function(name) {
+  return this.attr(name) !== undefined;
+};
+
 $(document).ready(function() {
 
     $('#hButtonSitewideTextBigger').click(function(kEvent){
@@ -51,10 +55,19 @@ $(document).ready(function() {
     $('#hButtonSitewideHighContrast').click(function(kEvent){
     	kEvent.preventDefault();
 
+      var logoImg = $('.logo img')
     	if ($('body').hasClass('highcontrast')){
     		$('body').removeClass('highcontrast');
-    	}else{
+
+        if(logoImg.hasAttr('src-normal')) {
+          logoImg.attr('src', logoImg.attr('src-normal'));
+        }
+      } else {
     		$('body').addClass('highcontrast');
+
+        if(logoImg.hasAttr('src-over')) {
+          logoImg.attr('src', logoImg.attr('src-over'));
+        }
     	}
     });
 

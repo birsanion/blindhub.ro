@@ -22,7 +22,7 @@
 
         <!--<link rel="stylesheet" href="<?php echo qurl_f('styles/reset.css'); ?>" />-->
         <link rel="stylesheet" href="<?php echo qurl_f('styles/standard.css'); ?>" />
-        <link rel="stylesheet" href="<?php echo qurl_f('styles/main.css?v=' . date('YmdHis')); ?>" />
+        <link rel="stylesheet" href="<?php echo qurl_f('styles/main.css?v=2'); ?>" />
         <link rel="stylesheet" href="<?php echo qurl_f('styles/custom.css?v=1'); ?>" />
 
         <?php
@@ -47,7 +47,7 @@
         <script src="<?php echo qurl_f('scripts/jquery.validate.min.js'); ?>"></script>
         <script src="<?php echo qurl_f('vendor/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
-        <script src="<?php echo qurl_f('scripts/main.js?v=1'); ?>"></script>
+        <script src="<?php echo qurl_f('scripts/main.js?v=2'); ?>"></script>
     </head>
 
     <body class="size-1">
