@@ -6,7 +6,7 @@
                     <?php if ($this->ROUTE->GetFlagsLanguage() == 'ro'): ?>
                     <img src="<?= qurl_f('images/logo_final_blindhub.png'); ?>" alt="">
                     <?php elseif ($this->ROUTE->GetFlagsLanguage() == 'de'): ?>
-                    <img src="<?= qurl_f('images/logo_final_blindhub_de_normal.png'); ?>" src-normal="<?= qurl_f('images/logo_final_blindhub_de_normal.png'); ?>" src-over="<?= qurl_f('images/logo_final_blindhub_de_over.png'); ?>" alt="">
+                    <img style="max-height:85px" src="<?= qurl_f('images/logo_final_blindhub_de_normal.png'); ?>" src-normal="<?= qurl_f('images/logo_final_blindhub_de_normal.png'); ?>" src-over="<?= qurl_f('images/logo_final_blindhub_de_over.png'); ?>" alt="">
                     <?php else: ?>
                     <img src="<?= qurl_f('images/logo_final_blindhub_en.png'); ?>" alt="">
                     <?php endif; ?>
