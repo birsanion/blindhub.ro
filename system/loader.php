@@ -279,8 +279,17 @@ class CQSingleLoader
         try {
             $callable();
         } catch (\Exception $e) {
-            $this->DATA['result'] = $e->getMessage();
-            http_response_code($e->getCode());
+            switch ($e->getCode) {
+                case 400:
+                    $errCode = 400;
+
+                case 500:
+                default:
+                    $errCode = 500;
+            }
+
+            http_response_code($errCode);
+            $this->DATA['result'] = $this->LANG($e->getMessage());
             $this->logException($e);
         }
     }
@@ -623,9 +632,7 @@ class CQLoader
                     $this->CONFIG, $this->CORE, $this->AUTH, $this->LOG);
 
                 // load content language layer
-                $strLangFile = $this->ROUTE->qurl_pageroot('nogui/' .
-                    $this->ROUTE->GetPageValue() . '-' . $this->ROUTE->GetFlagsLanguage() . '.txt');
-
+                $strLangFile = $this->ROUTE->qurl_pageroot('nogui/lang/' . $this->ROUTE->GetFlagsLanguage() . '.txt');
                 $this->arrModuleData->LoadLanguage($strLangFile);
                 $this->arrLoadedFiles[] = $strLangFile;
 

@@ -1,49 +1,61 @@
     <header id="header" class="header shadow bg-white border-bottom">
         <div class="container">
-            <div class="offset-lg-1 col-lg-10 d-flex align-items-center justify-content-between">
+            <div class="row">
+                <div class="offset-lg-1 col-lg-10">
+                    <div class="row">
+                        <div class="col-md-4 d-flex py-3 align-items-center">
+                            <a href="<?= qurl_l(''); ?>" class="logo d-flex align-items-center">
+                                <?php if ($this->ROUTE->GetFlagsLanguage() == 'ro'): ?>
+                                <img src="<?= qurl_f('images/logo_final_blindhub.png'); ?>" alt="">
+                                <?php elseif ($this->ROUTE->GetFlagsLanguage() == 'de'): ?>
+                                <img style="max-height:85px" src="<?= qurl_f('images/logo_final_blindhub_de_normal.png'); ?>" src-normal="<?= qurl_f('images/logo_final_blindhub_de_normal.png'); ?>" src-over="<?= qurl_f('images/logo_final_blindhub_de_over.png'); ?>" alt="">
+                                <?php elseif ($this->ROUTE->GetFlagsLanguage() == 'fr'): ?>
+                                <img style="max-height:25px" src="<?= qurl_f('images/logo_final_blindhub_fr.png'); ?>" alt="">
+                                <?php else: ?>
+                                <img src="<?= qurl_f('images/logo_final_blindhub_en.png'); ?>" alt="">
+                                <?php endif; ?>
+                            </a>
+                        </div>
 
-                <a href="<?= qurl_l(''); ?>" class="logo d-flex align-items-center">
-                    <?php if ($this->ROUTE->GetFlagsLanguage() == 'ro'): ?>
-                    <img src="<?= qurl_f('images/logo_final_blindhub.png'); ?>" alt="">
-                    <?php elseif ($this->ROUTE->GetFlagsLanguage() == 'de'): ?>
-                    <img style="max-height:85px" src="<?= qurl_f('images/logo_final_blindhub_de_normal.png'); ?>" src-normal="<?= qurl_f('images/logo_final_blindhub_de_normal.png'); ?>" src-over="<?= qurl_f('images/logo_final_blindhub_de_over.png'); ?>" alt="">
-                    <?php else: ?>
-                    <img src="<?= qurl_f('images/logo_final_blindhub_en.png'); ?>" alt="">
-                    <?php endif; ?>
-                </a>
+                        <div class="col-md-4 d-flex py-3 align-items-center text-md-center ">
+                            <a href="<?= $_ENV['PAYMENT_PROCESSOR'] ? qurl_l('doneaza') : '#' ?>" class="d-flex align-items-center mx-md-auto">
+                                <img
+                                    src="<?php echo qurl_f('images/icon_doneaza_normal.png'); ?>"
+                                    src-normal="<?php echo qurl_f('images/icon_doneaza_normal.png'); ?>"
+                                    src-over="<?php echo qurl_f('images/icon_doneaza_mouseover.png'); ?>"
+                                    class="img-hover"
+                                    height="50"
+                                    style="margin-right:7px" />
+                                <h5><strong><?= $this->LANG('Donează') ?></strong></h5>
+                            </a>
+                        </div>
 
-                <a href="<?= $_ENV['PAYMENT_PROCESSOR'] ? qurl_l('doneaza') : '#' ?>" class="d-flex align-items-center">
-                    <img
-                        src="<?php echo qurl_f('images/icon_doneaza_normal.png'); ?>"
-                        src-normal="<?php echo qurl_f('images/icon_doneaza_normal.png'); ?>"
-                        src-over="<?php echo qurl_f('images/icon_doneaza_mouseover.png'); ?>"
-                        class="img-hover"
-                        height="50"
-                        style="margin-right:7px" />
-                    <h5><strong><?= $this->LANG('Donează') ?></strong></h5>
-                </a>
+                        <div class="col-md-4 d-flex align-items-center ">
 
-                <div>
-                    <?php if ($this->ROUTE->GetFlagsLanguage() == 'ro'): ?>
-                    <a href="#" class="logo ">
-                        <img src="<?= qurl_f('images/logo_fundatia-orange.png'); ?>" alt="">
-                    </a>
-                    <?php endif;?>
-                    <div id="homepage-blindcontrol">
-                        <a href="#" id="hButtonSitewideHighContrast" class="block reference imglink">
-                            <img src="<?php echo qurl_f('images/icon_highcontrast_normal.png'); ?>" class="normal" />
-                            <img src="<?php echo qurl_f('images/icon_highcontrast_mouseover.png'); ?>" class="over" />
-                        </a>
+                            <?php if ($this->ROUTE->GetFlagsLanguage() == 'ro'): ?>
+                            <div >
+                                <a href="#" class="logo ">
+                                    <img src="<?= qurl_f('images/logo_fundatia-orange.png'); ?>" alt="">
+                                </a>
+                            </div>
+                            <?php endif;?>
+                            <div id="homepage-blindcontrol" class="ml-md-auto">
+                                <a href="#" id="hButtonSitewideHighContrast" class="block reference imglink">
+                                    <img src="<?php echo qurl_f('images/icon_highcontrast_normal.png'); ?>" class="normal" />
+                                    <img src="<?php echo qurl_f('images/icon_highcontrast_mouseover.png'); ?>" class="over" />
+                                </a>
 
-                        <a href="#" id="hButtonSitewideTextBigger" class="block reference imglink">
-                            <img src="<?php echo qurl_f('images/icon_plussizetext_normal.png'); ?>" class="normal" />
-                            <img src="<?php echo qurl_f('images/icon_plussizetext_mouseover.png'); ?>" class="over" />
-                        </a>
+                                <a href="#" id="hButtonSitewideTextBigger" class="block reference imglink">
+                                    <img src="<?php echo qurl_f('images/icon_plussizetext_normal.png'); ?>" class="normal" />
+                                    <img src="<?php echo qurl_f('images/icon_plussizetext_mouseover.png'); ?>" class="over" />
+                                </a>
 
-                        <a href="#" id="hButtonSitewideTextSmaller" class="block reference imglink">
-                            <img src="<?php echo qurl_f('images/icon_minussizetext_normal.png'); ?>" class="normal" />
-                            <img src="<?php echo qurl_f('images/icon_minussizetext_mouseover.png'); ?>" class="over" />
-                        </a>
+                                <a href="#" id="hButtonSitewideTextSmaller" class="block reference imglink">
+                                    <img src="<?php echo qurl_f('images/icon_minussizetext_normal.png'); ?>" class="normal" />
+                                    <img src="<?php echo qurl_f('images/icon_minussizetext_mouseover.png'); ?>" class="over" />
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

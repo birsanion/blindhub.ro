@@ -25,9 +25,7 @@ $this->handleAPIRequest(function() {
 
     $validation->validate();
     if ($validation->fails()) {
-        $errors = $validation->errors();
-        $error = array_values($errors->firstOfAll())[0];
-        throw new Exception("EROARE: {$error}!", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $conds = [];
@@ -36,20 +34,20 @@ $this->handleAPIRequest(function() {
     } else if ($this->AUTH->IsAuthenticated()) {
         $conds = [ 'idx', '=', $this->AUTH->GetUserId() ];
     } else {
-        throw new Exception("Cerere invalida", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $arrUser = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'auth_users', $conds);
     if ($arrUser === false) {
-        throw new Exception("EROARE INTERNA", 500);
+        throw new Exception("Eroare internă", 500);
     }
     if (empty($arrUser)) {
-        throw new Exception("EROARE: acest utilizator nu există !", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $arrUser = $arrUser[0];
     if ($arrUser['tiputilizator'] != 1) {
-        throw new Exception("EROARE: acest utilizator nu este de tip angajator !", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $arrInterviu = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'interviuri', [
@@ -58,7 +56,7 @@ $this->handleAPIRequest(function() {
         ['idxobject', '=', (int)$validation->getValue('idxlocmunca')]
     ]);
     if ($arrInterviu === false) {
-        throw new Exception("EROARE INTERNA", 500);
+        throw new Exception("Eroare internă", 500);
     }
 
     if (empty($arrInterviu)) {
@@ -69,7 +67,7 @@ $this->handleAPIRequest(function() {
             $strNevazatorKey = $kOpentok->generateToken($strSessionId);
             $strInterlocutorKey = $kOpentok->generateToken($strSessionId);
         } catch (Exception $kEx) {
-            throw new Exception("EROARE: nu se pot genera datele pentru videochat !", 1);
+            throw new Exception("EROARE: nu se pot genera datele pentru videochat!", 1);
         }
 
         $res = $this->DATABASE->RunQuickInsert(SYSCFG_DB_PREFIX . 'interviuri', [
@@ -90,7 +88,7 @@ $this->handleAPIRequest(function() {
             'vonageinterlocutortoken' => $strInterlocutorKey
         ]]);
         if (!$res) {
-            throw new Exception("EROARE INTERNA", 500);
+            throw new Exception("Eroare internă", 500);
         }
 
         $idxInterviu = $this->DATABASE->GetLastInsertID();
@@ -103,20 +101,20 @@ $this->handleAPIRequest(function() {
             ['idxobject', '=', (int)$validation->getValue('idxlocmunca')]
         ]);
         if (!$res) {
-            throw new Exception($this->DATABASE->GetError(), 500);
+            throw new Exception("Eroare internă", 500);
         }
 
         $idxInterviu = $arrInterviu[0]['idx'];
     }
 
-    $titlu = $this->LANG('interview_invitation_title');
-    $mesaj = sprintf($this->LANG('interview_invitation_message'), $validation->getValue('datacalend'), $validation->getValue('ora'));
+    $titlu = $this->LANG('Invitație interviu');
+    $mesaj = sprintf($this->LANG('Ați fost invitat la un interviu pe data de %s la ora %s!'), $validation->getValue('datacalend'), $validation->getValue('ora'));
     $arrNotificare = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'notificari', [
         ['idxauth', '=', $validation->getValue('idxauthnevazator'), 'AND'],
         ['idxinterviu', '=', $idxInterviu]
     ]);
     if ($arrNotificare === false) {
-        throw new Exception("EROARE INTERNA", 500);
+        throw new Exception("Eroare internă", 500);
     }
     if (empty($arrNotificare)) {
         $res = $this->DATABASE->RunQuickInsert(SYSCFG_DB_PREFIX . 'notificari', [
@@ -132,7 +130,7 @@ $this->handleAPIRequest(function() {
         ]]);
 
         if (!$res) {
-            throw new Exception('EROARE: Nu s-a putut introduce notificare!', 500);
+            throw new Exception("Eroare internă", 500);
         }
     } else {
         $res = $this->DATABASE->RunQuickUpdate(SYSCFG_DB_PREFIX . 'notificari', 'titlu,mesaj', [
@@ -143,7 +141,7 @@ $this->handleAPIRequest(function() {
             ['idxinterviu', '=', $idxInterviu]
         ]);
         if (!$res) {
-            throw new Exception("EROARE INTERNA", 500);
+            throw new Exception("Eroare internă", 500);
         }
     }
 });

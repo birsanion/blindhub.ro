@@ -9,19 +9,19 @@ $this->handleAPIRequest(function() {
 
     $validation->validate();
     if ($validation->fails()) {
-        $errors = $validation->errors();
-        $error = array_values($errors->firstOfAll())[0];
-        throw new Exception("EROARE: {$error}!", 400);
+        // $errors = $validation->errors();
+        // $error = array_values($errors->firstOfAll())[0];
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $arrUser = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'auth_users', [
         'apploginid', '=', $validation->getValue('userkey')
     ]);
     if ($arrUser === false) {
-        throw new Exception("EROARE INTERNA", 500);
+        throw new Exception("Eroare internă", 500);
     }
     if (empty($arrUser)) {
-        throw new Exception("EROARE: acest utilizator nu există !", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $arrUser = $arrUser[0];
@@ -31,10 +31,10 @@ $this->handleAPIRequest(function() {
                 'idxauth', '=', $arrUser['idx']
             ]);
             if ($arrAngajat === false) {
-                throw new Exception("EROARE INTERNA", 500);
+                throw new Exception("Eroare internă", 500);
             }
             if (empty($arrAngajat)) {
-                throw new Exception("EROARE: acest angajat nu există !", 400);
+                throw new Exception("Cerere invalidă", 400);
             }
 
             $idxAuthAngajat = $arrUser['idx'];
@@ -48,10 +48,10 @@ $this->handleAPIRequest(function() {
                 'idxauth', '=', $arrUser['idx']
             ]);
             if ($arrAngajator === false) {
-                throw new Exception("EROARE INTERNA", 500);
+                throw new Exception("Eroare internă", 500);
             }
             if (empty($arrAngajator)) {
-                throw new Exception("EROARE: acest angajator nu există !", 400);
+                throw new Exception("Cerere invalidă", 400);
             }
 
             $idxAuthAngajat = $validation->getValue('idxauthinter');
@@ -65,10 +65,10 @@ $this->handleAPIRequest(function() {
                 'idxauth', '=', $arrUser['idx']
             ]);
             if ($arrUniversitate === false) {
-                throw new Exception("EROARE INTERNA", 500);
+                throw new Exception("Eroare internă", 500);
             }
             if (empty($arrUniversitate)) {
-                throw new Exception("EROARE: acesta universitate nu există!", 400);
+                throw new Exception("Cerere invalidă", 400);
             }
 
             $idxAuthAngajat = $validation->getValue('idxauthinter');
@@ -78,7 +78,7 @@ $this->handleAPIRequest(function() {
             break;
 
         default:
-            throw new Exception('EROARE: Tip utilizator invalid!', 400);
+            throw new Exception("Cerere invalidă", 400);
 
     }
 
@@ -94,7 +94,7 @@ $this->handleAPIRequest(function() {
         'mesaj'               => $validation->getValue('mesaj')
     ]]);
     if (!$res) {
-        throw new Exception('EROARE: Nu s-a putut introduce mesajul !', 500);
+        throw new Exception("Eroare internă", 500);
     }
 
     $res = $this->DATABASE->RunQuickInsert(SYSCFG_DB_PREFIX . 'notificari', [
@@ -110,6 +110,6 @@ $this->handleAPIRequest(function() {
     ]]);
 
     if (!$res) {
-        throw new Exception('EROARE: Nu s-a putut introduce notificare!', 500);
+        throw new Exception("Eroare internă", 500);
     }
 });

@@ -12,9 +12,7 @@ $this->handleAPIRequest(function() {
 
     $validation->validate();
     if ($validation->fails()) {
-        $errors = $validation->errors();
-        $error = array_values($errors->firstOfAll())[0];
-        throw new Exception("EROARE: {$error}!", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $conds = [];
@@ -23,31 +21,31 @@ $this->handleAPIRequest(function() {
     } else if ($this->AUTH->IsAuthenticated()) {
         $conds = [ 'idx', '=', $this->AUTH->GetUserId() ];
     } else {
-        throw new Exception("Cerere invalida", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $arrUser = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'auth_users', $conds);
     if ($arrUser === false) {
-        throw new Exception("EROARE INTERNA", 500);
+        throw new Exception("Eroare internă", 500);
     }
 
     if (empty($arrUser)) {
-        throw new Exception("EROARE: acest utilizator nu există !", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $arrUser = $arrUser[0];
     if ($arrUser['tiputilizator'] != 0) {
-        throw new Exception("EROARE: acest utilizator nu este de tip angajat!", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $arrUniversitate = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'universitati', [
         ['idxauth', '=', $validation->getValue('idxauthuniversitate')],
     ]);
     if ($arrUniversitate === false) {
-        throw new Exception("EROARE INTERNA", 500);
+        throw new Exception("Eroare internă", 500);
     }
     if (empty($arrUniversitate)) {
-        throw new Exception("Eroare: aceasta universitate nu exista", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $arrUniversitate = $arrUniversitate[0];
@@ -64,7 +62,7 @@ $this->handleAPIRequest(function() {
         (int)$arrUniversitate['idxauth']
     ));
     if ($arrLocuri === false) {
-        throw new Exception("EROARE INTERNA", 500);
+        throw new Exception("Eroare internă", 500);
     }
 
     $this->DATA['nrrezultate'] = 0;

@@ -20,16 +20,14 @@ $this->handleAPIRequest(function() {
 
     $validation->validate();
     if ($validation->fails()) {
-        $errors = $validation->errors();
-        $error = array_values($errors->firstOfAll())[0];
-        throw new Exception("EROARE: {$error}!", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $nUserIdx = 0;
     if (!$validation->getValue('userkey')) {
         $nNewUserResult = $this->AUTH->AddNewUser($validation->getValue('email'), $validation->getValue('parola'), $nUserIdx);
         if ($nNewUserResult != AUTH_SUCCESS) {
-            throw new Exception('EROARE: nu poate fi adăugat acest utilizator!', 400);
+            throw new Exception("EROARE: nu poate fi adăugat acest utilizator! Poate contul există deja?", 400);
         }
 
         $this->AUTH->ChangeAdvancedDetails([
@@ -52,7 +50,7 @@ $this->handleAPIRequest(function() {
             'img'                      => getPlaceholderImg(),
         ]]);
         if (!$res) {
-            throw new Exception($this->DATABASE->GetError(), 500);
+            throw new Exception("Eroare internă", 500);
         }
 
         $res = $this->DATABASE->RunQuickInsert(SYSCFG_DB_PREFIX . 'auth_userpermissions',
@@ -80,7 +78,7 @@ $this->handleAPIRequest(function() {
             ]
         );
         if (!$res) {
-            throw new Exception("EROARE INTERNA", 500);
+            throw new Exception("Eroare internă", 500);
         }
 
         // login
@@ -89,7 +87,7 @@ $this->handleAPIRequest(function() {
 
         $nLoginCode = $kNewAuth->LogIn($validation->getValue('email'), $validation->getValue('parola'));
         if ($nLoginCode !== AUTH_SUCCESS) {
-            throw new Exception("EROARE: nu poate fi autentificat automat utilizatorul !", 500);
+            throw new Exception("Eroare internă", 500);
         }
 
         $strUserKey = $kNewAuth->GetNewSalt();
@@ -108,16 +106,16 @@ $this->handleAPIRequest(function() {
             'apploginid', '=', $validation->getValue('userkey')
         ]);
         if ($arrUser === false) {
-            throw new Exception("EROARE INTERNA", 500);
+            throw new Exception("Eroare internă", 500);
         }
 
         if (empty($arrUser)) {
-            throw new Exception("EROARE: acest utilizator nu există !", 400);
+            throw new Exception("Cerere invalidă", 400);
         }
 
         $arrUser = $arrUser[0];
         if ($arrUser['tiputilizator'] != 0) {
-            throw new Exception("EROARE: acest utilizator nu este de tip universitate!", 400);
+            throw new Exception("Cerere invalidă", 400);
         }
 
         $res = $this->DATABASE->RunQuickUpdate(SYSCFG_DB_PREFIX . 'angajati', [
@@ -134,7 +132,7 @@ $this->handleAPIRequest(function() {
             'idxauth', '=', (int)$arrUser['idx']
         ]);
         if (!$res) {
-            throw new Exception("EROARE INTERNA", 500);
+            throw new Exception("Eroare internă", 500);
         }
     }
 });

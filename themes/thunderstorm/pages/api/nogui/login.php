@@ -13,9 +13,7 @@ $this->handleAPIRequest(function() {
 
     $validation->validate();
     if ($validation->fails()) {
-        $errors = $validation->errors();
-        $error = array_values($errors->firstOfAll())[0];
-        throw new Exception("EROARE: {$error}!", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $kNewAuth = new CQAuth();
@@ -41,6 +39,6 @@ $this->handleAPIRequest(function() {
         $kNewAuth->ChangeAdvancedDetails($arrAllDetails);
         $this->DATA['userkey'] = $strUserKey;
     } else {
-        throw new Exception("EROARE: Tipul de utilizator este incorect !", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 });

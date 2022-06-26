@@ -2,7 +2,7 @@
     <div class="container my-5">
         <div class="row">
                 <div class="offset-lg-1 col-lg-10">
-                    <h1 class="titlu"><?= $this->LANG('Ambasadori') ?></h1>
+                    <h1 class="titlu">Ambassadors</h1>
                     <article>
                         <p class="subtitlu">Tudorel Tupilusi - president of the Association of the Blind in Romania</p>
                         <ul class="lista">

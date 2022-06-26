@@ -16,34 +16,32 @@ $this->handleAPIRequest(function() {
 
     $validation->validate();
     if ($validation->fails()) {
-        $errors = $validation->errors();
-        $error = array_values($errors->firstOfAll())[0];
-        throw new Exception("EROARE: {$error}!", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $arrUser = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'auth_users', [
         'apploginid', '=', $validation->getValue('userkey')
     ]);
     if ($arrUser === false) {
-        throw new Exception("EROARE INTERNA", 500);
+        throw new Exception("Eroare internă", 500);
     }
     if (empty($arrUser)) {
-        throw new Exception("EROARE: acest utilizator nu există !", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $arrUser = $arrUser[0];
     if ($arrUser['tiputilizator'] != 0) {
-        throw new Exception("EROARE: acest utilizator nu este de tip angajat !", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $arrAngajat = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'angajati', [
         'idxauth', '=', $arrUser['idx'],
     ]);
     if ($arrAngajat === false) {
-        throw new Exception("EROARE INTERNA", 500);
+        throw new Exception("Eroare internă", 500);
     }
     if (empty($arrAngajat)) {
-        throw new Exception("EROARE: acest angajat nu există !", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $arrAngajat = $arrAngajat[0];
@@ -65,7 +63,7 @@ $this->handleAPIRequest(function() {
         (int)$arrAngajat['idx']
     ));
     if ($arrRezultate === false) {
-        throw new Exception("EROARE INTERNA", 500);
+        throw new Exception("Eroare internă", 500);
     }
 
     $this->DATA['nrlocuri'] = count($arrRezultate);
@@ -75,9 +73,10 @@ $this->handleAPIRequest(function() {
         $this->DATA['locuri'][] = [
             'nume'                  => $arrRezultat['companie'],
             'vechimeanunt'          =>
-                ($nTimeDiff <= 0 ? $this->LANG('announcement_posted_today') :
-                    ($nTimeDiff <= 1 ? $this->LANG('announcement_posted_a_day_ago') :
-                        sprintf($this->LANG('announcement_posted_x_days_ago'), $nTimeDiff))),
+                $nTimeDiff <= 0 ? $this->LANG('anunț postat astăzi') :
+                    $nTimeDiff <= 1 ? $this->LANG('anunț postat acum o zi') :
+                        $nTimeDiff <= 19 ? sprintf($this->LANG('anunț postat acum %s zile'), $nTimeDiff) :
+                            sprintf($this->LANG('anunț postat acum %s de zile'), $nTimeDiff),
             'idxlocmunca'           => (int)$arrRezultat['idx'],
             'idxauth'               => (int)$arrRezultat['idxauth'],
             'idx_oras'              => (int)$arrRezultat['idx_oras'],

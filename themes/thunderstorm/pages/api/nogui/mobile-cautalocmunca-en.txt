@@ -1,3 +1,0 @@
-announcement_posted_today = announcement posted today
-announcement_posted_a_day_ago = announcement posted a day ago
-announcement_posted_x_days_ago = announcement posted %s days ago

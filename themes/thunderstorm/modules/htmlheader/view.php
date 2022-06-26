@@ -23,7 +23,7 @@
         <!--<link rel="stylesheet" href="<?php echo qurl_f('styles/reset.css'); ?>" />-->
         <link rel="stylesheet" href="<?php echo qurl_f('styles/standard.css'); ?>" />
         <link rel="stylesheet" href="<?php echo qurl_f('styles/main.css?v=2'); ?>" />
-        <link rel="stylesheet" href="<?php echo qurl_f('styles/custom.css?v=1'); ?>" />
+        <link rel="stylesheet" href="<?php echo qurl_f('styles/custom.css?v=2'); ?>" />
 
         <?php
             if (isset($this->DATA['structure-styles'])){

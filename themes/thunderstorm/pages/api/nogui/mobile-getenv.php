@@ -7,33 +7,31 @@ $this->handleAPIRequest(function() {
 
     $validation->validate();
     if ($validation->fails()) {
-        $errors = $validation->errors();
-        $error = array_values($errors->firstOfAll())[0];
-        throw new Exception("EROARE: {$error}!", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     if ($validation->getValue('appkey') != '8GLmkhmzDwP6wsFXTLUPs9kptX6Swb') {
-        throw new Exception("EROARE: cerere invalida!", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $arrOrase = $this->DATABASE->RunQuickSelect(['idx', 'nume'], SYSCFG_DB_PREFIX . 'orase', NULL, ['nume']);
     if ($arrOrase === false) {
-        throw new Exception("EROARE INTERNA", 500);
+        throw new Exception("Eroare internă", 500);
     }
 
     $arrDomeniiCv = $this->DATABASE->RunQuickSelect(['idx', 'nume'], SYSCFG_DB_PREFIX . 'domenii_cv', NULL, ['nume']);
     if ($arrDomeniiCv === false) {
-        throw new Exception("EROARE INTERNA", 500);
+        throw new Exception("Eroare internă", 500);
     }
 
     $arrDomeniiUniversitate = $this->DATABASE->RunQuickSelect(['idx', 'nume'], SYSCFG_DB_PREFIX . 'domenii_universitate', NULL, ['nume']);
     if ($arrDomeniiUniversitate === false) {
-        throw new Exception("EROARE INTERNA", 500);
+        throw new Exception("Eroare internă", 500);
     }
 
     $arrOptiuni = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'optiuni', NULL, ['categorie', 'nume']);
     if ($arrOptiuni === false) {
-        throw new Exception("EROARE INTERNA", 500);
+        throw new Exception("Eroare internă", 500);
     }
 
     $this->DATA['mentenanta'] = false;

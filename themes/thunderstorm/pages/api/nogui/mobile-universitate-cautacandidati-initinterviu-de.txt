@@ -1,2 +1,0 @@
-interview_invitation_title = Einladung zum Interview
-interview_invitation_message = Sie wurden am %s um %s  Uhr, zu einen Interview eingeladet

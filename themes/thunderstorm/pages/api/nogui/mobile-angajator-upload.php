@@ -7,7 +7,7 @@ $this->handleAPIRequest(function() {
 
     $validation->validate();
     if ($validation->fails()) {
-        throw new Exception("EROARE: cerere invalida!", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $conds = [];
@@ -17,21 +17,21 @@ $this->handleAPIRequest(function() {
     } else if ($this->AUTH->IsAuthenticated()) {
         $conds = [ 'idx', '=', $this->AUTH->GetUserId() ];
     } else {
-        throw new Exception("Cerere invalida", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $arrUser = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'auth_users', $conds);
     if ($arrUser === false) {
-        throw new Exception("EROARE INTERNA", 500);
+        throw new Exception("Eroare internă", 500);
     }
 
     if (empty($arrUser)) {
-        throw new Exception("EROARE: acest utilizator nu există !", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $arrUser = $arrUser[0];
     if ($arrUser['tiputilizator'] != 1) {
-        throw new Exception("EROARE: acest utilizator nu este de tip angajator!", 400);
+        throw new Exception("Eroare internă", 500);
     }
 
     switch ($validation->getValue('uploaded_file')['error']) {
@@ -52,17 +52,17 @@ $this->handleAPIRequest(function() {
         'idxauth', '=', $arrUser['idx']
     ]);
     if ($arrAngajator === false) {
-        throw new Exception("EROARE INTERNA", 500);
+        throw new Exception("Eroare internă", 500);
     }
     if (empty($arrAngajator)) {
-        throw new Exception("EROARE: acest angajator nu există !", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $filePath = 'media/uploads/';
     $arrAngajator = $arrAngajator[0];
     $fileName = 'angajator_' . (int)$arrUser['idx'] . substr($_FILES['uploaded_file']['name'], strrpos($_FILES['uploaded_file']['name'], '.'));
     if (!move_uploaded_file($_FILES['uploaded_file']['tmp_name'], $filePath . $fileName)) {
-        throw new Exception("EROARE INTERNA", 500);
+        throw new Exception("Eroare internă", 500);
     }
 
     $res = $this->DATABASE->RunQuickUpdate(SYSCFG_DB_PREFIX . 'angajatori', 'img', [
@@ -71,6 +71,6 @@ $this->handleAPIRequest(function() {
         'idxauth', '=', $arrUser['idx']
     ]);
     if ($res === false) {
-        throw new Exception("EROARE INTERNA", 500);
+        throw new Exception("Eroare internă", 500);
     }
 });

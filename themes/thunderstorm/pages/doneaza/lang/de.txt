@@ -1,0 +1,4 @@
+Donează = Donate
+Donația ta = Your donation
+Vreau să donez suma = I want to donate the amount
+Continuă = Continue

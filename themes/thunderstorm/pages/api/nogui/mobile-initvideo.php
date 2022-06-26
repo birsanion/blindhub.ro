@@ -16,19 +16,17 @@ $this->handleAPIRequest(function() {
 
     $validation->validate();
     if ($validation->fails()) {
-        $errors = $validation->errors();
-        $error = array_values($errors->firstOfAll())[0];
-        throw new Exception("EROARE: {$error}!", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $arrUser = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'auth_users', [
         'apploginid', '=', $validation->getValue('userkey')
     ]);
     if ($arrUser === false) {
-        throw new Exception("EROARE INTERNA", 500);
+        throw new Exception("Eroare internă", 500);
     }
     if (empty($arrUser)) {
-        throw new Exception("EROARE: acest utilizator nu există !", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $arrUser = $arrUser[0];
@@ -40,7 +38,7 @@ $this->handleAPIRequest(function() {
                 ['tstamp', '=', RomanianDate_to_MySQLDate($validation->getValue('dataora')) . ':00']
             ]);
             if ($res <= 0) {
-                throw new Exception("EROARE: aceasta programare de interviu nu exista !", 1);
+                throw new Exception("Cerere invalidă", 400);
             }
 
             $res = $this->DATABASE->RunQuickUpdate(SYSCFG_DB_PREFIX . 'interviuri', 'initvideo',
@@ -54,7 +52,7 @@ $this->handleAPIRequest(function() {
                 ]
             );
             if (!$res) {
-                throw new Exception("EROARE INTERNA", 500);
+                throw new Exception("Eroare internă", 500);
             }
 
             $arrData = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'interviuri', [
@@ -63,7 +61,7 @@ $this->handleAPIRequest(function() {
                 ['tstamp', '=', RomanianDate_to_MySQLDate($validation->getValue('dataora')) . ':00']
             ]);
             if ($arrData === false) {
-                throw new Exception("EROARE INTERNA", 500);
+                throw new Exception("Eroare internă", 500);
             }
 
             $this->DATA['idxentry'] = (int)$arrData[0]['idx'];
@@ -76,7 +74,7 @@ $this->handleAPIRequest(function() {
                 ['tstamp', '=', RomanianDate_to_MySQLDate($validation->getValue('dataora')) . ':00']
             ]);
             if ($res <= 0) {
-                throw new Exception("EROARE: aceasta programare de interviu nu exista !", 400);
+                throw new Exception("Cerere invalidă", 400);
             }
 
             $res = $this->DATABASE->RunQuickUpdate(SYSCFG_DB_PREFIX . 'interviuri', 'initvideo',
@@ -90,7 +88,7 @@ $this->handleAPIRequest(function() {
                 ]
             );
             if (!$res) {
-                throw new Exception($this->DATABASE->GetError(), 500);
+                throw new Exception("Eroare internă", 500);
             }
 
             $arrData = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'interviuri', array(
@@ -99,7 +97,7 @@ $this->handleAPIRequest(function() {
                 array('tstamp', '=', RomanianDate_to_MySQLDate(POST('dataora')) . ':00')
             ));
             if ($arrData === false) {
-                throw new Exception("EROARE INTERNA2", 500);
+                throw new Exception("Eroare internă", 500);
             }
 
             $this->DATA['idxentry'] = (int)$arrData[0]['idx'];
@@ -107,6 +105,6 @@ $this->handleAPIRequest(function() {
 
 
         default:
-            throw new Exception("EROARE: acest utilizator nu este nici de tip angajator, nici universitate !", 400);
+            throw new Exception("Cerere invalidă", 400);
     }
 });

@@ -8,9 +8,7 @@ $this->handleAPIRequest(function() {
 
     $validation->validate();
     if ($validation->fails()) {
-        $errors = $validation->errors();
-        $error = array_values($errors->firstOfAll())[0];
-        throw new Exception("EROARE: {$error}!", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $conds = [];
@@ -19,40 +17,39 @@ $this->handleAPIRequest(function() {
     } else if ($this->AUTH->IsAuthenticated()) {
         $conds = [ 'idx', '=', $this->AUTH->GetUserId() ];
     } else {
-        throw new Exception("Cerere invalida", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $arrUser = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'auth_users', $conds);
     if ($arrUser === false) {
-        throw new Exception("EROARE INTERNA", 500);
+        throw new Exception("Eroare internă", 500);
     }
     if (empty($arrUser)) {
-        throw new Exception("EROARE: acest utilizator nu există !", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $arrUser = $arrUser[0];
     if ($arrUser['tiputilizator'] != 0) {
-        throw new Exception("EROARE: acest utilizator nu este de tip angajat !", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $arrLocMunca = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'locurimunca', [
         'idx', '=', (int)$validation->getValue('idxlocmunca')
     ]);
     if ($arrLocMunca === false) {
-        throw new Exception("EROARE INTERNA", 500);
+        throw new Exception("Eroare internă", 500);
     }
     if (empty($arrLocMunca)) {
-        throw new Exception("EROARE: acest loc munca nu exista", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
     $arrLocMunca = $arrLocMunca[0];
-
     $res = $this->DATABASE->RunQuickCount(SYSCFG_DB_PREFIX . 'angajati_locurisalvate', [
         ['idxauthangajat', '=', (int)$arrUser['idx'], 'AND'],
         ['idxauthangajator', '=', (int)$arrLocMunca['idxauth'], 'AND'],
         ['idxlocmunca', '=', (int)$validation->getValue('idxlocmunca')]
     ]);
     if ($res === false) {
-        throw new Exception("EROARE INTERNA", 500);
+        throw new Exception("Eroare internă", 500);
     }
     if (!$res) {
         $res = $this->DATABASE->RunQuickInsert(SYSCFG_DB_PREFIX . 'angajati_locurisalvate', [
@@ -65,7 +62,7 @@ $this->handleAPIRequest(function() {
             'idxlocmunca'      => (int)$validation->getValue('idxlocmunca')
         ]]);
         if (!$res) {
-            throw new Exception("EROARE: Nu s-a putut salva locul de muncă în listă !", 500);
+            throw new Exception("Eroare internă", 500);
         }
     }
 });

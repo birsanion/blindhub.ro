@@ -36,20 +36,18 @@ $this->handleAPIRequest(function() {
     ]);
     $validation->validate();
     if ($validation->fails()) {
-        $errors = $validation->errors();
-        $error = array_values($errors->firstOfAll())[0];
-        throw new Exception("EROARE: {$error}!", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $arrUser = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'auth_users', [
         'username', '=', $validation->getValue('email')
     ]);
     if ($arrUser === false) {
-        throw new Exception("EROARE INTERNA", 500);
+        throw new Exception("Eroare internă", 500);
     }
 
     if (empty($arrUser)) {
-        throw new Exception("EROARE: acest utilizator nu există !", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $arrUser = $arrUser[0];
@@ -61,7 +59,7 @@ $this->handleAPIRequest(function() {
         'idx', '=', (int)$arrUser['idx']
     ]);
     if (!$res) {
-        throw new Exception("EROARE: Momentan nu se poate procesa resetarea contului.", 500);
+        throw new Exception("Eroare internă", 500);
     }
 
     try {
@@ -77,20 +75,17 @@ $this->handleAPIRequest(function() {
         $kMessage = new Swift_Message('[AUTOMAT] Resetare parola cont blindhub.ro');
         $kMessage->setFrom(array('noreply@blindhub.ro' => 'BLINDHUB.RO'));
         $kMessage->setTo(array($arrUser['username'] => $arrUser['username']));
-        $kMessage->setBody("Bună ziua !\r\n\r\n" .
-            "Prin acest mesaj automat dorim să vă informăm că s-a efectuat o cere de " .
-            "resetare a parolei contului dumneavoastră de utilizator în platforma BlindHub.ro." .
-            "\r\nPentru a reseta parola vă rugăm să accesați adresa de mai jos și" .
-            " să urmați pașii respectivi:\r\n\r\n" .
-            qurl_l('reseteaza-parola/' . (int)$arrUser['idx'] . '/' . $strNewSalt, array('section' => 'index')) .
-            "\r\n\r\nVă mulțumim !\r\nEchipa BlindHub.ro");
-
+        $body = $this->LANG("Bună ziua!") . "\r\n\r\n";
+        $body .= $this->LANG("Prin acest mesaj automat dorim să vă informăm că s-a efectuat o cere de resetare a parolei contului dumneavoastră de utilizator în platforma BlindHub.ro.") . "\r\n";
+        $body .= sprintf($this->LANG("Pentru a reseta parola vă rugăm să accesați adresa de mai jos și să urmați pașii respectivi:"), qurl_l('reseteaza-parola/' . (int)$arrUser['idx'] . '/' . $strNewSalt, array('section' => 'index'))) . "\r\n\r\n";
+        $body .= "\r\n\r\n" . $this->LANG("Vă mulțumim!");
+        $body .= "\r\n" . $this->LANG("Echipa BlindHub.ro");
+        $kMessage->setBody($body);
         $arrFails = array();
 
         // Send the message
         $kMailer->send($kMessage, $arrFails);
     } catch (Exception $ex) {
-        throw new Exception("Ne pare rau, a intervenit o problema. Momentan datele dvs. nu pot fi procesate", 500);
+        throw new Exception("Eroare internă", 500);
     }
-
 });

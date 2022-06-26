@@ -7,25 +7,23 @@ $this->handleAPIRequest(function() {
 
     $validation->validate();
     if ($validation->fails()) {
-        $errors = $validation->errors();
-        $error = array_values($errors->firstOfAll())[0];
-        throw new Exception("EROARE: {$error}!", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $arrUser = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'auth_users', [
         'apploginid', '=', $validation->getValue('userkey')
     ]);
     if ($arrUser === false) {
-        throw new Exception("EROARE INTERNA", 500);
+        throw new Exception("Eroare internă", 500);
     }
 
     if (empty($arrUser)) {
-        throw new Exception("EROARE: acest utilizator nu există !", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $arrUser = $arrUser[0];
     if ($arrUser['tiputilizator'] != 2) {
-        throw new Exception("EROARE: acest utilizator nu este de tip universitate!", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $arrCereri = $this->DATABASE->RunQuery(sprintf(
@@ -47,7 +45,7 @@ $this->handleAPIRequest(function() {
         $arrUser['idx']
     ));
     if ($arrCereri === false) {
-        throw new Exception("Eroare interna", 500);
+        throw new Exception("Eroare internă", 500);
     }
 
     $this->DATA['nrlocuri'] = count($arrCereri);

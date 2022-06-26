@@ -7,43 +7,40 @@ $this->handleAPIRequest(function() {
 
     $validation->validate();
     if ($validation->fails()) {
-        $errors = $validation->errors();
-        $error = array_values($errors->firstOfAll())[0];
-        throw new Exception("EROARE: {$error}!", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $arrUser = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'auth_users', [
         'apploginid', '=', $validation->getValue('userkey')
     ]);
     if ($arrUser === false) {
-        throw new Exception("EROARE INTERNA", 500);
+        throw new Exception("Eroare internă", 500);
     }
     if (empty($arrUser)) {
-        throw new Exception("EROARE: acest utilizator nu există !", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $arrUser = $arrUser[0];
     if ($arrUser['tiputilizator'] != 0) {
-        throw new Exception("EROARE: acest utilizator nu este de tip angajat !", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $arrAngajat = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'angajati', [
         'idxauth', '=', $arrUser['idx'],
     ]);
     if ($arrAngajat === false) {
-        throw new Exception("EROARE INTERNA", 500);
+        throw new Exception("Eroare internă", 500);
     }
     if (empty($arrAngajat)) {
-        throw new Exception("EROARE: acest angajat nu există !", 400);
+        throw new Exception("Cerere invalidă", 400);
     }
 
     $arrAngajat = $arrAngajat[0];
-
     $arrOrase = $this->DATABASE->RunQuickSelect('*', SYSCFG_DB_PREFIX . 'angajati_orase', [
         ['idx_angajat', '=', $arrAngajat['idx']]
     ]);
     if ($arrOrase === false) {
-        throw new Exception("EROARE INTERNA", 500);
+        throw new Exception("Eroare internă", 500);
     }
 
     $idxOrase = [];
@@ -55,7 +52,7 @@ $this->handleAPIRequest(function() {
         ['idx_angajat', '=', $arrAngajat['idx']]
     ]);
     if ($arrDomenii === false) {
-        throw new Exception("EROARE INTERNA", 500);
+        throw new Exception("Eroare internă", 500);
     }
 
     $idxDomenii = [];
@@ -80,7 +77,7 @@ $this->handleAPIRequest(function() {
         implode(',', $idxDomenii)
     ));
     if ($arrRezultate === false) {
-        throw new Exception($this->DATABASE->GetError(), 500);
+        throw new Exception("Eroare internă", 500);
     }
 
     $this->DATA['nrlocuri'] = count($arrRezultate);
