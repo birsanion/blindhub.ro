@@ -70,6 +70,11 @@
                         <li><a href="<?= qurl_l('profil-universitate') ?>"><span>Profil</span></a></li>
                     </ul>
                     <?php endif; ?>
+                    <?php if ($this->AUTH->GetAdvancedDetail('statistics_permission')): ?>
+                    <ul>
+                        <li><a href="<?= qurl_l('statistici') ?>"><span>Statistici</span></a></li>
+                    </ul>
+                    <?php endif; ?>
                     <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav>
                 <form method="post" enctype="multipart/form-data" name="frm_login" action="<?= qurl_l('') ?>">
