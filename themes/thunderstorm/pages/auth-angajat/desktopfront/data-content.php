@@ -13,5 +13,9 @@ if ($this->AUTH->IsAuthenticated()) {
         case 2:
             $this->ROUTE->Redirect(qurl_l('home-universitate'));
             break;
+
+        case -1:
+            $this->ROUTE->Redirect(qurl_l('statistici'));
+            break;
     }
 }

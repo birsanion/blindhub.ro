@@ -69,8 +69,7 @@
                         <li><a href="<?= qurl_l('universitate-interviu') ?>"><span>Agenda</span></a></li>
                         <li><a href="<?= qurl_l('profil-universitate') ?>"><span>Profil</span></a></li>
                     </ul>
-                    <?php endif; ?>
-                    <?php if ($this->AUTH->GetAdvancedDetail('statistics_permission')): ?>
+                    <?php elseif ($this->AUTH->GetAdvancedDetail('tiputilizator') == -1): ?>
                     <ul>
                         <li><a href="<?= qurl_l('statistici') ?>"><span>Statistici</span></a></li>
                     </ul>
