@@ -460,7 +460,7 @@ class CQAuth
         // check first if IP is allowed
         if ($this->CheckIfAllowed()){
             // login
-            $strUser = strtolower($strUser);
+            $strUser = $strUser;
 
             $arrUserData = $this->DATABASE->RunQuickSelect('*',
                 SYSCFG_DB_PREFIX.'auth_users', array('username', '=', $strUser));
