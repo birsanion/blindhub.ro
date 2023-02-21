@@ -6,12 +6,22 @@
                     <?= $this->LANG('Beneficii pentru companie') ?>
                 </h1>
                 <article>
-                    <p>
-                        <?= $this->LANG('<strong>BLINDHUB</strong> este <strong>prima interfata online</strong> prin care punem impreuna angajatorii si persoanele cu deficiente de vedere intr-un demers comun de valorificare a abilitatilor acestei categorii de persoane intr-un loc de munca incluziv si deschis pentru toti.') ?>
-                    </p>
-                    <p>
-                        <?= $this->LANG('Continând instrumente precum video CV-ul sau posibilitatea de a desfasura interviul online printr-un simplu cont de angajator, aplicatia BLINDHUB reprezinta o inovatie pentru afacerea ta si pentru procesele de recrutare si selectie a personalului pe care le deruleaza fiecare departament de resurse umane.') ?>
-                    </p>
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <p>
+                                <?= $this->LANG('<strong>BLINDHUB</strong> este <strong>prima interfata online</strong> prin care punem impreuna angajatorii si persoanele cu deficiente de vedere intr-un demers comun de valorificare a abilitatilor acestei categorii de persoane intr-un loc de munca incluziv si deschis pentru toti.') ?>
+                            </p>
+                            <p>
+                                <?= $this->LANG('Continând instrumente precum video CV-ul sau posibilitatea de a desfasura interviul online printr-un simplu cont de angajator, aplicatia BLINDHUB reprezinta o inovatie pentru afacerea ta si pentru procesele de recrutare si selectie a personalului pe care le deruleaza fiecare departament de resurse umane.') ?>
+                            </p>
+                        </div>
+                        <div class="col-lg-5">
+                            <video controls width="100%">
+                                <source src="<?= qurl_f('video/dezvoltare_profesionala.MOV'); ?>">
+                            </video>
+                        </div>
+                    </div>
+
                     <p></p>
                     <p class="mt-5 subtitlu">
                         <?= $this->LANG('De ce sa iti diversifici forta de munca?') ?>
